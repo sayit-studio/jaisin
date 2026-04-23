@@ -41,12 +41,16 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    background: rgba(27,58,107,0.97);
-    backdrop-filter: blur(8px);
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0.75rem 2rem;
+    transition: background 0.35s ease, box-shadow 0.35s ease, backdrop-filter 0.35s ease;
+  }
+  nav.scrolled {
+    background: rgba(27,58,107,0.97);
+    backdrop-filter: blur(8px);
     box-shadow: 0 2px 16px rgba(0,0,0,0.2);
   }
   .nav-logo {
@@ -59,20 +63,32 @@
   .nav-brand {
     font-weight: 900;
     font-size: 1.1rem;
-    color: var(--white);
+    color: rgba(255,255,255,0.92);
     letter-spacing: 0.05em;
   }
   .nav-cta {
-    background: var(--yellow);
-    color: var(--navy);
+    background: rgba(255,255,255,0.15);
+    color: var(--white);
+    border: 1.5px solid rgba(255,255,255,0.55);
     font-weight: 700;
     font-size: 0.875rem;
     padding: 0.5rem 1.25rem;
     border-radius: 9999px;
     text-decoration: none;
-    transition: background 0.2s, transform 0.15s;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
   }
-  .nav-cta:hover { background: var(--yellow-warm); transform: translateY(-1px); }
+  .nav-cta:hover {
+    background: rgba(255,255,255,0.28);
+    border-color: rgba(255,255,255,0.85);
+    transform: translateY(-1px);
+  }
+  nav.scrolled .nav-cta {
+    background: var(--yellow);
+    color: var(--navy);
+    border-color: transparent;
+  }
+  nav.scrolled .nav-cta:hover { background: var(--yellow-warm); }
 
   /* ── HERO ── */
   .hero {
@@ -1166,6 +1182,12 @@
 </div>
 
 <script>
+  // Nav scroll effect
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
   // Tab switching
   function showTab(id) {
     document.querySelectorAll('.inspect-panel').forEach(p => p.classList.remove('active'));
