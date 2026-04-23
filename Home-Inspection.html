@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>交屋前必看！驗屋完全指南｜宅心驗屋</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700;800&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #1B3A6B;
+    --navy-dark:   #122850;
+    --navy-light:  #2A5298;
+    --yellow:      #F5C518;
+    --yellow-warm: #F0B429;
+    --white:       #FFFFFF;
+    --off-white:   #F8F7F4;
+    --gray-light:  #F0EEE9;
+    --gray-mid:    #9B9B9B;
+    --gray-dark:   #4A4A4A;
+    --danger:      #C0392B;
+    --success:     #27AE60;
+    --font-zh:     'Noto Sans TC', sans-serif;
+    --font-en:     'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-zh);
+    background: var(--off-white);
+    color: var(--gray-dark);
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(27,58,107,0.97);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 2rem;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .nav-logo img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    background: var(--yellow);
+    border-radius: 50%;
+  }
+  .nav-brand {
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: var(--white);
+    letter-spacing: 0.05em;
+  }
+  .nav-cta {
+    background: var(--yellow);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--yellow-warm); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, var(--navy-light) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 7rem 1.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 50%, rgba(245,197,24,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(245,197,24,0.06) 0%, transparent 40%);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(245,197,24,0.15);
+    border: 1px solid rgba(245,197,24,0.4);
+    color: var(--yellow);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 0.4rem 1.2rem;
+    border-radius: 9999px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  .hero h1 span { color: var(--yellow); }
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255,255,255,0.75);
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--yellow);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.9rem 2rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(245,197,24,0.35);
+  }
+  .btn-primary:hover {
+    background: var(--yellow-warm);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(245,197,24,0.45);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.9rem 2rem;
+    border-radius: 9999px;
+    border: 2px solid rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.4);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    animation: bounce 2s infinite;
+  }
+  .hero-scroll::after {
+    content: '↓';
+    font-size: 1.2rem;
+  }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 5rem 1.5rem; }
+  .container { max-width: 800px; margin: 0 auto; }
+  .section-label {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--navy);
+    font-weight: 900;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    padding: 0.3rem 1rem;
+    border-radius: 9999px;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+  .section-desc {
+    color: var(--gray-mid);
+    font-size: 1rem;
+    margin-bottom: 3rem;
+    max-width: 600px;
+  }
+
+  /* ── CH1: WHY ── */
+  .ch1 { background: var(--white); }
+  .myth-box {
+    background: var(--off-white);
+    border-left: 4px solid var(--gray-light);
+    border-radius: 0 12px 12px 0;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .myth-box p {
+    color: var(--gray-mid);
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+  .myth-box p::before { content: '❝ '; color: var(--gray-light); }
+
+  .reveal-card {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 2rem;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .reveal-card::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 120px; height: 120px;
+    background: rgba(245,197,24,0.1);
+    border-radius: 50%;
+  }
+  .reveal-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--yellow);
+    margin-bottom: 0.75rem;
+  }
+  .reveal-card p { font-size: 0.95rem; color: rgba(255,255,255,0.85); line-height: 1.7; }
+
+  /* ── CH2: COST ── */
+  .ch2 { background: var(--gray-light); }
+  .cost-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  .cost-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 1.75rem 1.5rem;
+    box-shadow: 0 2px 12px rgba(27,58,107,0.08);
+    border-top: 4px solid var(--danger);
+    text-align: center;
+  }
+  .cost-card .cost-item { font-size: 0.9rem; color: var(--gray-mid); margin-bottom: 0.5rem; }
+  .cost-card .cost-amount {
+    font-family: var(--font-en);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--danger);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .cost-card .cost-label { font-size: 0.8rem; color: var(--gray-mid); }
+  .cost-vs {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .cost-vs-item { flex: 1; min-width: 160px; text-align: center; }
+  .cost-vs-item .label { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 0.5rem; }
+  .cost-vs-item .amount {
+    font-family: var(--font-en);
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .cost-vs-item.bad .amount { color: var(--danger); }
+  .cost-vs-item.good .amount { color: var(--yellow); }
+  .cost-vs-divider {
+    color: rgba(255,255,255,0.3);
+    font-size: 2rem;
+    font-weight: 300;
+  }
+
+  /* ── CH3: WHAT ── */
+  .ch3 { background: var(--white); }
+  .inspect-tabs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .tab-btn {
+    background: var(--gray-light);
+    border: none;
+    border-radius: 9999px;
+    padding: 0.5rem 1.25rem;
+    font-family: var(--font-zh);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--gray-mid);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: var(--navy);
+    color: var(--white);
+  }
+  .inspect-panel {
+    display: none;
+    animation: fadeUp 0.3s ease both;
+  }
+  .inspect-panel.active { display: block; }
+  .inspect-panel-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .inspect-icon {
+    width: 52px; height: 52px;
+    background: var(--navy);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .inspect-count {
+    font-family: var(--font-en);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--yellow);
+    line-height: 1;
+  }
+  .inspect-count-label { font-size: 0.8rem; color: var(--gray-mid); }
+  .inspect-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.75rem;
+  }
+  .inspect-item {
+    background: var(--off-white);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: var(--gray-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .inspect-item::before {
+    content: '✓';
+    color: var(--success);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* ── CH4: FLOW ── */
+  .ch4 { background: var(--navy); }
+  .ch4 .section-title { color: var(--white); }
+  .ch4 .section-desc { color: rgba(255,255,255,0.6); }
+  .ch4 .section-label { background: rgba(245,197,24,0.2); color: var(--yellow); }
+  .flow-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .flow-step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    position: relative;
+  }
+  .flow-step:not(:last-child) .step-line {
+    position: absolute;
+    left: 22px;
+    top: 48px;
+    bottom: -16px;
+    width: 2px;
+    background: rgba(245,197,24,0.25);
+  }
+  .step-num {
+    width: 44px; height: 44px;
+    background: var(--yellow);
+    color: var(--navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-en);
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+  }
+  .step-content {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    flex: 1;
+    margin-bottom: 1.25rem;
+  }
+  .step-content h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--yellow);
+    margin-bottom: 0.4rem;
+  }
+  .step-content p { font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
+
+  /* ── CH5: DIY VS PRO ── */
+  .ch5 { background: var(--off-white); }
+  .compare-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(27,58,107,0.1);
+  }
+  .compare-table thead tr { background: var(--navy); }
+  .compare-table thead th {
+    color: var(--white);
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 1rem 1.25rem;
+    text-align: center;
+  }
+  .compare-table thead th:first-child { text-align: left; }
+  .compare-table tbody tr { background: var(--white); }
+  .compare-table tbody tr:nth-child(even) { background: var(--off-white); }
+  .compare-table tbody td {
+    padding: 0.9rem 1.25rem;
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--gray-light);
+    text-align: center;
+    vertical-align: middle;
+  }
+  .compare-table tbody td:first-child { text-align: left; font-weight: 700; color: var(--navy); }
+  .tag-no {
+    display: inline-block;
+    background: #FEE2E2;
+    color: var(--danger);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.2rem 0.75rem;
+    border-radius: 9999px;
+  }
+  .tag-yes {
+    display: inline-block;
+    background: #D1FAE5;
+    color: var(--success);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.2rem 0.75rem;
+    border-radius: 9999px;
+  }
+  .tag-mid {
+    display: inline-block;
+    background: #FEF3C7;
+    color: #92400E;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.2rem 0.75rem;
+    border-radius: 9999px;
+  }
+
+  /* ── CH6: REPORT ── */
+  .ch6 { background: var(--white); }
+  .report-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .report-step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: var(--off-white);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    border-left: 4px solid var(--yellow);
+  }
+  .report-step-num {
+    font-family: var(--font-en);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--yellow);
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 28px;
+  }
+  .report-step h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; }
+  .report-step p { font-size: 0.875rem; color: var(--gray-dark); line-height: 1.6; }
+
+  /* ── CTA FINAL ── */
+  .cta-section {
+    background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+    padding: 5rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(245,197,24,0.1) 0%, transparent 60%);
+  }
+  .cta-section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+  .cta-section h2 span { color: var(--yellow); }
+  .cta-section p {
+    color: rgba(255,255,255,0.7);
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-cards {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  .cta-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    min-width: 200px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+  }
+  .cta-card-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .cta-card-title { font-size: 0.9rem; font-weight: 700; color: var(--yellow); margin-bottom: 0.3rem; }
+  .cta-card-desc { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .btn-line {
+    background: #06C755;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.9rem 2.5rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 20px rgba(6,199,85,0.35);
+    transition: transform 0.15s, box-shadow 0.2s;
+  }
+  .btn-line:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(6,199,85,0.45); }
+  .btn-event {
+    background: var(--yellow);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.9rem 2.5rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(245,197,24,0.35);
+    transition: transform 0.15s, box-shadow 0.2s;
+  }
+  .btn-event:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(245,197,24,0.45); }
+  .cta-contact {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.85rem;
+  }
+  .cta-contact a { color: rgba(255,255,255,0.8); text-decoration: none; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy-dark);
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .footer-logo img {
+    width: 36px;
+    mix-blend-mode: multiply;
+    background: var(--yellow);
+    border-radius: 50%;
+  }
+  .footer-logo span {
+    font-weight: 900;
+    color: var(--white);
+    font-size: 1rem;
+  }
+  footer p { color: rgba(255,255,255,0.35); font-size: 0.8rem; }
+
+  /* ── STICKY CTA BAR ── */
+  .sticky-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 90;
+    background: rgba(18,40,80,0.97);
+    backdrop-filter: blur(8px);
+    padding: 0.875rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+  }
+  .sticky-bar-text {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+  .sticky-bar-text span { color: var(--yellow); }
+  .sticky-bar-btn {
+    background: #06C755;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.5rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: transform 0.15s;
+  }
+  .sticky-bar-btn:hover { transform: translateY(-1px); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 600px) {
+    .cost-vs { flex-direction: column; gap: 1rem; }
+    .cost-vs-divider { display: none; }
+    .sticky-bar-text { font-size: 0.8rem; }
+    nav { padding: 0.75rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="https://raw.githubusercontent.com/sayit-studio/jaisin/main/logo.png" alt="宅心驗屋">
+    <span class="nav-brand">宅心驗屋</span>
+  </div>
+  <a href="#cta" class="nav-cta">免費諮詢 →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-badge">交屋前必看完全指南</div>
+    <h1>花了幾百萬買的房<br><span>你憑什麼不驗？</span></h1>
+    <p class="hero-sub">從為什麼驗、驗什麼、到拿到報告後怎麼跟建商談，宅心陪你搞懂每一步。</p>
+    <div class="hero-actions">
+      <a href="#ch1" class="btn-primary">開始閱讀指南</a>
+      <a href="#cta" class="btn-outline">直接加 LINE 諮詢</a>
+    </div>
+  </div>
+  <div class="hero-scroll">往下看</div>
+</section>
+
+<!-- CH1: 為什麼要驗屋 -->
+<section class="ch1" id="ch1">
+  <div class="container">
+    <div class="section-label reveal">第一章</div>
+    <h2 class="section-title reveal">為什麼要驗屋？</h2>
+    <p class="section-desc reveal">打破「新房子沒問題」的迷思</p>
+
+    <div class="myth-box reveal">
+      <p>「新成屋嘛，建商蓋好的，應該沒什麼問題吧？」</p>
+      <p>「預售屋都是新的，驗什麼？」</p>
+      <p>「建商交屋前不是自己會檢查嗎？」</p>
+    </div>
+
+    <div class="reveal-card reveal">
+      <h3>🏗️ 真相 01｜建商的利益 ≠ 你的利益</h3>
+      <p>建商的目標是準時交屋、完成收款。你的目標是住進一間真正沒問題的家。這兩件事中間，有一條縫，縫裡藏的就是那些「沒有人主動告訴你」的缺失。</p>
+    </div>
+
+    <div class="reveal-card reveal">
+      <h3>🔬 真相 02｜肉眼看不見，不代表沒問題</h3>
+      <p>牆壁裡的水氣、管道內的裂縫、地板下的空鼓——這些問題外表完美，但用熱顯儀一照、用內視鏡一看，問題全部現形。沒有設備，你根本沒辦法發現。</p>
+    </div>
+
+    <div class="reveal-card reveal">
+      <h3>📋 真相 03｜交屋後就是你的責任</h3>
+      <p>一旦你簽了交屋確認書，建商的責任就大幅縮減。交屋前發現的問題，建商必須修；交屋後才發現，你要自己承擔舉證責任，甚至自費修繕。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CH2: 不驗屋會怎樣 -->
+<section class="ch2" id="ch2">
+  <div class="container">
+    <div class="section-label reveal">第二章</div>
+    <h2 class="section-title reveal">不驗屋，代價是多少？</h2>
+    <p class="section-desc reveal">真實修繕費用試算，讓你看清楚這筆帳</p>
+
+    <div class="cost-grid reveal">
+      <div class="cost-card">
+        <div class="cost-item">漏水修繕</div>
+        <div class="cost-amount">$8萬+</div>
+        <div class="cost-label">拆磁磚、防水層重做</div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-item">管線接錯重拉</div>
+        <div class="cost-amount">$3萬+</div>
+        <div class="cost-label">電路相位錯誤</div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-item">磁磚空鼓重鋪</div>
+        <div class="cost-amount">$5萬+</div>
+        <div class="cost-label">大面積脫落重貼</div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-item">門窗氣密修繕</div>
+        <div class="cost-amount">$2萬+</div>
+        <div class="cost-label">密合度不足滲水</div>
+      </div>
+    </div>
+
+    <div class="cost-vs reveal">
+      <div class="cost-vs-item bad">
+        <div class="label">未驗屋｜自費修繕</div>
+        <div class="amount">$18萬+</div>
+      </div>
+      <div class="cost-vs-divider">vs</div>
+      <div class="cost-vs-item good">
+        <div class="label">驗屋費用｜建商負責修</div>
+        <div class="amount">$8,800</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CH3: 驗屋在驗什麼 -->
+<section class="ch3" id="ch3">
+  <div class="container">
+    <div class="section-label reveal">第三章</div>
+    <h2 class="section-title reveal">驗屋到底在驗什麼？</h2>
+    <p class="section-desc reveal">宅心驗屋涵蓋四大類、共 103 項逐一檢驗</p>
+
+    <div class="inspect-tabs reveal">
+      <button class="tab-btn active" onclick="showTab('water')">💧 進排水</button>
+      <button class="tab-btn" onclick="showTab('electric')">⚡ 電弱電</button>
+      <button class="tab-btn" onclick="showTab('exterior')">🏠 外觀</button>
+      <button class="tab-btn" onclick="showTab('env')">🌬️ 設備環境</button>
+    </div>
+
+    <div id="tab-water" class="inspect-panel active reveal">
+      <div class="inspect-panel-header">
+        <div class="inspect-icon">💧</div>
+        <div>
+          <div class="inspect-count">29</div>
+          <div class="inspect-count-label">進排水檢驗項目</div>
+        </div>
+      </div>
+      <div class="inspect-items">
+        <div class="inspect-item">水壓檢驗</div>
+        <div class="inspect-item">窗戶灑水檢驗</div>
+        <div class="inspect-item">冷氣排水管道檢驗</div>
+        <div class="inspect-item">衛浴濕區灑水檢驗</div>
+        <div class="inspect-item">衛浴淋浴門滲漏檢驗</div>
+        <div class="inspect-item">淋浴設備切換檢驗</div>
+        <div class="inspect-item">衛浴乾區灑水檢驗</div>
+        <div class="inspect-item">衛浴排水檢驗</div>
+        <div class="inspect-item">面盆盆底滲漏檢驗</div>
+        <div class="inspect-item">馬桶進排水檢驗</div>
+        <div class="inspect-item">衛浴乾區洩水坡度</div>
+        <div class="inspect-item">衛浴濕區洩水坡度</div>
+        <div class="inspect-item">地面排水管道內檢驗</div>
+        <div class="inspect-item">浴缸溢水孔檢驗</div>
+        <div class="inspect-item">浴缸底部檢驗</div>
+        <div class="inspect-item">洗碗槽溢水孔</div>
+        <div class="inspect-item">洗碗槽止水塞</div>
+        <div class="inspect-item">洗碗槽底部滲漏</div>
+        <div class="inspect-item">洗碗槽排水管</div>
+        <div class="inspect-item">陽台灑水檢驗</div>
+        <div class="inspect-item">陽台排水檢驗</div>
+        <div class="inspect-item">陽台洩水坡度</div>
+        <div class="inspect-item">植栽滴灌設備檢驗</div>
+        <div class="inspect-item">…等共 29 項</div>
+      </div>
+    </div>
+
+    <div id="tab-electric" class="inspect-panel reveal">
+      <div class="inspect-panel-header">
+        <div class="inspect-icon">⚡</div>
+        <div>
+          <div class="inspect-count">26</div>
+          <div class="inspect-count-label">電弱電檢驗項目</div>
+        </div>
+      </div>
+      <div class="inspect-items">
+        <div class="inspect-item">配電標示檢驗</div>
+        <div class="inspect-item">配電箱外觀品質</div>
+        <div class="inspect-item">匯流排接線端子</div>
+        <div class="inspect-item">匯流排線徑檢驗</div>
+        <div class="inspect-item">匯流排電壓檢驗</div>
+        <div class="inspect-item">冷氣專用迴路</div>
+        <div class="inspect-item">衛浴專用迴路</div>
+        <div class="inspect-item">廚房專用迴路</div>
+        <div class="inspect-item">陽台專用迴路</div>
+        <div class="inspect-item">電器櫃專用迴路</div>
+        <div class="inspect-item">多合一暖風機迴路</div>
+        <div class="inspect-item">斷路器漏電開關</div>
+        <div class="inspect-item">燈系切換配置</div>
+        <div class="inspect-item">弱電箱外觀品質</div>
+        <div class="inspect-item">網路設備訊號</div>
+        <div class="inspect-item">電話訊號檢驗</div>
+        <div class="inspect-item">有線電視訊號</div>
+        <div class="inspect-item">保全監控設備</div>
+        <div class="inspect-item">節能控制開關</div>
+        <div class="inspect-item">緊急押扣檢驗</div>
+        <div class="inspect-item">自動感應燈</div>
+        <div class="inspect-item">插座電壓檢驗</div>
+        <div class="inspect-item">插座接線相位</div>
+        <div class="inspect-item">…等共 26 項</div>
+      </div>
+    </div>
+
+    <div id="tab-exterior" class="inspect-panel reveal">
+      <div class="inspect-panel-header">
+        <div class="inspect-icon">🏠</div>
+        <div>
+          <div class="inspect-count">26</div>
+          <div class="inspect-count-label">外觀檢驗項目</div>
+        </div>
+      </div>
+      <div class="inspect-items">
+        <div class="inspect-item">牆面泥作品質</div>
+        <div class="inspect-item">牆面漆面品質</div>
+        <div class="inspect-item">牆面陰陽角檢驗</div>
+        <div class="inspect-item">地磚地面檢驗</div>
+        <div class="inspect-item">地磚地面接縫</div>
+        <div class="inspect-item">門框門片檢驗</div>
+        <div class="inspect-item">窗戶五金檢驗</div>
+        <div class="inspect-item">玻璃厚度檢驗</div>
+        <div class="inspect-item">浴櫃鉸鍊檢驗</div>
+        <div class="inspect-item">衛浴五金檢驗</div>
+        <div class="inspect-item">衛浴封板內檢驗</div>
+        <div class="inspect-item">格局設備圖核查</div>
+        <div class="inspect-item">…等共 26 項</div>
+      </div>
+    </div>
+
+    <div id="tab-env" class="inspect-panel reveal">
+      <div class="inspect-panel-header">
+        <div class="inspect-icon">🌬️</div>
+        <div>
+          <div class="inspect-count">22</div>
+          <div class="inspect-count-label">設備環境檢驗項目</div>
+        </div>
+      </div>
+      <div class="inspect-items">
+        <div class="inspect-item">減壓閥/加壓機</div>
+        <div class="inspect-item">多合一換氣設備</div>
+        <div class="inspect-item">排油煙機設備</div>
+        <div class="inspect-item">爐具設備檢驗</div>
+        <div class="inspect-item">烘碗機檢驗</div>
+        <div class="inspect-item">曬衣設備檢驗</div>
+        <div class="inspect-item">PM2.5 濃度檢驗</div>
+        <div class="inspect-item">甲醛濃度檢驗</div>
+        <div class="inspect-item">空氣品質指數</div>
+        <div class="inspect-item">無線電磁波檢驗</div>
+        <div class="inspect-item">…等共 22 項</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CH4: 驗屋流程 -->
+<section class="ch4" id="ch4">
+  <div class="container">
+    <div class="section-label reveal">第四章</div>
+    <h2 class="section-title reveal">驗屋流程長什麼樣？</h2>
+    <p class="section-desc reveal">從諮詢到入住，宅心全程陪你走</p>
+
+    <div class="flow-steps">
+      <div class="flow-step reveal">
+        <div class="step-num">1</div>
+        <div class="step-line"></div>
+        <div class="step-content">
+          <h3>加 LINE 諮詢報價</h3>
+          <p>告訴宅編社區名稱、坪數、屋型，當天就能取得報價，不用等。</p>
+        </div>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-num">2</div>
+        <div class="step-line"></div>
+        <div class="step-content">
+          <h3>預約驗屋日期</h3>
+          <p>確認後繳交訂金卡位，假日可驗、台中不加車馬費，排期彈性。</p>
+        </div>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-num">3</div>
+        <div class="step-line"></div>
+        <div class="step-content">
+          <h3>現場全程驗屋</h3>
+          <p>驗屋師帶齊所有科技儀器到場，103 項逐一完整檢驗，大樓約 2-3 小時。</p>
+        </div>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-num">4</div>
+        <div class="step-line"></div>
+        <div class="step-content">
+          <h3>三方會勘說明</h3>
+          <p>驗屋師＋屋主＋建商，當場說明所有缺失，宅心幫你跟建商溝通，你不用自己面對。</p>
+        </div>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-num">5</div>
+        <div class="step-line"></div>
+        <div class="step-content">
+          <h3>取得電子驗屋報告</h3>
+          <p>完整電子報告含缺失照片、位置標記、建議修繕方式，可直接交給建商。</p>
+        </div>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-num">6</div>
+        <div class="step-line"></div>
+        <div class="step-content">
+          <h3>建商修繕 → 複驗確認</h3>
+          <p>建商改善後可選擇複驗，確認全部缺失都處理完畢，才真正安心入住。</p>
+        </div>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-num">7</div>
+        <div class="step-content">
+          <h3>安心入住，後續有宅心</h3>
+          <p>入住後需要裝潢、修繕、家電採購？一個 LINE 全部搞定，宅心不會驗完就消失。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CH5: 自己驗 vs 找專業 -->
+<section class="ch5" id="ch5">
+  <div class="container">
+    <div class="section-label reveal">第五章</div>
+    <h2 class="section-title reveal">自己驗 vs 找專業，差在哪？</h2>
+    <p class="section-desc reveal">一張表讓你秒懂差異</p>
+
+    <div class="reveal" style="overflow-x:auto;">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>比較項目</th>
+            <th>自己驗</th>
+            <th>找宅心驗</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>科技儀器輔助</td>
+            <td><span class="tag-no">✗ 無</span></td>
+            <td><span class="tag-yes">✓ 熱顯儀/內視鏡等</span></td>
+          </tr>
+          <tr>
+            <td>檢驗項目數量</td>
+            <td><span class="tag-no">憑感覺</span></td>
+            <td><span class="tag-yes">103 項逐一</span></td>
+          </tr>
+          <tr>
+            <td>電子報告</td>
+            <td><span class="tag-no">✗ 無</span></td>
+            <td><span class="tag-yes">✓ 含照片+位置標記</span></td>
+          </tr>
+          <tr>
+            <td>跟建商溝通</td>
+            <td><span class="tag-no">自己面對</span></td>
+            <td><span class="tag-yes">✓ 宅心幫你談</span></td>
+          </tr>
+          <tr>
+            <td>假日可驗</td>
+            <td><span class="tag-mid">看情況</span></td>
+            <td><span class="tag-yes">✓ 假日不加價</span></td>
+          </tr>
+          <tr>
+            <td>後續修繕服務</td>
+            <td><span class="tag-no">✗ 自己找</span></td>
+            <td><span class="tag-yes">✓ 一站式轉介</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CH6: 看懂報告 -->
+<section class="ch6" id="ch6">
+  <div class="container">
+    <div class="section-label reveal">第六章</div>
+    <h2 class="section-title reveal">拿到報告後，怎麼跟建商談？</h2>
+    <p class="section-desc reveal">有了電子報告，你手上就有底氣</p>
+
+    <div class="report-steps">
+      <div class="report-step reveal">
+        <div class="report-step-num">01</div>
+        <div>
+          <h3>確認缺失分級</h3>
+          <p>報告中缺失分為「必修」與「建議改善」兩類。必修項目要求建商限期完成，不完成不簽交屋單。</p>
+        </div>
+      </div>
+      <div class="report-step reveal">
+        <div class="report-step-num">02</div>
+        <div>
+          <h3>提出書面要求</h3>
+          <p>將報告正式提交給建商，載明每項缺失與位置。書面記錄保護你的權益，口頭說沒有用。</p>
+        </div>
+      </div>
+      <div class="report-step reveal">
+        <div class="report-step-num">03</div>
+        <div>
+          <h3>設定改善期限</h3>
+          <p>依照缺失嚴重程度，要求建商在 7-30 天內完成修繕，期限到期再次確認。</p>
+        </div>
+      </div>
+      <div class="report-step reveal">
+        <div class="report-step-num">04</div>
+        <div>
+          <h3>複驗確認才交屋</h3>
+          <p>建商修繕完成後委託宅心複驗，確認缺失全部處理，才在交屋文件上簽名。</p>
+        </div>
+      </div>
+      <div class="report-step reveal">
+        <div class="report-step-num">05</div>
+        <div>
+          <h3>宅心幫你全程溝通</h3>
+          <p>不知道怎麼跟建商說？宅心幫你。從缺失認定到修繕確認，我們站在你這邊。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section" id="cta">
+  <div class="container" style="position:relative;z-index:1;">
+    <h2 class="reveal">下一步，<span>讓宅心陪你</span></h2>
+    <p class="reveal">交屋通知來了不要慌。加 LINE 告訴宅編你的社區和坪數，當天就能取得報價。</p>
+
+    <div class="cta-cards reveal">
+      <div class="cta-card">
+        <div class="cta-card-icon">💬</div>
+        <div class="cta-card-title">加 LINE 免費諮詢</div>
+        <div class="cta-card-desc">@301thssm<br>當天回覆報價</div>
+      </div>
+      <div class="cta-card">
+        <div class="cta-card-icon">📅</div>
+        <div class="cta-card-title">參加免費說明會</div>
+        <div class="cta-card-desc">每月定期舉辦<br>30 分鐘搞懂交屋眉角</div>
+      </div>
+      <div class="cta-card">
+        <div class="cta-card-icon">🏘️</div>
+        <div class="cta-card-title">社區團驗更划算</div>
+        <div class="cta-card-desc">5 戶以上開團<br>三房最低 $7,800</div>
+      </div>
+    </div>
+
+    <div class="cta-buttons reveal">
+      <a href="https://line.me/R/ti/p/@301thssm" class="btn-line" target="_blank">
+        💬 加 LINE 立即諮詢
+      </a>
+      <a href="https://line.me/R/ti/p/@301thssm" class="btn-event" target="_blank">
+        📅 報名免費說明會
+      </a>
+    </div>
+
+    <p class="cta-contact reveal">
+      電話：<a href="tel:0971866797">0971-866-797</a>｜
+      LINE ID：<a href="https://line.me/R/ti/p/@301thssm" target="_blank">@301thssm</a>
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="https://raw.githubusercontent.com/sayit-studio/jaisin/main/logo.png" alt="宅心驗屋">
+    <span>宅心驗屋 Jaisin Home Inspection</span>
+  </div>
+  <p>驗屋｜裝修｜裝潢細清｜台中 0971-866-797</p>
+</footer>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar">
+  <div class="sticky-bar-text">三房 <span>$8,800</span> 起，假日不加價</div>
+  <a href="https://line.me/R/ti/p/@301thssm" class="sticky-bar-btn" target="_blank">💬 加 LINE 諮詢</a>
+</div>
+
+<script>
+  // Tab switching
+  function showTab(id) {
+    document.querySelectorAll('.inspect-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
