@@ -54,14 +54,8 @@
     align-items: center;
     gap: 0.5rem;
   }
-  .nav-logo img {
-    width: 44px;
-    height: 44px;
-    object-fit: contain;
-    mix-blend-mode: multiply;
-    background: var(--yellow);
-    border-radius: 50%;
-  }
+  .nav-logo img { display: none; }
+  .logo-svg { width: 44px; height: 44px; flex-shrink: 0; }
   .nav-brand {
     font-weight: 900;
     font-size: 1.1rem;
@@ -620,12 +614,7 @@
     gap: 0.5rem;
     margin-bottom: 1rem;
   }
-  .footer-logo img {
-    width: 36px;
-    mix-blend-mode: multiply;
-    background: var(--yellow);
-    border-radius: 50%;
-  }
+  .footer-logo svg { flex-shrink: 0; }
   .footer-logo span {
     font-weight: 900;
     color: var(--white);
@@ -701,7 +690,20 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
-    <img src="https://raw.githubusercontent.com/sayit-studio/jaisin/main/logo.png" alt="宅心驗屋">
+    <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="48" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="1"/>
+      <path d="M50 8 A42 42 0 0 1 92 50 L8 50 A42 42 0 0 1 50 8Z" fill="#F5C518"/>
+      <path d="M50 8 A42 42 0 0 1 92 50 L8 50 A42 42 0 0 1 50 8Z" fill="#F5C518"/>
+      <!-- roof lines -->
+      <polyline points="18,54 50,28 82,54" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round"/>
+      <polyline points="22,60 50,36 78,60" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+      <polyline points="26,66 50,44 74,66" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/>
+      <!-- window -->
+      <rect x="42" y="68" width="7" height="7" rx="1.5" fill="white"/>
+      <rect x="51" y="68" width="7" height="7" rx="1.5" fill="white"/>
+      <rect x="42" y="77" width="7" height="7" rx="1.5" fill="white"/>
+      <rect x="51" y="77" width="7" height="7" rx="1.5" fill="white"/>
+    </svg>
     <span class="nav-brand">宅心驗屋</span>
   </div>
   <a href="#cta" class="nav-cta">免費諮詢 →</a>
@@ -1141,7 +1143,17 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">
-    <img src="https://raw.githubusercontent.com/sayit-studio/jaisin/main/logo.png" alt="宅心驗屋">
+    <svg style="width:36px;height:36px;flex-shrink:0;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="48" fill="#1B3A6B"/>
+      <path d="M50 8 A42 42 0 0 1 92 50 L8 50 A42 42 0 0 1 50 8Z" fill="#F5C518"/>
+      <polyline points="18,54 50,28 82,54" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round"/>
+      <polyline points="22,60 50,36 78,60" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+      <polyline points="26,66 50,44 74,66" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/>
+      <rect x="42" y="68" width="7" height="7" rx="1.5" fill="white"/>
+      <rect x="51" y="68" width="7" height="7" rx="1.5" fill="white"/>
+      <rect x="42" y="77" width="7" height="7" rx="1.5" fill="white"/>
+      <rect x="51" y="77" width="7" height="7" rx="1.5" fill="white"/>
+    </svg>
     <span>宅心驗屋 Jaisin Home Inspection</span>
   </div>
   <p>驗屋｜裝修｜裝潢細清｜台中 0971-866-797</p>
