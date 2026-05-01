@@ -1,0 +1,115 @@
+{
+  "type": "flex",
+  "altText": "宅心驗屋服務推薦",
+  "contents": {
+    "type": "bubble",
+    "size": "mega",
+    "hero": {
+      "type": "image",
+      "url": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+      "size": "full",
+      "aspectRatio": "20:13",
+      "aspectMode": "cover"
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "md",
+      "contents": [
+        {
+          "type": "text",
+          "text": "宅心驗屋",
+          "weight": "bold",
+          "size": "xl",
+          "color": "#17221F"
+        },
+        {
+          "type": "text",
+          "text": "交屋前把看不見的風險先找出來。從牆面、給排水、電路到門窗細節，協助屋主用清楚紀錄與建商溝通。",
+          "wrap": true,
+          "size": "sm",
+          "color": "#3C4B45"
+        },
+        {
+          "type": "box",
+          "layout": "vertical",
+          "margin": "lg",
+          "spacing": "sm",
+          "contents": [
+            {
+              "type": "box",
+              "layout": "baseline",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "推薦來源",
+                  "color": "#6B7280",
+                  "size": "sm",
+                  "flex": 2
+                },
+                {
+                  "type": "text",
+                  "text": "{{ref}}",
+                  "wrap": true,
+                  "color": "#17221F",
+                  "size": "sm",
+                  "flex": 5
+                }
+              ]
+            },
+            {
+              "type": "box",
+              "layout": "baseline",
+              "spacing": "sm",
+              "contents": [
+                {
+                  "type": "text",
+                  "text": "活動",
+                  "color": "#6B7280",
+                  "size": "sm",
+                  "flex": 2
+                },
+                {
+                  "type": "text",
+                  "text": "{{campaign}}",
+                  "wrap": true,
+                  "color": "#17221F",
+                  "size": "sm",
+                  "flex": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "sm",
+      "contents": [
+        {
+          "type": "button",
+          "style": "primary",
+          "color": "#1B6F58",
+          "action": {
+            "type": "uri",
+            "label": "轉發給好友",
+            "uri": "{{shareUrl}}"
+          }
+        },
+        {
+          "type": "button",
+          "style": "link",
+          "action": {
+            "type": "uri",
+            "label": "預約驗屋諮詢",
+            "uri": "{{bookingUrl}}"
+          }
+        }
+      ],
+      "flex": 0
+    }
+  }
+}

@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>宅心驗屋 LIFF 分享網址產生器</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="tool-shell">
+      <section class="tool-header" aria-labelledby="page-title">
+        <p class="eyebrow">ZAI SHIN LIFF Share Tool</p>
+        <h1 id="page-title">分享網址產生器</h1>
+        <p>輸入訊息 ID、來源、活動與 LIFF URL，產生 LINE OA 按鈕網址與宅心驗屋 Flex JSON 範本。</p>
+      </section>
+
+      <section class="workspace" aria-label="LIFF 分享設定">
+        <form class="builder" id="builderForm">
+          <label>
+            LIFF URL 或 LIFF ID
+            <input id="liffInput" name="liffInput" value="https://liff.line.me/YOUR_LIFF_ID" autocomplete="off">
+          </label>
+
+          <label>
+            訊息 ID
+            <input id="messageId" name="messageId" value="inspection-service" autocomplete="off">
+          </label>
+
+          <label>
+            ref 轉發來源
+            <input id="refId" name="refId" value="line-oa" autocomplete="off">
+          </label>
+
+          <label>
+            campaign 活動
+            <input id="campaignId" name="campaignId" value="home-inspection" autocomplete="off">
+          </label>
+
+          <div class="field-grid">
+            <label>
+              Flex 標題
+              <input id="flexTitle" name="flexTitle" value="宅心驗屋" autocomplete="off">
+            </label>
+
+            <label>
+              Flex 副標
+              <input id="flexSubtitle" name="flexSubtitle" value="交屋前把看不見的風險先找出來" autocomplete="off">
+            </label>
+          </div>
+
+          <label>
+            內文
+            <textarea id="bodyText" name="bodyText" rows="4">交屋前把看不見的風險先找出來。從牆面、給排水、電路到門窗細節，協助屋主用清楚紀錄與建商溝通。</textarea>
+          </label>
+
+          <label>
+            圖片連結
+            <textarea id="imageUrls" name="imageUrls" rows="4">https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80</textarea>
+          </label>
+
+          <div class="field-grid">
+            <label>
+              主按鈕文字
+              <input id="primaryLabel" name="primaryLabel" value="轉發給好友" autocomplete="off">
+            </label>
+
+            <label>
+              CTA 顏色
+              <input id="buttonColor" name="buttonColor" value="#1B6F58" autocomplete="off">
+            </label>
+          </div>
+
+          <label>
+            第二按鈕網址
+            <input id="secondaryUrl" name="secondaryUrl" value="{{learnMoreUrl}}" autocomplete="off">
+          </label>
+
+          <label>
+            第二按鈕文字
+            <input id="secondaryLabel" name="secondaryLabel" value="了解驗屋服務" autocomplete="off">
+          </label>
+        </form>
+
+        <aside class="preview" aria-label="圖片預覽">
+          <h2>圖片預覽</h2>
+          <div class="image-preview" id="imagePreview"></div>
+        </aside>
+      </section>
+
+      <section class="outputs" aria-label="產生結果">
+        <div class="output-block">
+          <div class="output-title">
+            <h2>LINE OA 按鈕網址</h2>
+            <button type="button" data-copy-target="shareUrl">複製</button>
+          </div>
+          <textarea id="shareUrl" rows="3" readonly></textarea>
+        </div>
+
+        <div class="output-block">
+          <div class="output-title">
+            <h2>Debug 測試網址</h2>
+            <button type="button" data-copy-target="debugUrl">複製</button>
+          </div>
+          <textarea id="debugUrl" rows="3" readonly></textarea>
+        </div>
+
+        <div class="output-block">
+          <div class="output-title">
+            <h2>訊息檔名</h2>
+            <button type="button" data-copy-target="fileName">複製</button>
+          </div>
+          <input id="fileName" readonly>
+        </div>
+
+        <div class="output-block wide">
+          <div class="output-title">
+            <h2>Flex JSON</h2>
+            <button type="button" data-copy-target="jsonOutput">複製</button>
+          </div>
+          <textarea id="jsonOutput" rows="24" readonly></textarea>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const fields = {
+        liffInput: document.querySelector("#liffInput"),
+        messageId: document.querySelector("#messageId"),
+        refId: document.querySelector("#refId"),
+        campaignId: document.querySelector("#campaignId"),
+        flexTitle: document.querySelector("#flexTitle"),
+        flexSubtitle: document.querySelector("#flexSubtitle"),
+        bodyText: document.querySelector("#bodyText"),
+        imageUrls: document.querySelector("#imageUrls"),
+        primaryLabel: document.querySelector("#primaryLabel"),
+        buttonColor: document.querySelector("#buttonColor"),
+        secondaryUrl: document.querySelector("#secondaryUrl"),
+        secondaryLabel: document.querySelector("#secondaryLabel")
+      };
+
+      const outputs = {
+        shareUrl: document.querySelector("#shareUrl"),
+        debugUrl: document.querySelector("#debugUrl"),
+        fileName: document.querySelector("#fileName"),
+        jsonOutput: document.querySelector("#jsonOutput"),
+        imagePreview: document.querySelector("#imagePreview")
+      };
+
+      function normalizeLiffUrl(value) {
+        const input = value.trim();
+
+        if (!input) {
+          return "https://liff.line.me/YOUR_LIFF_ID";
+        }
+
+        if (input.startsWith("https://liff.line.me/")) {
+          return input.split("?")[0];
+        }
+
+        return `https://liff.line.me/${input.replace(/^\/+/, "")}`;
+      }
+
+      function normalizeMessageId(value) {
+        return value.trim().replace(/[^a-zA-Z0-9_-]/g, "-").replace(/-+/g, "-").replace(/^-|-$/g, "") || "new-message";
+      }
+
+      function getImageUrls() {
+        return fields.imageUrls.value
+          .split(/\r?\n/)
+          .map((line) => line.trim())
+          .filter(Boolean);
+      }
+
+      function buildShareUrl({ debug = false } = {}) {
+        const url = new URL(normalizeLiffUrl(fields.liffInput.value));
+        url.searchParams.set("message", normalizeMessageId(fields.messageId.value));
+        url.searchParams.set("ref", fields.refId.value.trim());
+        url.searchParams.set("campaign", fields.campaignId.value.trim());
+
+        if (debug) {
+          url.searchParams.set("auto", "0");
+          url.searchParams.set("debug", "1");
+        }
+
+        return url.toString();
+      }
+
+      function buildFlexJson() {
+        const images = getImageUrls();
+        const messageId = normalizeMessageId(fields.messageId.value);
+        const title = fields.flexTitle.value.trim() || messageId;
+        const subtitle = fields.flexSubtitle.value.trim();
+        const bodyText = fields.bodyText.value.trim();
+
+        return {
+          type: "flex",
+          altText: title,
+          contents: {
+            type: "bubble",
+            size: "mega",
+            hero: {
+              type: "image",
+              url: images[0] || "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+              size: "full",
+              aspectRatio: "20:13",
+              aspectMode: "cover"
+            },
+            body: {
+              type: "box",
+              layout: "vertical",
+              spacing: "md",
+              contents: [
+                {
+                  type: "text",
+                  text: title,
+                  weight: "bold",
+                  size: "xl",
+                  color: "#17221F"
+                },
+                subtitle
+                  ? {
+                      type: "text",
+                      text: subtitle,
+                      wrap: true,
+                      size: "sm",
+                      color: "#1B6F58"
+                    }
+                  : null,
+                bodyText
+                  ? {
+                      type: "text",
+                      text: bodyText,
+                      wrap: true,
+                      size: "sm",
+                      color: "#3C4B45"
+                    }
+                  : null,
+                {
+                  type: "box",
+                  layout: "vertical",
+                  margin: "lg",
+                  spacing: "sm",
+                  contents: [
+                    buildMetaRow("推薦來源", "{{ref}}"),
+                    buildMetaRow("活動", "{{campaign}}")
+                  ]
+                }
+              ].filter(Boolean)
+            },
+            footer: {
+              type: "box",
+              layout: "vertical",
+              spacing: "sm",
+              contents: [
+                {
+                  type: "button",
+                  action: {
+                    type: "uri",
+                    label: fields.primaryLabel.value.trim() || "轉發給好友",
+                    uri: `${normalizeLiffUrl(fields.liffInput.value)}?message=${encodeURIComponent(messageId)}&ref={{refEncoded}}&campaign={{campaignEncoded}}`
+                  },
+                  style: "primary",
+                  color: fields.buttonColor.value.trim() || "#1B6F58",
+                  height: "sm"
+                },
+                {
+                  type: "button",
+                  action: {
+                    type: "uri",
+                    label: fields.secondaryLabel.value.trim() || "了解驗屋服務",
+                    uri: fields.secondaryUrl.value.trim() || "{{learnMoreUrl}}"
+                  },
+                  style: "link"
+                }
+              ]
+            }
+          }
+        };
+      }
+
+      function buildMetaRow(label, value) {
+        return {
+          type: "box",
+          layout: "baseline",
+          spacing: "sm",
+          contents: [
+            {
+              type: "text",
+              text: label,
+              color: "#6B7280",
+              size: "sm",
+              flex: 2
+            },
+            {
+              type: "text",
+              text: value,
+              wrap: true,
+              color: "#17221F",
+              size: "sm",
+              flex: 5
+            }
+          ]
+        };
+      }
+
+      function renderPreview() {
+        const images = getImageUrls();
+        outputs.imagePreview.innerHTML = "";
+
+        if (!images.length) {
+          const empty = document.createElement("p");
+          empty.textContent = "尚未輸入圖片連結。";
+          outputs.imagePreview.append(empty);
+          return;
+        }
+
+        for (const url of images) {
+          const img = document.createElement("img");
+          img.src = url;
+          img.alt = "Flex image preview";
+          img.loading = "lazy";
+          outputs.imagePreview.append(img);
+        }
+      }
+
+      function updateOutputs() {
+        const messageId = normalizeMessageId(fields.messageId.value);
+        outputs.shareUrl.value = buildShareUrl();
+        outputs.debugUrl.value = buildShareUrl({ debug: true });
+        outputs.fileName.value = `liff-share/messages/${messageId}.json`;
+        outputs.jsonOutput.value = JSON.stringify(buildFlexJson(), null, 2);
+        renderPreview();
+      }
+
+      async function copyValue(targetId) {
+        const target = document.querySelector(`#${targetId}`);
+        target.select?.();
+        await navigator.clipboard.writeText(target.value);
+      }
+
+      document.querySelector("#builderForm").addEventListener("input", updateOutputs);
+
+      for (const button of document.querySelectorAll("[data-copy-target]")) {
+        button.addEventListener("click", async () => {
+          try {
+            await copyValue(button.dataset.copyTarget);
+            button.textContent = "已複製";
+            window.setTimeout(() => {
+              button.textContent = "複製";
+            }, 900);
+          } catch (error) {
+            console.error(error);
+          }
+        });
+      }
+
+      updateOutputs();
+    </script>
+  </body>
+</html>
