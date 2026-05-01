@@ -389,18 +389,6 @@ body {
   display: none !important;
 }
 
-@media screen and (max-width: 1480px) and (max-device-width: 1480px) {
-  .poster {
-    transform: scale(calc((100vw - 48px) / 1415));
-    transform-origin: top left;
-  }
-
-  .page-shell {
-    width: calc(100vw - 48px);
-    height: calc(2000px * ((100vw - 48px) / 1415) + 48px);
-  }
-}
-
 @media print {
   body,
   .page-shell {
