@@ -174,7 +174,7 @@ body {
 .price-title {
   display: flex;
   align-items: center;
-  gap: 35px;
+  gap: 28px;
   margin-bottom: 48px;
 }
 
@@ -184,50 +184,13 @@ body {
   font-weight: 500;
 }
 
-.home-icon {
-  position: relative;
-  width: 128px;
-  height: 112px;
-}
-
-.home-icon .roof {
-  position: absolute;
-  top: 9px;
-  left: 3px;
-  width: 102px;
-  height: 102px;
-  border-left: 18px solid #ffc65a;
-  border-top: 18px solid #ffc65a;
-  transform: rotate(45deg);
-}
-
-.home-icon .body {
-  position: absolute;
-  right: 14px;
-  bottom: 0;
-  width: 78px;
-  height: 72px;
-  border-radius: 4px;
-  background: #ffc65a;
-}
-
-.home-icon .body::after {
-  position: absolute;
-  bottom: 0;
-  left: 27px;
-  width: 25px;
-  height: 44px;
-  background: #ffffff;
-  content: "";
-}
-
-.home-icon .chimney {
-  position: absolute;
-  right: 5px;
-  top: 20px;
-  width: 23px;
-  height: 54px;
-  background: #ffc65a;
+.price-icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 105px;
+  height: 126px;
+  object-fit: contain;
+  object-position: center;
 }
 
 .price-table {
@@ -274,23 +237,23 @@ body {
 
 .notes {
   position: absolute;
-  top: 1588px;
+  top: 1498px;
   left: 142px;
   display: grid;
-  grid-template-columns: 760px 1fr;
-  gap: 45px;
+  grid-template-columns: 720px 1fr;
+  gap: 74px;
   width: 1180px;
 }
 
 .note-list {
   display: grid;
-  gap: 18px;
+  gap: 16px;
 }
 
 .note-item {
   margin: 0;
   color: var(--muted);
-  font-size: 38px;
+  font-size: 36px;
   line-height: 1.5;
 }
 
@@ -312,8 +275,8 @@ body {
 
 #qrImage,
 .qr-placeholder {
-  width: 365px;
-  height: 365px;
+  width: 305px;
+  height: 305px;
 }
 
 #qrImage {
@@ -331,7 +294,7 @@ body {
 
 .footer-brand {
   position: absolute;
-  bottom: 34px;
+  bottom: 145px;
   left: 172px;
   display: flex;
   align-items: end;
