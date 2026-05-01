@@ -14,20 +14,25 @@
 
 body {
   margin: 0;
-  background: #eef2f4;
+  width: 1415px;
+  height: 2000px;
+  overflow: hidden;
+  background: #ffffff;
 }
 
 .page-shell {
-  min-height: 100vh;
-  padding: 24px;
-  overflow: auto;
+  width: 1415px;
+  height: 2000px;
+  padding: 0;
+  overflow: hidden;
+  background: #ffffff;
 }
 
 .poster {
   position: relative;
   width: 1415px;
   height: 2000px;
-  margin: 0 auto;
+  margin: 0;
   overflow: hidden;
   background: var(--paper);
   color: #050505;
