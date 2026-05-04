@@ -36,10 +36,30 @@
     </main>
 
     <script>
-      const params = new URLSearchParams(window.location.search);
+      function mergeLiffStateParams() {
+        const params = new URLSearchParams(window.location.search);
+        const state = params.get("liff.state");
+
+        if (!state) {
+          return params;
+        }
+
+        const normalizedState = state.startsWith("?") ? state.slice(1) : state;
+        const stateParams = new URLSearchParams(normalizedState);
+
+        for (const [key, value] of stateParams.entries()) {
+          if (!params.has(key)) {
+            params.set(key, value);
+          }
+        }
+
+        return params;
+      }
+
+      const params = mergeLiffStateParams();
 
       const CONFIG = {
-        liffId: params.get("liffId") || "YOUR_LIFF_ID",
+        liffId: params.get("liffId") || "2009970471-3CvTTsuZ",
         flexApiUrl:
           params.get("api") ||
           params.get("webhook") ||
