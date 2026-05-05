@@ -24,26 +24,18 @@
             background-color: var(--korean-cream);
             color: var(--trust-blue);
             scroll-behavior: smooth;
-            overflow-x: hidden; /* 防止橫向抖動 */
+            overflow-x: hidden;
         }
 
         .font-poppins { font-family: 'Poppins', sans-serif; }
 
-        /* 韓系簡約卡片 - 重要：移除 overflow-hidden 以免遮擋浮動人物 */
-        .glass-card {
-            background: white;
-            border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(13, 35, 64, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+        /* 移除大區塊限制，確保圖片浮動不被裁切 */
+        section {
             position: relative;
-            overflow: visible !important; /* 強制可視，防止裁切 */
+            overflow: visible !important;
         }
 
-        @media (min-width: 768px) {
-            .glass-card { border-radius: 40px; }
-        }
-
-        /* 區域標籤樣式 */
+        /* 區域統計標籤 */
         .region-badge {
             background: var(--trust-blue);
             color: var(--warm-yellow);
@@ -53,9 +45,24 @@
             font-weight: 900;
         }
 
+        /* 社區實績清單專用區塊 (Block) */
+        .case-block-card {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 10px 30px rgba(13, 35, 64, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        
+        .case-block-card:hover {
+            transform: translateY(-5px);
+        }
+
         /* 實績標籤 */
         .case-tag {
-            background: white;
+            background: var(--korean-cream);
             border: 1px solid #E9ECEF;
             border-radius: 12px;
             padding: 10px 16px;
@@ -79,106 +86,113 @@
             background: var(--warm-yellow);
             color: var(--trust-blue);
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 211, 90, 0.25);
+            box-shadow: 0 8px 20px rgba(255, 211, 90, 0.2);
         }
 
-        /* 宅編 IP 動態浮動 - 增加 will-change 並優化位移幅度 */
+        /* 宅編 IP 動態浮動 - 增加頂部安全間距避免裁切 */
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); } /* 增加明顯度 */
+            50% { transform: translateY(-25px); }
         }
         .mascot-float { 
             animation: float 4s ease-in-out infinite; 
             will-change: transform;
             display: inline-block;
             overflow: visible !important;
+            padding-top: 30px; /* 給予頭部浮動空間 */
         }
 
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--warm-yellow); border-radius: 10px; }
         
-        /* 防止任何可能導致裁切的容器隱藏內容 */
-        .no-clip { overflow: visible !important; }
+        /* 全域按鈕效果 */
+        .btn-cta {
+            background-color: var(--trust-blue);
+            color: white;
+            transition: all 0.4s ease;
+        }
+        .btn-cta:hover {
+            background-color: #1a3a66;
+            box-shadow: 0 20px 40px rgba(13, 35, 64, 0.2);
+            transform: translateY(-3px);
+        }
     </style>
 </head>
 <body class="p-4 md:p-8 lg:p-12">
 
-    <!-- Block 1: Hero & Stats (權威與量化數據) -->
-    <section class="max-w-6xl mx-auto mb-16 md:mb-28 no-clip">
-        <div class="glass-card p-8 md:p-16 lg:p-20 flex flex-col md:flex-row items-center gap-12 md:gap-20">
-            <!-- 背景裝飾 - 移出主容器之外或調整為不裁切 -->
-            <div class="absolute -top-10 -right-10 w-64 h-64 bg-[#FFD35A] opacity-10 rounded-full blur-3xl pointer-events-none"></div>
+    <!-- Block 1: Hero Section (融入背景) -->
+    <section class="max-w-6xl mx-auto mb-20 md:mb-32 mt-10 md:mt-16">
+        <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20 overflow-visible">
             
-            <!-- 宅編 IP (role-home.png) - 增加安全邊距 py-10 確保頭部不被切 -->
-            <div class="w-64 md:w-72 lg:w-96 flex-shrink-0 mascot-float relative z-20 py-10">
+            <!-- 宅編 IP (role-home.png) - 融入背景，無區塊限制 -->
+            <div class="w-64 md:w-80 lg:w-[450px] flex-shrink-0 mascot-float relative z-20">
                 <img src="https://raw.githubusercontent.com/sayit-studio/jaisin/main/%E5%93%81%E7%89%8C%E5%AF%A6%E7%B8%BE/role-home.png" 
                      alt="宅心驗屋 - 宅編專業守護" 
                      class="w-full h-auto drop-shadow-2xl object-contain overflow-visible"
                      onerror="this.src='https://via.placeholder.com/400?text=role-home'">
             </div>
 
-            <div class="flex-1 text-center md:text-left z-10 no-clip">
-                <div class="inline-block bg-white border-2 border-[#0D2340] text-[#0D2340] px-4 py-1 rounded-full text-[10px] md:text-xs font-black tracking-widest mb-6 md:mb-8 uppercase">
+            <div class="flex-1 text-center md:text-left z-10">
+                <div class="inline-block bg-[#0D2340] text-[#FFD35A] px-5 py-1.5 rounded-full text-[10px] md:text-xs font-black tracking-widest mb-6 md:mb-8 uppercase">
                     Digital Trust & Service Proof
                 </div>
-                <h1 class="text-4xl md:text-5xl lg:text-7xl font-black mb-4 leading-tight tracking-tighter">
+                <h1 class="text-5xl md:text-6xl lg:text-8xl font-black mb-6 leading-tight tracking-tighter">
                     <span class="text-[#FFD35A]">130+</span> 實績證明
                 </h1>
-                <p class="text-gray-400 text-xl md:text-2xl lg:text-3xl font-bold mb-12">讓宅心守護你的寶貴資產</p>
+                <p class="text-gray-400 text-2xl md:text-3xl lg:text-4xl font-bold mb-12 italic">讓宅心守護你的寶貴資產</p>
                 
-                <!-- 數據彙整區 -->
-                <div class="grid grid-cols-3 gap-3 md:gap-6 border-t border-gray-100 pt-10">
-                    <div class="text-center md:text-left">
-                        <div class="font-poppins text-3xl md:text-4xl lg:text-6xl font-black">130<span class="text-xs md:text-xl text-[#FFD35A] ml-0.5">+</span></div>
-                        <div class="text-[9px] md:text-[11px] font-bold text-gray-400 uppercase tracking-widest mt-2">服務社區</div>
+                <!-- 數據總覽 - 融入背景 -->
+                <div class="grid grid-cols-3 gap-4 md:gap-10 border-t-2 border-gray-100 pt-10">
+                    <div class="flex flex-col">
+                        <div class="font-poppins text-4xl md:text-5xl lg:text-7xl font-black mb-2">130<span class="text-lg md:text-2xl text-[#FFD35A] ml-1">+</span></div>
+                        <div class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest">服務社區</div>
                     </div>
-                    <div class="text-center md:text-left">
-                        <div class="font-poppins text-3xl md:text-4xl lg:text-6xl font-black">50<span class="text-xs md:text-xl text-[#FFD35A] ml-0.5">+</span></div>
-                        <div class="text-[9px] md:text-[11px] font-bold text-gray-400 uppercase tracking-widest mt-2">品牌建商</div>
+                    <div class="flex flex-col">
+                        <div class="font-poppins text-4xl md:text-5xl lg:text-7xl font-black mb-2">50<span class="text-lg md:text-2xl text-[#FFD35A] ml-1">+</span></div>
+                        <div class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest">品牌建商</div>
                     </div>
-                    <div class="text-center md:text-left">
-                        <div class="font-poppins text-3xl md:text-4xl lg:text-6xl font-black">08<span class="text-xs md:text-xl text-[#FFD35A] ml-0.5">+</span></div>
-                        <div class="text-[9px] md:text-[11px] font-bold text-gray-400 uppercase tracking-widest mt-2">服務縣市</div>
+                    <div class="flex flex-col">
+                        <div class="font-poppins text-4xl md:text-5xl lg:text-7xl font-black mb-2">08<span class="text-lg md:text-2xl text-[#FFD35A] ml-1">+</span></div>
+                        <div class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest">服務縣市</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Block 2: Regional Record (分區實績全紀錄) -->
-    <section class="max-w-6xl mx-auto mb-16 md:mb-28 no-clip">
-        <div class="flex flex-col sm:flex-row items-center sm:items-end justify-between mb-16 px-4 gap-8 no-clip">
-            <div class="flex items-center gap-6 md:gap-10 no-clip">
-                <!-- 宅編 IP (role-magnifier.png) - 增加頂部安全邊距 pt-12 -->
-                <div class="mascot-float pt-12 pb-2">
-                    <img src="https://raw.githubusercontent.com/sayit-studio/jaisin/main/%E5%93%81%E7%89%8C%E5%AF%A6%E7%B8%BE/role-magnifier.png" 
-                         alt="區域實績搜尋" 
-                         class="w-28 h-auto md:w-40 drop-shadow-lg overflow-visible"
-                         onerror="this.src='https://via.placeholder.com/200?text=role-magnifier'">
-                </div>
-                <div>
-                    <h2 class="text-3xl md:text-5xl font-black tracking-tighter mb-3">服務社區全紀錄</h2>
-                    <p class="text-gray-400 text-sm md:text-xl font-medium tracking-wide">驗屋把關、建商互動、提供改善措施提供專業一條龍服務</p>
-                </div>
+    <!-- Block 2: Regional Record (無邊界人物 + 社區清單區塊) -->
+    <section class="max-w-6xl mx-auto mb-24 md:mb-40">
+        <div class="flex flex-col items-center text-center mb-16 px-4">
+            <!-- 宅編 IP (role-magnifier.png) - 融入背景，無區塊限制 -->
+            <div class="mascot-float mb-6">
+                <img src="https://raw.githubusercontent.com/sayit-studio/jaisin/main/%E5%93%81%E7%89%8C%E5%AF%A6%E7%B8%BE/role-magnifier.png" 
+                     alt="區域實績搜尋" 
+                     class="w-32 h-auto md:w-48 drop-shadow-xl overflow-visible"
+                     onerror="this.src='https://via.placeholder.com/200?text=role-magnifier'">
             </div>
-            <div class="bg-white px-5 py-3 md:px-8 md:py-4 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-                <span class="w-2.5 h-2.5 md:w-3 md:h-3 bg-[#FFD35A] rounded-full animate-pulse"></span>
-                <span class="text-xs md:text-base font-bold text-[#0D2340]">總計 134 個社區已完成檢測</span>
+            <h2 class="text-4xl md:text-6xl font-black tracking-tighter mb-4">服務社區全紀錄</h2>
+            <p class="text-gray-400 text-lg md:text-2xl font-medium tracking-wide max-w-4xl leading-relaxed">
+                驗屋把關、建商互動、提供改善措施提供專業一條龍服務
+            </p>
+            <div class="mt-8 bg-white/50 px-6 py-2 rounded-full border border-white flex items-center gap-3 shadow-sm">
+                <span class="w-2.5 h-2.5 bg-[#FFD35A] rounded-full animate-pulse"></span>
+                <span class="text-xs md:text-base font-bold text-[#0D2340]">總計 134 個社區已完成專業驗收檢測</span>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 no-clip">
+        <!-- 社區清單保留區塊感 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
             <!-- 區域 1: 台中核心 -->
-            <div class="glass-card p-8 md:p-12">
-                <div class="flex justify-between items-center mb-8 pb-5 border-b border-gray-50">
+            <div class="case-block-card">
+                <div class="flex justify-between items-center mb-8 pb-5 border-b-2 border-gray-50">
                     <h3 class="text-xl md:text-2xl font-black flex items-center gap-3">
-                        <span class="w-2.5 h-8 md:w-3 md:h-10 bg-[#FFD35A] rounded-full"></span>
+                        <span class="w-3 h-8 bg-[#FFD35A] rounded-full"></span>
                         台中核心精華區
                     </h3>
-                    <span class="region-badge text-sm">88 案</span>
+                    <span class="region-badge">88 案</span>
                 </div>
-                <div class="flex flex-wrap gap-2.5 md:gap-3 max-h-[300px] md:max-h-[400px] overflow-y-auto pr-3 custom-scrollbar">
+                <div class="flex flex-wrap gap-3 max-h-[350px] md:max-h-[450px] overflow-y-auto pr-3 custom-scrollbar">
                     <div class="case-tag">雙橡園2279</div>
                     <div class="case-tag">國泰The park</div>
                     <div class="case-tag">精銳嚮未來</div>
@@ -202,16 +216,16 @@
                 </div>
             </div>
 
-            <!-- 區域 2: 台中海線與衛星 -->
-            <div class="glass-card p-8 md:p-12">
-                <div class="flex justify-between items-center mb-8 pb-5 border-b border-gray-50">
+            <!-- 區域 2: 海線衛星 -->
+            <div class="case-block-card">
+                <div class="flex justify-between items-center mb-8 pb-5 border-b-2 border-gray-50">
                     <h3 class="text-xl md:text-2xl font-black flex items-center gap-3">
-                        <span class="w-2.5 h-8 md:w-3 md:h-10 bg-[#526C8E] rounded-full"></span>
+                        <span class="w-3 h-8 bg-[#526C8E] rounded-full"></span>
                         海線與衛星區
                     </h3>
-                    <span class="region-badge text-sm">24 案</span>
+                    <span class="region-badge">24 案</span>
                 </div>
-                <div class="flex flex-wrap gap-2.5 md:gap-3 max-h-[300px] md:max-h-[400px] overflow-y-auto pr-3 custom-scrollbar">
+                <div class="flex flex-wrap gap-3 max-h-[350px] md:max-h-[450px] overflow-y-auto pr-3 custom-scrollbar">
                     <div class="case-tag">遠雄幸福成</div>
                     <div class="case-tag">聯悦臻</div>
                     <div class="case-tag">和築T1</div>
@@ -227,13 +241,11 @@
                 </div>
             </div>
 
-            <!-- 區域 3: 其他地區 -->
-            <div class="glass-card p-8 md:p-12 lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="border-b md:border-b-0 md:border-r border-gray-100 pb-8 md:pb-0 md:pr-12">
-                    <div class="flex justify-between items-center mb-8 pb-3 border-b border-gray-50">
-                        <h3 class="text-lg md:text-xl font-black flex items-center gap-3 text-[#526C8E]">
-                            北部 / 桃竹苗
-                        </h3>
+            <!-- 其他地區併列區塊 -->
+            <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                <div class="case-block-card">
+                    <div class="flex justify-between items-center mb-6 pb-3 border-b border-gray-100">
+                        <h3 class="text-xl font-black text-[#526C8E]">北部 / 桃竹苗</h3>
                         <span class="region-badge">12 案</span>
                     </div>
                     <div class="flex flex-wrap gap-3">
@@ -245,11 +257,9 @@
                         <div class="case-tag">苗栗豪瀧昊翰</div>
                     </div>
                 </div>
-                <div class="md:pl-4">
-                    <div class="flex justify-between items-center mb-8 pb-3 border-b border-gray-50">
-                        <h3 class="text-lg md:text-xl font-black flex items-center gap-3 text-[#526C8E]">
-                            彰投雲嘉南
-                        </h3>
+                <div class="case-block-card">
+                    <div class="flex justify-between items-center mb-6 pb-3 border-b border-gray-100">
+                        <h3 class="text-xl font-black text-[#526C8E]">彰投雲嘉南</h3>
                         <span class="region-badge">10 案</span>
                     </div>
                     <div class="flex flex-wrap gap-3">
@@ -265,40 +275,40 @@
         </div>
     </section>
 
-    <!-- Block 3: CTA (行動呼籲) -->
-    <section class="max-w-6xl mx-auto pb-24 no-clip">
-        <div class="glass-card p-8 md:p-16 bg-[#0D2340] text-white flex flex-col lg:flex-row items-center justify-between gap-12 no-clip">
-            <div class="absolute bottom-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl pointer-events-none"></div>
+    <!-- Block 3: CTA Section (融入背景) -->
+    <section class="max-w-6xl mx-auto pb-32">
+        <div class="relative py-24 flex flex-col items-center">
             
-            <div class="flex flex-col sm:flex-row items-center gap-8 md:gap-14 z-10 text-center sm:text-left no-clip">
-                <!-- 宅編 IP (role-support.png) - 預留足夠浮動空間 pt-12 -->
-                <div class="w-40 h-auto md:w-64 flex-shrink-0 mascot-float pt-12 pb-2">
-                    <img src="https://raw.githubusercontent.com/sayit-studio/jaisin/main/%E5%93%81%E7%89%8C%E5%AF%A6%E7%B8%BE/role-support.png" 
-                         alt="專業諮詢服務" 
-                         class="w-full h-auto drop-shadow-xl overflow-visible"
-                         onerror="this.src='https://via.placeholder.com/300?text=role-support'">
-                </div>
-                <div class="max-w-xl">
-                    <h2 class="text-3xl md:text-5xl font-black mb-5 md:mb-7 tracking-tight">讓「宅心」守護您的資產</h2>
-                    <p class="text-blue-100 text-sm md:text-xl leading-relaxed opacity-90 font-medium">
-                        累積 130+ 案件經驗，每一戶檢測我們都視如己出。<br class="hidden md:block">
-                        數位信任見證實力，專業確保安心。
-                    </p>
+            <!-- 宅編 IP (role-support.png) - 靠左呈現，不裁切 -->
+            <div class="mascot-float absolute left-0 md:-left-20 top-0 z-0 opacity-40 md:opacity-100 pointer-events-none">
+                <img src="https://raw.githubusercontent.com/sayit-studio/jaisin/main/%E5%93%81%E7%89%8C%E5%AF%A6%E7%B8%BE/role-support.png" 
+                     alt="專業諮詢服務" 
+                     class="w-56 h-auto md:w-96 drop-shadow-2xl overflow-visible"
+                     onerror="this.src='https://via.placeholder.com/300?text=role-support'">
+            </div>
+
+            <div class="max-w-4xl z-10 text-center relative">
+                <h2 class="text-4xl md:text-7xl font-black mb-8 tracking-tight">讓「宅心」守護您的資產</h2>
+                <p class="text-gray-400 text-lg md:text-2xl leading-relaxed mb-12 font-medium max-w-2xl mx-auto">
+                    累積 130+ 案件經驗，每一戶檢測我們都視如己出。<br class="hidden md:block">
+                    數位信任見證實力，專業確保安心。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://lin.ee/n97HlXf" target="_blank" class="btn-cta group relative inline-block px-14 py-6 rounded-full font-black text-xl md:text-2xl">
+                        立即預約專業驗屋
+                        <span class="absolute -right-3 -top-3 w-8 h-8 bg-red-500 rounded-full border-4 border-white animate-bounce hidden md:block"></span>
+                    </a>
                 </div>
             </div>
-            
-            <div class="w-full lg:w-auto z-10">
-                <a href="https://lin.ee/n97HlXf" target="_blank" class="group relative block w-full lg:w-auto bg-[#FFD35A] text-[#0D2340] px-12 md:px-16 py-6 md:py-7 rounded-full font-black text-xl md:text-2xl hover:shadow-[0_20px_60px_rgba(255,211,90,0.4)] transition-all text-center">
-                    立即預約專業驗屋
-                    <span class="absolute -right-2 -top-2 w-7 h-7 bg-red-500 rounded-full border-4 border-white animate-bounce hidden md:block"></span>
-                </a>
-            </div>
+
+            <!-- 背景光暈飾底 -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-full bg-[#FFD35A] opacity-5 rounded-full blur-[100px] -z-10"></div>
         </div>
         
         <!-- Footer Info -->
         <div class="mt-20 text-center">
-            <div class="text-[10px] md:text-xs text-gray-400 font-bold tracking-[0.3em] uppercase mb-8 opacity-60">
-                © 2024 Zhaixin Home Inspection. All Case Records Verified.
+            <div class="text-[10px] md:text-xs text-gray-400 font-bold tracking-[0.4em] uppercase mb-8 opacity-40">
+                最懂你的心的驗屋服務
             </div>
             <div class="flex justify-center gap-5">
                 <div class="w-2.5 h-2.5 rounded-full bg-gray-200"></div>
