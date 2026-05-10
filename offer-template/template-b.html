@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1415, initial-scale=1">
+  <title>宅心驗屋 團購方案</title>
+  <style>
+    :root {
+      --navy: #0D2340;
+      --yellow: #FFD35A;
+      --cream: #F1E7D6;
+      --blue-grey: #526C8E;
+      --light: #E9ECEF;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body, .page-shell {
+      width: 1415px;
+      height: 2000px;
+      overflow: hidden;
+      background: var(--cream);
+    }
+    .poster {
+      position: relative;
+      width: 1415px;
+      height: 2000px;
+      background: var(--cream);
+      overflow: hidden;
+    }
+
+    /* ── Navy header band ── */
+    .header-band {
+      position: absolute;
+      top: 0; left: 0;
+      width: 1415px;
+      height: 270px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      padding: 0 112px;
+      gap: 44px;
+    }
+    #brandLogo {
+      width: 148px;
+      height: 148px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    #logoFallback { display: none; }
+    .header-text { display: flex; flex-direction: column; gap: 6px; }
+    .header-brand { font-size: 50px; font-weight: 700; color: #fff; letter-spacing: 4px; }
+    .header-service { font-size: 34px; font-weight: 400; color: rgba(255,255,255,0.75); letter-spacing: 5px; }
+    .header-accent {
+      position: absolute;
+      top: 0; right: 0;
+      width: 12px;
+      height: 270px;
+      background: var(--yellow);
+    }
+
+    /* ── Building name ── */
+    .project-section {
+      position: absolute;
+      top: 312px;
+      left: 0;
+      width: 1415px;
+      text-align: center;
+      padding: 0 112px;
+    }
+    .project-eyebrow {
+      font-size: 30px;
+      font-weight: 400;
+      color: var(--blue-grey);
+      letter-spacing: 8px;
+      margin-bottom: 22px;
+    }
+    #projectName {
+      display: block;
+      font-size: 112px;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: 12px;
+      line-height: 1;
+    }
+
+    /* ── Yellow separator ── */
+    .sep {
+      position: absolute;
+      left: 112px;
+      width: 1191px;
+      height: 8px;
+      background: var(--yellow);
+      border-radius: 4px;
+    }
+    .sep-top { top: 640px; }
+    .sep-bottom { top: 1400px; }
+
+    /* ── Section title ── */
+    .section-title {
+      position: absolute;
+      top: 690px;
+      left: 112px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+    .section-title img { width: 76px; height: 92px; object-fit: contain; }
+    .section-title h2 { font-size: 50px; font-weight: 700; color: var(--navy); }
+
+    /* ── Price table ── */
+    .price-table-wrap {
+      position: absolute;
+      top: 822px;
+      left: 112px;
+      width: 1191px;
+    }
+    .price-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+    /* Header row */
+    .pt-head th {
+      font-size: 30px;
+      font-weight: 700;
+      padding: 0 0 20px;
+      text-align: center;
+      color: var(--blue-grey);
+      letter-spacing: 2px;
+    }
+    .pt-head th:first-child { text-align: left; color: transparent; font-size: 0; width: 200px; }
+    .pt-head th.is-best {
+      background: var(--navy);
+      color: var(--yellow);
+      border-radius: 14px 14px 0 0;
+      padding: 18px 0;
+      font-size: 32px;
+    }
+    /* Body rows */
+    .pt-body tr { border-bottom: 1px solid rgba(82,108,142,0.18); }
+    .pt-body tr:last-child td { border-bottom: none; }
+    .pt-body td {
+      padding: 32px 16px;
+      text-align: center;
+      vertical-align: middle;
+      border-bottom: 1px solid rgba(82,108,142,0.18);
+    }
+    .pt-body td:first-child {
+      font-size: 56px;
+      font-weight: 900;
+      color: var(--navy);
+      text-align: left;
+      padding-left: 0;
+      letter-spacing: 4px;
+    }
+    .pt-body td.price-val {
+      font-size: 54px;
+      font-weight: 900;
+      color: var(--navy);
+    }
+    .pt-body td.price-val.is-best {
+      background: var(--navy);
+      color: var(--yellow);
+      font-size: 62px;
+    }
+
+    /* ── Notes ── */
+    .notes-area {
+      position: absolute;
+      top: 1450px;
+      left: 112px;
+      width: 1191px;
+      display: flex;
+      align-items: flex-start;
+      gap: 70px;
+    }
+    .note-list { flex: 1; }
+    .note-item {
+      font-size: 30px;
+      color: var(--blue-grey);
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .note-item::before { content: "★ "; }
+    .note-item strong { color: var(--navy); font-weight: 700; }
+    .qr-side { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    #qrImage { width: 220px; height: 220px; object-fit: contain; }
+    #qrFallback {
+      width: 220px; height: 220px;
+      border: 10px solid var(--navy);
+      display: grid; place-items: center;
+      font-size: 44px; font-weight: 900; color: var(--navy);
+    }
+    .qr-label { font-size: 26px; color: var(--blue-grey); letter-spacing: 2px; }
+
+    /* ── Footer ── */
+    .footer {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 1415px;
+      height: 210px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 112px;
+    }
+    .wordmark {
+      font-size: 54px;
+      font-weight: 500;
+      color: #fff;
+      line-height: 1;
+      border-bottom: 10px solid var(--yellow);
+      padding-bottom: 4px;
+    }
+    .wordmark strong { color: var(--yellow); font-weight: 700; }
+    .contact { color: rgba(255,255,255,0.7); }
+    .contact p { font-size: 30px; line-height: 1.45; }
+    .contact strong { font-size: 40px; color: #fff; font-weight: 900; }
+    .is-hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="poster" id="poster">
+
+      <div class="header-band">
+        <img id="brandLogo" alt="宅心驗屋">
+        <div id="logoFallback"></div>
+        <div class="header-text">
+          <div class="header-brand">宅心驗屋</div>
+          <div class="header-service">驗屋｜裝修｜裝潢細清</div>
+        </div>
+        <div class="header-accent"></div>
+      </div>
+
+      <div class="project-section">
+        <div class="project-eyebrow">社 區 專 屬 驗 屋 方 案</div>
+        <strong id="projectName">建案專屬</strong>
+      </div>
+
+      <div class="sep sep-top"></div>
+
+      <div class="section-title">
+        <img src="./assets/ip.png" alt="">
+        <h2>驗屋價格</h2>
+      </div>
+
+      <div class="price-table-wrap">
+        <table class="price-table">
+          <thead class="pt-head" id="ptHead"></thead>
+          <tbody class="pt-body" id="ptBody"></tbody>
+        </table>
+      </div>
+
+      <div class="sep sep-bottom"></div>
+
+      <div class="notes-area">
+        <div class="note-list" id="noteList"></div>
+        <div class="qr-side">
+          <img id="qrImage" alt="LINE QR">
+          <div id="qrFallback" class="is-hidden">QR</div>
+          <span class="qr-label">官方 LINE</span>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="wordmark">宅心<strong>驗屋</strong></div>
+        <div class="contact">
+          <p>電話：<strong id="phoneText">0971-866797</strong></p>
+          <p>LINE ID：<strong id="lineText">@301thssm</strong></p>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script>window.OFFER_SKIP_AUTO_RENDER = true;</script>
+  <script src="./template.js"></script>
+  <script>
+    (function () {
+      const data = getDataFromUrl();
+      const thresholds = data.thresholds || [];
+      const prices = data.prices || [];
+      const lastCol = thresholds.length - 1;
+
+      const q = (id) => document.getElementById(id);
+      if (q("projectName")) q("projectName").textContent = data.projectName || "建案專屬";
+      if (q("phoneText")) q("phoneText").textContent = data.phone || "0971-866797";
+      if (q("lineText")) q("lineText").textContent = data.lineId || "@301thssm";
+      setImage(q("brandLogo"), q("logoFallback"), data.brandLogo || "./assets/logo.png");
+      setImage(q("qrImage"), q("qrFallback"), data.qrImage || "./assets/qrcode.png");
+
+      // Notes
+      const noteList = q("noteList");
+      if (noteList) {
+        (data.notes || []).forEach(function (note) {
+          const p = document.createElement("p");
+          p.className = "note-item";
+          p.innerHTML = note;
+          noteList.appendChild(p);
+        });
+      }
+
+      // Table header
+      const head = q("ptHead");
+      if (head) {
+        const tr = document.createElement("tr");
+        const emptyTh = document.createElement("th");
+        tr.appendChild(emptyTh);
+        thresholds.forEach(function (t, i) {
+          const th = document.createElement("th");
+          th.textContent = t;
+          if (i === lastCol) th.className = "is-best";
+          tr.appendChild(th);
+        });
+        head.appendChild(tr);
+      }
+
+      // Table body
+      const body = q("ptBody");
+      if (body) {
+        prices.forEach(function (row) {
+          const tr = document.createElement("tr");
+          const roomTd = document.createElement("td");
+          roomTd.textContent = row.room;
+          tr.appendChild(roomTd);
+          (row.values || []).forEach(function (val, i) {
+            const td = document.createElement("td");
+            td.className = "price-val" + (i === lastCol ? " is-best" : "");
+            td.textContent = (val !== null && val !== undefined) ? formatPrice(val) : "–";
+            tr.appendChild(td);
+          });
+          body.appendChild(tr);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

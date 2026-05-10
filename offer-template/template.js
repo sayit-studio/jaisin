@@ -63,6 +63,7 @@ function getDataFromUrl() {
 }
 
 function setImage(image, fallback, url) {
+  if (!image) return;
   if (!url) {
     image.classList.add("is-hidden");
     fallback?.classList.remove("is-hidden");
@@ -76,6 +77,7 @@ function setImage(image, fallback, url) {
 
 function renderPriceTable(data) {
   const table = document.querySelector("#priceTable");
+  if (!table) return;
   table.innerHTML = "";
 
   table.append(document.createElement("div"));
@@ -104,6 +106,7 @@ function renderPriceTable(data) {
 
 function renderNotes(data) {
   const list = document.querySelector("#noteList");
+  if (!list) return;
   list.innerHTML = "";
 
   for (const note of data.notes || []) {
@@ -115,28 +118,19 @@ function renderNotes(data) {
 }
 
 function renderPoster(data) {
-  document.querySelector("#projectName").textContent = data.projectName || "建案專屬";
-  document.querySelector("#phoneText").textContent = data.phone || "0971-866797";
-  document.querySelector("#lineText").textContent = data.lineId || "@301thssm";
+  const q = (sel) => document.querySelector(sel);
+  if (q("#projectName")) q("#projectName").textContent = data.projectName || "建案專屬";
+  if (q("#phoneText")) q("#phoneText").textContent = data.phone || "0971-866797";
+  if (q("#lineText")) q("#lineText").textContent = data.lineId || "@301thssm";
 
-  setImage(
-    document.querySelector("#brandLogo"),
-    document.querySelector("#logoFallback"),
-    data.brandLogo || "./assets/logo.png"
-  );
-  setImage(
-    document.querySelector("#projectImage"),
-    null,
-    data.projectImage
-  );
-  setImage(
-    document.querySelector("#qrImage"),
-    document.querySelector("#qrFallback"),
-    data.qrImage || "./assets/qrcode.png"
-  );
+  setImage(q("#brandLogo"), q("#logoFallback"), data.brandLogo || "./assets/logo.png");
+  setImage(q("#projectImage"), null, data.projectImage);
+  setImage(q("#qrImage"), q("#qrFallback"), data.qrImage || "./assets/qrcode.png");
 
   renderPriceTable(data);
   renderNotes(data);
 }
 
-renderPoster(getDataFromUrl());
+if (!window.OFFER_SKIP_AUTO_RENDER) {
+  renderPoster(getDataFromUrl());
+}
