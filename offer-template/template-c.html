@@ -10,223 +10,144 @@
       --yellow: #FFD35A;
       --cream: #F1E7D6;
       --blue-grey: #526C8E;
-      --light: #E9ECEF;
       font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body, .page-shell {
-      width: 1415px;
-      height: 2000px;
-      overflow: hidden;
-      background: var(--cream);
-    }
-    .poster {
-      position: relative;
-      width: 1415px;
-      height: 2000px;
-      background: var(--cream);
-      overflow: hidden;
-    }
+    body, .page-shell { width: 1415px; height: 2000px; overflow: hidden; background: var(--cream); }
+    .poster { position: relative; width: 1415px; height: 2000px; background: var(--cream); overflow: hidden; }
 
-    /* ── Navy zone with diagonal bottom (no side accent) ── */
+    /* ── Navy diagonal zone ── */
     .navy-zone {
-      position: absolute;
-      top: 0; left: 0;
-      width: 1415px;
-      height: 960px;
+      position: absolute; top: 0; left: 0;
+      width: 1415px; height: 720px;
       background: var(--navy);
-      clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 76%, 0 96%);
     }
 
     /* ── Brand header ── */
     .top-brand {
-      position: absolute;
-      top: 70px;
-      left: 112px;
-      display: flex;
-      align-items: center;
-      gap: 44px;
+      position: absolute; top: 52px; left: 112px;
+      display: flex; align-items: center; gap: 40px;
     }
-    #brandLogo { width: 148px; height: 148px; object-fit: contain; flex-shrink: 0; }
+    #brandLogo { width: 112px; height: 112px; object-fit: contain; flex-shrink: 0; }
     #logoFallback { display: none; }
     .service-line {
-      font-size: 38px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.82);
-      letter-spacing: 5px;
+      font-size: 36px; font-weight: 400;
+      color: rgba(255,255,255,0.78); letter-spacing: 5px;
     }
 
     /* ── Building name ── */
     .project-block {
-      position: absolute;
-      top: 285px;
-      left: 112px;
-      width: 1060px;
+      position: absolute; top: 240px; left: 112px; width: 900px;
     }
     .project-eyebrow {
-      font-size: 28px;
-      font-weight: 400;
-      color: rgba(255,211,90,0.62);
-      letter-spacing: 9px;
-      margin-bottom: 28px;
+      font-size: 26px; font-weight: 400;
+      color: rgba(255,211,90,0.62); letter-spacing: 9px; margin-bottom: 24px;
     }
     #projectName {
-      display: block;
-      font-size: 148px;
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: 16px;
-      line-height: 1.0;
-      margin-bottom: 40px;
+      display: block; font-size: 156px; font-weight: 900;
+      color: #fff; letter-spacing: 16px; line-height: 1.0; margin-bottom: 32px;
     }
     .project-sub {
       display: inline-block;
-      border: 3px solid rgba(255,211,90,0.5);
-      color: var(--yellow);
-      font-size: 30px;
-      font-weight: 500;
-      padding: 10px 44px;
-      border-radius: 50px;
-      letter-spacing: 5px;
+      border: 3px solid rgba(255,211,90,0.5); color: var(--yellow);
+      font-size: 30px; font-weight: 500;
+      padding: 10px 40px; border-radius: 50px; letter-spacing: 5px;
     }
 
-    /* ── Mascot (right side of navy zone, no bg issues with transparent png) ── */
+    /* ── Mascot ── */
     .mascot-float {
-      position: absolute;
-      top: 410px;
-      right: 88px;
-      width: 230px;
-      object-fit: contain;
+      position: absolute; top: 200px; right: 40px;
+      width: 360px; max-height: 560px;
+      object-fit: contain; object-position: bottom;
     }
 
     /* ── Yellow band ── */
     .yellow-band {
-      position: absolute;
-      top: 870px;
-      left: 0;
-      width: 1415px;
-      height: 100px;
+      position: absolute; top: 708px; left: 0;
+      width: 1415px; height: 92px;
       background: var(--yellow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1;
+      display: flex; align-items: center; justify-content: center; z-index: 1;
     }
     .yellow-band-text {
-      font-size: 44px;
-      font-weight: 900;
-      color: var(--navy);
-      letter-spacing: 10px;
+      font-size: 42px; font-weight: 900;
+      color: var(--navy); letter-spacing: 10px;
     }
 
-    /* ── Price section: one card per threshold ── */
+    /* ── Price section ── */
     .price-section {
-      position: absolute;
-      top: 1010px;
-      left: 72px;
-      width: 1271px;
-      display: flex;
-      gap: 32px;
-      align-items: flex-start;
-    }
-    .threshold-card {
-      flex: 1;
-      background: #fff;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 3px 20px rgba(13,35,64,0.07);
-    }
-    .threshold-card.is-best { background: var(--navy); }
-
-    .card-header {
-      padding: 26px 20px 22px;
-      text-align: center;
-      background: rgba(82,108,142,0.07);
-      border-bottom: 3px solid var(--light);
-    }
-    .threshold-card.is-best .card-header {
-      background: rgba(255,211,90,0.12);
-      border-bottom: 3px solid rgba(255,211,90,0.25);
-    }
-    .card-header-label {
-      font-size: 30px;
-      font-weight: 700;
-      color: var(--blue-grey);
-      letter-spacing: 2px;
-    }
-    .threshold-card.is-best .card-header-label { color: var(--yellow); }
-    .card-best-badge {
-      display: inline-block;
-      background: var(--yellow);
-      color: var(--navy);
-      font-size: 22px;
-      font-weight: 700;
-      padding: 4px 18px;
-      border-radius: 20px;
-      margin-top: 8px;
-      letter-spacing: 2px;
+      position: absolute; top: 832px; left: 112px; width: 1191px;
     }
 
-    .card-rows { padding: 8px 0; }
-    .card-price-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 28px 32px;
-      border-bottom: 1px solid var(--light);
+    /* Tier group */
+    .tier-group { position: relative; margin-bottom: 36px; }
+    .tier-label {
+      font-size: 34px; font-weight: 700; color: var(--navy);
+      letter-spacing: 4px; margin-bottom: 16px;
     }
-    .card-price-row:last-child { border-bottom: none; }
-    .threshold-card.is-best .card-price-row {
-      border-bottom-color: rgba(255,211,90,0.13);
+
+    /* Hot group: navy box + corner badge */
+    .tier-group.is-hot {
+      background: var(--navy);
+      border-radius: 20px;
+      padding: 28px 32px 24px 32px;
+      margin-bottom: 36px;
     }
-    .row-room {
-      font-size: 44px;
-      font-weight: 900;
-      color: var(--navy);
-      letter-spacing: 4px;
+    .tier-group.is-hot .tier-label { color: var(--yellow); margin-bottom: 16px; }
+
+    /* Corner badge */
+    .hot-corner-badge {
+      position: absolute; top: 0; right: 0;
+      background: var(--yellow); color: var(--navy);
+      font-size: 22px; font-weight: 900; letter-spacing: 2px;
+      padding: 10px 24px;
+      border-radius: 0 20px 0 20px;
     }
-    .threshold-card.is-best .row-room { color: rgba(255,255,255,0.82); }
-    .row-price {
-      font-size: 58px;
-      font-weight: 900;
-      color: var(--navy);
+
+    /* Room grid: 2 columns */
+    .room-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 32px;
     }
-    .threshold-card.is-best .row-price { color: var(--yellow); font-size: 68px; }
+    .room-cell {
+      display: flex; align-items: center; gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(13,35,64,0.1);
+    }
+    .room-cell:nth-last-child(1),
+    .room-cell:nth-last-child(2) { border-bottom: none; }
+    .tier-group.is-hot .room-cell { border-bottom-color: rgba(255,211,90,0.15); }
+
+    .rc-room {
+      font-size: 28px; font-weight: 700; color: var(--navy);
+      flex-shrink: 0; min-width: 70px;
+    }
+    .rc-leader {
+      flex: 1; height: 0;
+      border-top: 2px dashed rgba(13,35,64,0.18);
+      margin-bottom: 4px;
+    }
+    .rc-price { font-size: 58px; font-weight: 900; color: var(--navy); }
+
+    .tier-group.is-hot .rc-room { color: rgba(255,255,255,0.75); }
+    .tier-group.is-hot .rc-leader { border-top-color: rgba(255,211,90,0.25); }
+    .tier-group.is-hot .rc-price { color: var(--yellow); font-size: 64px; }
 
     /* ── Notes ── */
-    .notes-area {
-      position: absolute;
-      top: 1640px;
-      left: 112px;
-      width: 1191px;
-    }
-    .note-item {
-      font-size: 28px;
-      color: var(--blue-grey);
-      line-height: 1.68;
-      margin-bottom: 8px;
-    }
+    .notes-area { position: absolute; left: 112px; width: 1191px; top: 1740px; }
+    .note-item { font-size: 27px; color: var(--blue-grey); line-height: 1.68; margin-bottom: 8px; }
     .note-item::before { content: "★ "; }
     .note-item strong { color: var(--navy); font-weight: 700; }
 
-    /* ── Footer: wordmark only ── */
+    /* ── Footer ── */
     .footer {
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 1415px;
-      height: 175px;
-      background: var(--navy);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: absolute; bottom: 0; left: 0; width: 1415px; height: 168px;
+      background: var(--navy); display: flex; align-items: center; justify-content: center;
     }
     .wordmark {
-      font-size: 62px;
-      font-weight: 500;
-      color: #fff;
-      border-bottom: 10px solid var(--yellow);
-      padding-bottom: 4px;
-      line-height: 1;
+      font-size: 62px; font-weight: 500; color: #fff;
+      border-bottom: 10px solid var(--yellow); padding-bottom: 4px; line-height: 1;
     }
     .wordmark strong { color: var(--yellow); font-weight: 700; }
     .is-hidden { display: none !important; }
@@ -257,7 +178,6 @@
       </div>
 
       <div class="price-section" id="priceSection"></div>
-
       <div class="notes-area" id="noteList"></div>
 
       <footer class="footer">
@@ -271,62 +191,71 @@
   <script src="./template.js"></script>
   <script>
     (function () {
-      const data = getDataFromUrl();
-      const thresholds = data.thresholds || [];
-      const prices = data.prices || [];
-      const lastCol = thresholds.length - 1;
+      var data = getDataFromUrl();
+      var thresholds = data.thresholds || [];
+      var prices = data.prices || [];
+      var HOT_IDX = 1; // 預約滿10戶 永遠是 index 1
 
-      const q = (id) => document.getElementById(id);
+      var q = function (id) { return document.getElementById(id); };
       if (q("projectName")) q("projectName").textContent = data.projectName || "建案專屬";
       setImage(q("brandLogo"), q("logoFallback"), data.brandLogo || "./assets/logo.png");
 
       // Notes
-      const noteList = q("noteList");
+      var noteList = q("noteList");
       if (noteList) {
         (data.notes || []).forEach(function (note) {
-          const p = document.createElement("p");
+          var p = document.createElement("p");
           p.className = "note-item";
           p.innerHTML = note;
           noteList.appendChild(p);
         });
       }
 
-      // Price section: one card per threshold
-      const section = q("priceSection");
+      // Price section: one tier group per threshold
+      var section = q("priceSection");
       if (section) {
         thresholds.forEach(function (threshold, colIdx) {
-          const isBest = (colIdx === lastCol);
-          const card = document.createElement("div");
-          card.className = "threshold-card" + (isBest ? " is-best" : "");
+          var isHot = (colIdx === HOT_IDX);
 
-          const header = document.createElement("div");
-          header.className = "card-header";
-          const labelEl = document.createElement("div");
-          labelEl.className = "card-header-label";
-          labelEl.textContent = threshold;
-          header.appendChild(labelEl);
-          if (isBest) {
-            const badge = document.createElement("div");
-            badge.className = "card-best-badge";
-            badge.textContent = "最 優 惠";
-            header.appendChild(badge);
+          var group = document.createElement("div");
+          group.className = "tier-group" + (isHot ? " is-hot" : "");
+
+          // Corner badge for hot
+          if (isHot) {
+            var badge = document.createElement("div");
+            badge.className = "hot-corner-badge";
+            badge.textContent = "★ 熱門方案";
+            group.appendChild(badge);
           }
-          card.appendChild(header);
 
-          const rowsEl = document.createElement("div");
-          rowsEl.className = "card-rows";
+          // Tier label
+          var label = document.createElement("div");
+          label.className = "tier-label";
+          label.textContent = threshold;
+          group.appendChild(label);
+
+          // Room grid
+          var grid = document.createElement("div");
+          grid.className = "room-grid";
           prices.forEach(function (row) {
-            const val = (row.values || [])[colIdx];
+            var val = (row.values || [])[colIdx];
             if (val === null || val === undefined) return;
-            const priceRow = document.createElement("div");
-            priceRow.className = "card-price-row";
-            priceRow.innerHTML =
-              "<span class=\"row-room\">" + row.room + "</span>" +
-              "<span class=\"row-price\">" + formatPrice(val) + "</span>";
-            rowsEl.appendChild(priceRow);
+            var cell = document.createElement("div");
+            cell.className = "room-cell";
+            cell.innerHTML =
+              '<span class="rc-room">' + row.room + '</span>' +
+              '<span class="rc-leader"></span>' +
+              '<span class="rc-price">' + formatPrice(val) + '</span>';
+            grid.appendChild(cell);
           });
-          card.appendChild(rowsEl);
-          section.appendChild(card);
+          group.appendChild(grid);
+          section.appendChild(group);
+        });
+
+        // 動態調整備註位置
+        requestAnimationFrame(function () {
+          var bottom = section.offsetTop + section.offsetHeight;
+          if (noteList) noteList.style.top = Math.max(bottom + 40, 1700) + 'px';
         });
       }
     })();

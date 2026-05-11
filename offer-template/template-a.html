@@ -13,186 +13,104 @@
       font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body, .page-shell {
-      width: 1415px;
-      height: 2000px;
-      overflow: hidden;
-      background: var(--navy);
-    }
-    .poster {
-      position: relative;
-      width: 1415px;
-      height: 2000px;
-      overflow: hidden;
-      background: var(--navy);
-      color: #fff;
-    }
+    body, .page-shell { width: 1415px; height: 2000px; overflow: hidden; background: var(--navy); }
+    .poster { position: relative; width: 1415px; height: 2000px; overflow: hidden; background: var(--navy); color: #fff; }
 
-    /* ── Brand header ── */
+    /* ── Header ── */
     .top-brand {
-      position: absolute;
-      top: 80px;
-      left: 112px;
-      display: flex;
-      align-items: center;
-      gap: 44px;
+      position: absolute; top: 60px; left: 112px;
+      display: flex; align-items: center; gap: 36px;
     }
-    #brandLogo {
-      width: 150px;
-      height: 150px;
-      object-fit: contain;
-    }
+    #brandLogo { width: 110px; height: 110px; object-fit: contain; flex-shrink: 0; }
     #logoFallback { display: none; }
-    .service-line {
-      color: rgba(255,255,255,0.85);
-      font-size: 42px;
-      font-weight: 500;
-      letter-spacing: 5px;
-    }
+    .service-line { color: rgba(255,255,255,0.72); font-size: 36px; font-weight: 400; letter-spacing: 5px; }
+
     .h-divider {
-      position: absolute;
-      top: 275px;
-      left: 112px;
-      width: 1191px;
-      height: 2px;
-      background: rgba(255,211,90,0.28);
+      position: absolute; top: 228px; left: 112px;
+      width: 1191px; height: 2px; background: rgba(255,211,90,0.22);
     }
 
     /* ── Building name ── */
     .project-block {
-      position: absolute;
-      top: 308px;
-      left: 112px;
-      width: 1191px;
-      text-align: center;
+      position: absolute; top: 264px; left: 112px; width: 840px;
     }
     .project-eyebrow {
-      font-size: 30px;
-      font-weight: 400;
-      color: rgba(255,211,90,0.65);
-      letter-spacing: 10px;
-      margin-bottom: 28px;
+      font-size: 26px; font-weight: 400; color: rgba(255,211,90,0.65);
+      letter-spacing: 10px; margin-bottom: 20px;
     }
     #projectName {
-      display: block;
-      font-size: 128px;
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: 14px;
-      line-height: 1.0;
-      margin-bottom: 36px;
+      display: block; font-size: 148px; font-weight: 900;
+      color: #fff; letter-spacing: 14px; line-height: 1.0; margin-bottom: 28px;
     }
     .project-badge {
-      display: inline-block;
-      background: var(--yellow);
-      color: var(--navy);
-      font-size: 34px;
-      font-weight: 700;
-      padding: 14px 60px;
-      border-radius: 60px;
-      letter-spacing: 6px;
+      display: inline-block; background: var(--yellow); color: var(--navy);
+      font-size: 32px; font-weight: 700; padding: 12px 48px;
+      border-radius: 50px; letter-spacing: 6px;
     }
 
-    /* ── Price cards ── */
-    .price-cards {
-      position: absolute;
-      top: 620px;
-      left: 80px;
-      width: 1255px;
-      display: flex;
-      gap: 48px;
-      align-items: flex-start;
+    /* ── Mascot ── */
+    .mascot {
+      position: absolute; top: 240px; right: 44px;
+      width: 360px; max-height: 540px; object-fit: contain; object-position: bottom;
     }
-    .price-card {
-      flex: 1;
-      background: #fff;
-      border-radius: 24px;
-      padding: 60px 52px 52px;
-      color: var(--navy);
+
+    /* ── Price section ── */
+    .price-section {
+      position: absolute; top: 800px; left: 80px; width: 1255px;
     }
-    .card-room {
-      font-size: 90px;
-      font-weight: 900;
-      color: var(--navy);
-      text-align: center;
-      letter-spacing: 10px;
-      padding-bottom: 26px;
-      border-bottom: 5px solid var(--yellow);
-      margin-bottom: 38px;
+
+    /* Thin tier bar */
+    .tier-bar {
+      display: flex; align-items: center; gap: 0;
+      background: rgba(255,255,255,0.06); border-radius: 18px;
+      padding: 22px 44px; margin-bottom: 18px;
     }
-    .card-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 16px 0;
-      border-bottom: 1px solid #E9ECEF;
+    .tier-bar-name {
+      font-size: 30px; font-weight: 700; color: rgba(255,255,255,0.62);
+      letter-spacing: 3px; flex-shrink: 0; min-width: 248px;
     }
-    .card-row-label {
-      font-size: 28px;
-      color: var(--blue-grey);
-      font-weight: 400;
+    .tier-bar-prices { display: flex; flex-wrap: wrap; gap: 8px 40px; }
+    .tier-bar-item { display: flex; align-items: baseline; gap: 10px; }
+    .tier-bar-room { font-size: 26px; color: rgba(255,255,255,0.4); font-weight: 400; }
+    .tier-bar-price { font-size: 46px; font-weight: 900; color: rgba(255,255,255,0.72); }
+
+    /* Hero card (熱門) */
+    .hero-card { border-radius: 24px; overflow: hidden; margin-bottom: 18px; }
+    .hero-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 52px; background: var(--navy);
+      border-bottom: 4px solid var(--yellow);
     }
-    .card-row-value {
-      font-size: 60px;
-      font-weight: 900;
-      color: var(--navy);
+    .hero-title { font-size: 52px; font-weight: 900; color: var(--yellow); letter-spacing: 6px; }
+    .hero-badge {
+      background: var(--yellow); color: var(--navy);
+      font-size: 26px; font-weight: 900; padding: 8px 28px;
+      border-radius: 50px; letter-spacing: 3px; white-space: nowrap;
     }
-    .card-lowest {
-      margin-top: 30px;
-      background: var(--navy);
-      border-radius: 16px;
-      padding: 28px 24px 22px;
-      text-align: center;
+    .hero-prices { padding: 28px 52px; background: var(--yellow); }
+    .hero-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 14px 0; border-bottom: 2px solid rgba(13,35,64,0.12);
     }
-    .card-lowest-label {
-      font-size: 30px;
-      color: var(--yellow);
-      font-weight: 700;
-      letter-spacing: 3px;
-      margin-bottom: 10px;
-    }
-    .card-lowest-value {
-      font-size: 120px;
-      font-weight: 900;
-      color: var(--yellow);
-      line-height: 1;
-    }
+    .hero-row:last-child { border-bottom: none; }
+    .hero-room { font-size: 50px; font-weight: 900; color: var(--navy); letter-spacing: 5px; }
+    .hero-price { font-size: 84px; font-weight: 900; color: var(--navy); }
 
     /* ── Notes ── */
-    .notes-area {
-      position: absolute;
-      top: 1660px;
-      left: 112px;
-      width: 1191px;
-    }
-    .note-item {
-      font-size: 28px;
-      color: #6e8fb0;
-      line-height: 1.65;
-      margin-bottom: 6px;
-    }
+    .notes-area { position: absolute; left: 112px; width: 1191px; top: 1680px; }
+    .note-item { font-size: 26px; color: rgba(255,255,255,0.38); line-height: 1.68; margin-bottom: 4px; }
     .note-item::before { content: "★ "; }
-    .note-item strong { color: #9bbde0; font-weight: 700; }
+    .note-item strong { color: rgba(255,255,255,0.62); font-weight: 700; }
 
-    /* ── Footer: wordmark only ── */
+    /* ── Footer ── */
     .footer {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 1415px;
-      height: 160px;
+      position: absolute; bottom: 0; left: 0; width: 1415px; height: 152px;
       border-top: 2px solid rgba(255,211,90,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
     }
     .wordmark {
-      font-size: 60px;
-      font-weight: 500;
-      color: #fff;
-      border-bottom: 10px solid var(--yellow);
-      padding-bottom: 4px;
-      line-height: 1;
+      font-size: 62px; font-weight: 500; color: #fff;
+      border-bottom: 10px solid var(--yellow); padding-bottom: 4px; line-height: 1;
     }
     .wordmark strong { color: var(--yellow); font-weight: 700; }
     .is-hidden { display: none !important; }
@@ -215,8 +133,9 @@
         <div class="project-badge">開 團 就 享 優 惠</div>
       </div>
 
-      <div class="price-cards" id="priceCards"></div>
+      <img class="mascot" src="./assets/ip.png" alt="">
 
+      <div class="price-section" id="priceSection"></div>
       <div class="notes-area" id="noteList"></div>
 
       <footer class="footer">
@@ -230,55 +149,90 @@
   <script src="./template.js"></script>
   <script>
     (function () {
-      const data = getDataFromUrl();
-      const thresholds = data.thresholds || [];
+      var data = getDataFromUrl();
+      var thresholds = data.thresholds || [];
+      var prices = data.prices || [];
+      var HOT_IDX = 1; // 預約滿10戶 永遠是 index 1
 
-      const q = (id) => document.getElementById(id);
+      var q = function (id) { return document.getElementById(id); };
       if (q("projectName")) q("projectName").textContent = data.projectName || "建案專屬";
       setImage(q("brandLogo"), q("logoFallback"), data.brandLogo || "./assets/logo.png");
 
       // Notes
-      const noteList = q("noteList");
+      var noteList = q("noteList");
       if (noteList) {
         (data.notes || []).forEach(function (note) {
-          const p = document.createElement("p");
+          var p = document.createElement("p");
           p.className = "note-item";
           p.innerHTML = note;
           noteList.appendChild(p);
         });
       }
 
-      // Price cards — one card per room, lowest price biggest
-      const cards = q("priceCards");
-      if (cards) {
-        (data.prices || []).forEach(function (row) {
-          const card = document.createElement("div");
-          card.className = "price-card";
+      // Price section
+      var section = q("priceSection");
+      if (section) {
+        thresholds.forEach(function (threshold, colIdx) {
+          var isHot = (colIdx === HOT_IDX);
 
-          const roomEl = document.createElement("div");
-          roomEl.className = "card-room";
-          roomEl.textContent = row.room;
-          card.appendChild(roomEl);
+          if (isHot) {
+            // ── Hero card ──
+            var hero = document.createElement("div");
+            hero.className = "hero-card";
 
-          const values = (row.values || []).filter(function (v) { return v !== null && v !== undefined; });
-          values.forEach(function (val, i) {
-            if (i === values.length - 1) {
-              const lowest = document.createElement("div");
-              lowest.className = "card-lowest";
-              lowest.innerHTML =
-                "<div class=\"card-lowest-label\">★ " + (thresholds[i] || "最低優惠") + "</div>" +
-                "<div class=\"card-lowest-value\">" + formatPrice(val) + "</div>";
-              card.appendChild(lowest);
-            } else {
-              const rowEl = document.createElement("div");
-              rowEl.className = "card-row";
-              rowEl.innerHTML =
-                "<span class=\"card-row-label\">" + (thresholds[i] || "") + "</span>" +
-                "<span class=\"card-row-value\">" + formatPrice(val) + "</span>";
-              card.appendChild(rowEl);
-            }
-          });
-          cards.appendChild(card);
+            var hdr = document.createElement("div");
+            hdr.className = "hero-header";
+            hdr.innerHTML =
+              '<span class="hero-title">' + threshold + '</span>' +
+              '<span class="hero-badge">★ 熱門方案</span>';
+            hero.appendChild(hdr);
+
+            var heroPs = document.createElement("div");
+            heroPs.className = "hero-prices";
+            prices.forEach(function (row) {
+              var val = (row.values || [])[colIdx];
+              if (val === null || val === undefined) return;
+              var r = document.createElement("div");
+              r.className = "hero-row";
+              r.innerHTML =
+                '<span class="hero-room">' + row.room + '</span>' +
+                '<span class="hero-price">' + formatPrice(val) + '</span>';
+              heroPs.appendChild(r);
+            });
+            hero.appendChild(heroPs);
+            section.appendChild(hero);
+
+          } else {
+            // ── Thin tier bar ──
+            var bar = document.createElement("div");
+            bar.className = "tier-bar";
+
+            var nameEl = document.createElement("div");
+            nameEl.className = "tier-bar-name";
+            nameEl.textContent = threshold;
+            bar.appendChild(nameEl);
+
+            var pricesEl = document.createElement("div");
+            pricesEl.className = "tier-bar-prices";
+            prices.forEach(function (row) {
+              var val = (row.values || [])[colIdx];
+              if (val === null || val === undefined) return;
+              var item = document.createElement("div");
+              item.className = "tier-bar-item";
+              item.innerHTML =
+                '<span class="tier-bar-room">' + row.room + '</span>' +
+                '<span class="tier-bar-price">' + formatPrice(val) + '</span>';
+              pricesEl.appendChild(item);
+            });
+            bar.appendChild(pricesEl);
+            section.appendChild(bar);
+          }
+        });
+
+        // 動態調整備註位置
+        requestAnimationFrame(function () {
+          var bottom = section.offsetTop + section.offsetHeight;
+          if (noteList) noteList.style.top = Math.max(bottom + 40, 1620) + 'px';
         });
       }
     })();

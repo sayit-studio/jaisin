@@ -14,181 +14,108 @@
       font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body, .page-shell {
-      width: 1415px;
-      height: 2000px;
-      overflow: hidden;
-      background: var(--cream);
-    }
-    .poster {
-      position: relative;
-      width: 1415px;
-      height: 2000px;
-      background: var(--cream);
-      overflow: hidden;
-    }
+    body, .page-shell { width: 1415px; height: 2000px; overflow: hidden; background: var(--cream); }
+    .poster { position: relative; width: 1415px; height: 2000px; background: var(--cream); overflow: hidden; }
 
     /* ── Navy header ── */
     .header-band {
-      position: absolute;
-      top: 0; left: 0;
-      width: 1415px;
-      height: 270px;
+      position: absolute; top: 0; left: 0; width: 1415px; height: 260px;
       background: var(--navy);
-      display: flex;
-      align-items: center;
-      padding: 0 112px;
-      gap: 44px;
+      display: flex; align-items: center; padding: 0 112px; gap: 40px;
     }
-    .header-accent {
-      position: absolute;
-      top: 0; right: 0;
-      width: 12px;
-      height: 270px;
-      background: var(--yellow);
-    }
-    #brandLogo { width: 148px; height: 148px; object-fit: contain; flex-shrink: 0; }
+    .header-accent { position: absolute; top: 0; right: 0; width: 12px; height: 260px; background: var(--yellow); }
+    #brandLogo { width: 136px; height: 136px; object-fit: contain; flex-shrink: 0; }
     #logoFallback { display: none; }
     .header-text { display: flex; flex-direction: column; gap: 6px; }
     .header-brand { font-size: 52px; font-weight: 700; color: #fff; letter-spacing: 4px; }
-    .header-service { font-size: 34px; font-weight: 400; color: rgba(255,255,255,0.72); letter-spacing: 5px; }
+    .header-service { font-size: 32px; font-weight: 400; color: rgba(255,255,255,0.68); letter-spacing: 5px; }
 
     /* ── Building name ── */
     .project-section {
-      position: absolute;
-      top: 308px;
-      left: 0; width: 1415px;
-      text-align: center;
-      padding: 0 112px;
+      position: absolute; top: 296px; left: 0; width: 1415px;
+      text-align: center; padding: 0 112px;
     }
     .project-eyebrow {
-      font-size: 30px;
-      font-weight: 400;
-      color: var(--blue-grey);
-      letter-spacing: 10px;
-      margin-bottom: 20px;
+      font-size: 28px; font-weight: 400; color: var(--blue-grey);
+      letter-spacing: 10px; margin-bottom: 18px;
     }
     #projectName {
-      display: block;
-      font-size: 148px;
-      font-weight: 900;
-      color: var(--navy);
-      letter-spacing: 16px;
-      line-height: 1.0;
+      display: block; font-size: 148px; font-weight: 900;
+      color: var(--navy); letter-spacing: 16px; line-height: 1.0;
     }
 
-    /* ── Separators ── */
+    /* ── Separator ── */
     .sep {
-      position: absolute;
-      left: 112px;
-      width: 1191px;
-      height: 8px;
-      background: var(--yellow);
-      border-radius: 4px;
+      position: absolute; left: 112px; width: 1191px;
+      height: 7px; background: var(--yellow); border-radius: 4px;
     }
-    .sep-1 { top: 660px; }
-    .sep-2 { top: 1480px; }
+    .sep-1 { top: 640px; }
 
-    /* ── Section title ── */
-    .section-title {
-      position: absolute;
-      top: 710px;
-      left: 112px;
-      display: flex;
-      align-items: center;
-      gap: 24px;
+    /* ── Section header (mascot + title) ── */
+    .section-header {
+      position: absolute; top: 672px; left: 112px;
+      display: flex; align-items: center; gap: 28px;
     }
-    .section-title img { width: 80px; height: 96px; object-fit: contain; }
-    .section-title h2 { font-size: 54px; font-weight: 700; color: var(--navy); }
+    .mascot-icon { width: 92px; height: 112px; object-fit: contain; }
+    .section-header h2 { font-size: 52px; font-weight: 700; color: var(--navy); letter-spacing: 3px; }
 
     /* ── Price table ── */
     .price-table-wrap {
-      position: absolute;
-      top: 850px;
-      left: 112px;
-      width: 1191px;
+      position: absolute; top: 820px; left: 112px; width: 1191px;
     }
-    .price-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-    }
+    .price-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+
+    /* Thead */
     .pt-head th {
-      font-size: 32px;
-      font-weight: 700;
-      padding: 0 0 18px;
-      text-align: center;
-      color: var(--blue-grey);
-      letter-spacing: 2px;
+      font-size: 28px; font-weight: 700;
+      padding: 20px 8px 18px; text-align: center;
+      color: var(--blue-grey); letter-spacing: 2px;
     }
-    .pt-head th:first-child { text-align: left; color: transparent; font-size: 0; width: 210px; }
-    .pt-head th.is-best {
-      background: var(--navy);
-      color: var(--yellow);
-      border-radius: 16px 16px 0 0;
-      padding: 20px 0;
-      font-size: 36px;
+    .pt-head th:first-child { text-align: left; width: 188px; font-size: 0; color: transparent; }
+    .pt-head th.is-hot {
+      background: var(--navy); color: var(--yellow);
+      border-radius: 18px 18px 0 0;
+      padding: 20px 8px 12px; font-size: 30px;
     }
+    .hot-sub {
+      display: block; font-size: 20px; font-weight: 900;
+      background: var(--yellow); color: var(--navy);
+      border-radius: 16px; padding: 4px 14px;
+      margin: 6px auto 0; width: fit-content; letter-spacing: 2px;
+    }
+
+    /* Tbody */
     .pt-body td {
-      padding: 36px 16px;
-      text-align: center;
-      vertical-align: middle;
-      border-bottom: 1px solid rgba(82,108,142,0.16);
+      padding: 30px 10px; text-align: center; vertical-align: middle;
+      border-bottom: 1px solid rgba(82,108,142,0.14);
     }
     .pt-body tr:last-child td { border-bottom: none; }
     .pt-body td:first-child {
-      font-size: 60px;
-      font-weight: 900;
-      color: var(--navy);
-      text-align: left;
-      padding-left: 0;
-      letter-spacing: 5px;
+      font-size: 58px; font-weight: 900; color: var(--navy);
+      text-align: left; padding-left: 0; letter-spacing: 4px;
     }
-    .pt-body td.price-val {
-      font-size: 64px;
-      font-weight: 900;
-      color: var(--navy);
-    }
-    .pt-body td.price-val.is-best {
-      background: var(--navy);
-      color: var(--yellow);
-      font-size: 78px;
+    .pt-body td.price-val { font-size: 62px; font-weight: 900; color: var(--navy); }
+    .pt-body td.price-val.is-hot {
+      background: var(--navy); color: var(--yellow); font-size: 74px;
     }
 
     /* ── Notes ── */
-    .notes-area {
-      position: absolute;
-      top: 1530px;
-      left: 112px;
-      width: 1191px;
-    }
-    .note-item {
-      font-size: 30px;
-      color: var(--blue-grey);
-      line-height: 1.7;
-      margin-bottom: 10px;
-    }
+    .notes-area { position: absolute; left: 112px; width: 1191px; top: 1560px; }
+    .note-item { font-size: 28px; color: var(--blue-grey); line-height: 1.68; margin-bottom: 8px; }
     .note-item::before { content: "★ "; }
     .note-item strong { color: var(--navy); font-weight: 700; }
 
-    /* ── Footer: wordmark only ── */
+    /* ── Sep-2 (dynamic) ── */
+    .sep-2 { position: absolute; left: 112px; width: 1191px; height: 7px; background: var(--yellow); border-radius: 4px; top: 1520px; }
+
+    /* ── Footer ── */
     .footer {
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 1415px;
-      height: 185px;
-      background: var(--navy);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: absolute; bottom: 0; left: 0; width: 1415px; height: 180px;
+      background: var(--navy); display: flex; align-items: center; justify-content: center;
     }
     .wordmark {
-      font-size: 62px;
-      font-weight: 500;
-      color: #fff;
-      line-height: 1;
-      border-bottom: 10px solid var(--yellow);
-      padding-bottom: 4px;
+      font-size: 62px; font-weight: 500; color: #fff;
+      border-bottom: 10px solid var(--yellow); padding-bottom: 4px; line-height: 1;
     }
     .wordmark strong { color: var(--yellow); font-weight: 700; }
     .is-hidden { display: none !important; }
@@ -215,8 +142,8 @@
 
       <div class="sep sep-1"></div>
 
-      <div class="section-title">
-        <img src="./assets/ip.png" alt="">
+      <div class="section-header">
+        <img class="mascot-icon" src="./assets/ip.png" alt="">
         <h2>驗屋報價</h2>
       </div>
 
@@ -227,8 +154,7 @@
         </table>
       </div>
 
-      <div class="sep sep-2"></div>
-
+      <div class="sep sep-2" id="sep2"></div>
       <div class="notes-area" id="noteList"></div>
 
       <footer class="footer">
@@ -242,20 +168,20 @@
   <script src="./template.js"></script>
   <script>
     (function () {
-      const data = getDataFromUrl();
-      const thresholds = data.thresholds || [];
-      const prices = data.prices || [];
-      const lastCol = thresholds.length - 1;
+      var data = getDataFromUrl();
+      var thresholds = data.thresholds || [];
+      var prices = data.prices || [];
+      var HOT_IDX = 1; // 預約滿10戶 永遠是 index 1
 
-      const q = (id) => document.getElementById(id);
+      var q = function (id) { return document.getElementById(id); };
       if (q("projectName")) q("projectName").textContent = data.projectName || "建案專屬";
       setImage(q("brandLogo"), q("logoFallback"), data.brandLogo || "./assets/logo.png");
 
       // Notes
-      const noteList = q("noteList");
+      var noteList = q("noteList");
       if (noteList) {
         (data.notes || []).forEach(function (note) {
-          const p = document.createElement("p");
+          var p = document.createElement("p");
           p.className = "note-item";
           p.innerHTML = note;
           noteList.appendChild(p);
@@ -263,36 +189,52 @@
       }
 
       // Table header
-      const head = q("ptHead");
+      var head = q("ptHead");
       if (head) {
-        const tr = document.createElement("tr");
-        const emptyTh = document.createElement("th"); tr.appendChild(emptyTh);
+        var tr = document.createElement("tr");
+        var emptyTh = document.createElement("th");
+        tr.appendChild(emptyTh);
         thresholds.forEach(function (t, i) {
-          const th = document.createElement("th");
-          th.textContent = t;
-          if (i === lastCol) th.className = "is-best";
+          var th = document.createElement("th");
+          if (i === HOT_IDX) {
+            th.className = "is-hot";
+            th.innerHTML = t + '<span class="hot-sub">★ 熱門方案</span>';
+          } else {
+            th.textContent = t;
+          }
           tr.appendChild(th);
         });
         head.appendChild(tr);
       }
 
       // Table body
-      const body = q("ptBody");
+      var body = q("ptBody");
       if (body) {
         prices.forEach(function (row) {
-          const tr = document.createElement("tr");
-          const roomTd = document.createElement("td");
+          var tr = document.createElement("tr");
+          var roomTd = document.createElement("td");
           roomTd.textContent = row.room;
           tr.appendChild(roomTd);
           (row.values || []).forEach(function (val, i) {
-            const td = document.createElement("td");
-            td.className = "price-val" + (i === lastCol ? " is-best" : "");
+            var td = document.createElement("td");
+            td.className = "price-val" + (i === HOT_IDX ? " is-hot" : "");
             td.textContent = (val !== null && val !== undefined) ? formatPrice(val) : "–";
             tr.appendChild(td);
           });
           body.appendChild(tr);
         });
       }
+
+      // 動態調整分隔線與備註位置
+      requestAnimationFrame(function () {
+        var wrap = document.querySelector(".price-table-wrap");
+        var sep2 = q("sep2");
+        if (wrap && sep2 && noteList) {
+          var tableBottom = wrap.offsetTop + wrap.offsetHeight;
+          sep2.style.top = (tableBottom + 32) + 'px';
+          noteList.style.top = (tableBottom + 68) + 'px';
+        }
+      });
     })();
   </script>
 </body>
