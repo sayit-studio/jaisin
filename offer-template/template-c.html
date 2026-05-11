@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=1415, initial-scale=1">
-  <title>宅心驗屋 團購方案</title>
+  <title>宅心驗屋 文宣海報</title>
   <style>
     :root {
       --navy: #0D2340;
@@ -28,75 +28,60 @@
       overflow: hidden;
     }
 
-    /* ── Navy top zone with diagonal bottom edge ── */
+    /* ── Navy zone with diagonal bottom (no side accent) ── */
     .navy-zone {
       position: absolute;
       top: 0; left: 0;
       width: 1415px;
-      height: 920px;
+      height: 960px;
       background: var(--navy);
-      clip-path: polygon(0 0, 100% 0, 100% 77%, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
     }
 
-    /* ── Top bar: logo + service (inside navy zone) ── */
-    .top-bar {
+    /* ── Brand header ── */
+    .top-brand {
       position: absolute;
-      top: 64px;
+      top: 70px;
       left: 112px;
       display: flex;
       align-items: center;
       gap: 44px;
     }
-    #brandLogo {
-      width: 140px;
-      height: 140px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
+    #brandLogo { width: 148px; height: 148px; object-fit: contain; flex-shrink: 0; }
     #logoFallback { display: none; }
     .service-line {
       font-size: 38px;
       font-weight: 400;
-      color: rgba(255,255,255,0.85);
+      color: rgba(255,255,255,0.82);
       letter-spacing: 5px;
     }
 
-    /* Right yellow accent */
-    .side-accent {
-      position: absolute;
-      top: 0; right: 0;
-      width: 12px;
-      height: 710px;
-      background: var(--yellow);
-      z-index: 2;
-    }
-
-    /* ── Building name (large, left-aligned, inside navy zone) ── */
+    /* ── Building name ── */
     .project-block {
       position: absolute;
-      top: 265px;
+      top: 285px;
       left: 112px;
-      width: 1100px;
+      width: 1060px;
     }
     .project-eyebrow {
       font-size: 28px;
       font-weight: 400;
-      color: rgba(255, 211, 90, 0.65);
-      letter-spacing: 8px;
-      margin-bottom: 30px;
+      color: rgba(255,211,90,0.62);
+      letter-spacing: 9px;
+      margin-bottom: 28px;
     }
     #projectName {
       display: block;
-      font-size: 118px;
+      font-size: 148px;
       font-weight: 900;
       color: #fff;
-      letter-spacing: 14px;
+      letter-spacing: 16px;
       line-height: 1.0;
-      margin-bottom: 36px;
+      margin-bottom: 40px;
     }
     .project-sub {
       display: inline-block;
-      border: 3px solid rgba(255,211,90,0.55);
+      border: 3px solid rgba(255,211,90,0.5);
       color: var(--yellow);
       font-size: 30px;
       font-weight: 500;
@@ -105,23 +90,22 @@
       letter-spacing: 5px;
     }
 
-    /* ── Mascot floating right (inside navy zone) ── */
+    /* ── Mascot (right side of navy zone, no bg issues with transparent png) ── */
     .mascot-float {
       position: absolute;
-      top: 420px;
-      right: 80px;
-      width: 200px;
+      top: 410px;
+      right: 88px;
+      width: 230px;
       object-fit: contain;
-      opacity: 0.92;
     }
 
-    /* ── Yellow band (over the diagonal cut) ── */
+    /* ── Yellow band ── */
     .yellow-band {
       position: absolute;
-      top: 840px;
+      top: 870px;
       left: 0;
       width: 1415px;
-      height: 96px;
+      height: 100px;
       background: var(--yellow);
       display: flex;
       align-items: center;
@@ -129,156 +113,122 @@
       z-index: 1;
     }
     .yellow-band-text {
-      font-size: 40px;
-      font-weight: 700;
+      font-size: 44px;
+      font-weight: 900;
       color: var(--navy);
-      letter-spacing: 8px;
+      letter-spacing: 10px;
     }
 
-    /* ── Price cards section (one card per threshold) ── */
+    /* ── Price section: one card per threshold ── */
     .price-section {
       position: absolute;
-      top: 976px;
+      top: 1010px;
       left: 72px;
       width: 1271px;
       display: flex;
-      gap: 36px;
+      gap: 32px;
       align-items: flex-start;
     }
     .threshold-card {
       flex: 1;
       background: #fff;
-      border-radius: 18px;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 4px 24px rgba(13,35,64,0.08);
+      box-shadow: 0 3px 20px rgba(13,35,64,0.07);
     }
-    .threshold-card.is-best {
-      background: var(--navy);
-    }
+    .threshold-card.is-best { background: var(--navy); }
+
     .card-header {
-      padding: 24px 20px 20px;
+      padding: 26px 20px 22px;
       text-align: center;
-      background: rgba(82,108,142,0.08);
+      background: rgba(82,108,142,0.07);
       border-bottom: 3px solid var(--light);
     }
     .threshold-card.is-best .card-header {
-      background: rgba(255,211,90,0.15);
-      border-bottom: 3px solid rgba(255,211,90,0.3);
+      background: rgba(255,211,90,0.12);
+      border-bottom: 3px solid rgba(255,211,90,0.25);
     }
     .card-header-label {
-      font-size: 26px;
+      font-size: 30px;
       font-weight: 700;
       color: var(--blue-grey);
       letter-spacing: 2px;
     }
-    .threshold-card.is-best .card-header-label {
-      color: var(--yellow);
-    }
-    .card-header-badge {
+    .threshold-card.is-best .card-header-label { color: var(--yellow); }
+    .card-best-badge {
       display: inline-block;
       background: var(--yellow);
       color: var(--navy);
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 700;
-      padding: 4px 16px;
+      padding: 4px 18px;
       border-radius: 20px;
-      margin-top: 6px;
-      letter-spacing: 1px;
+      margin-top: 8px;
+      letter-spacing: 2px;
     }
-    .threshold-card.is-best .card-header-badge {
-      background: var(--yellow);
-      color: var(--navy);
-    }
-    .card-rows { padding: 10px 0; }
+
+    .card-rows { padding: 8px 0; }
     .card-price-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding: 22px 28px;
+      padding: 28px 32px;
       border-bottom: 1px solid var(--light);
     }
     .card-price-row:last-child { border-bottom: none; }
     .threshold-card.is-best .card-price-row {
-      border-bottom-color: rgba(255,211,90,0.15);
+      border-bottom-color: rgba(255,211,90,0.13);
     }
     .row-room {
-      font-size: 36px;
-      font-weight: 900;
-      color: var(--navy);
-      letter-spacing: 3px;
-    }
-    .threshold-card.is-best .row-room {
-      color: rgba(255,255,255,0.85);
-    }
-    .row-price {
       font-size: 44px;
       font-weight: 900;
       color: var(--navy);
+      letter-spacing: 4px;
     }
-    .threshold-card.is-best .row-price {
-      color: var(--yellow);
-      font-size: 50px;
+    .threshold-card.is-best .row-room { color: rgba(255,255,255,0.82); }
+    .row-price {
+      font-size: 58px;
+      font-weight: 900;
+      color: var(--navy);
     }
+    .threshold-card.is-best .row-price { color: var(--yellow); font-size: 68px; }
 
     /* ── Notes ── */
     .notes-area {
       position: absolute;
       top: 1640px;
       left: 112px;
-      width: 960px;
+      width: 1191px;
     }
     .note-item {
       font-size: 28px;
       color: var(--blue-grey);
-      line-height: 1.65;
+      line-height: 1.68;
       margin-bottom: 8px;
     }
     .note-item::before { content: "★ "; }
     .note-item strong { color: var(--navy); font-weight: 700; }
 
-    /* ── QR block ── */
-    .qr-block {
-      position: absolute;
-      top: 1620px;
-      right: 112px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-    #qrImage { width: 200px; height: 200px; object-fit: contain; }
-    #qrFallback {
-      width: 200px; height: 200px;
-      border: 10px solid var(--navy);
-      display: grid; place-items: center;
-      font-size: 44px; font-weight: 900; color: var(--navy);
-    }
-    .qr-label { font-size: 26px; color: var(--blue-grey); letter-spacing: 2px; }
-
-    /* ── Footer ── */
+    /* ── Footer: wordmark only ── */
     .footer {
       position: absolute;
       bottom: 0; left: 0;
       width: 1415px;
-      height: 195px;
+      height: 175px;
       background: var(--navy);
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0 112px;
+      justify-content: center;
     }
     .wordmark {
-      font-size: 54px;
+      font-size: 62px;
       font-weight: 500;
       color: #fff;
-      line-height: 1;
       border-bottom: 10px solid var(--yellow);
       padding-bottom: 4px;
+      line-height: 1;
     }
     .wordmark strong { color: var(--yellow); font-weight: 700; }
-    .contact { color: rgba(255,255,255,0.7); }
-    .contact p { font-size: 30px; line-height: 1.45; }
-    .contact strong { font-size: 40px; color: #fff; font-weight: 900; }
     .is-hidden { display: none !important; }
   </style>
 </head>
@@ -287,9 +237,8 @@
     <div class="poster" id="poster">
 
       <div class="navy-zone"></div>
-      <div class="side-accent"></div>
 
-      <div class="top-bar">
+      <div class="top-brand">
         <img id="brandLogo" alt="宅心驗屋">
         <div id="logoFallback"></div>
         <span class="service-line">驗屋｜裝修｜裝潢細清</span>
@@ -311,18 +260,8 @@
 
       <div class="notes-area" id="noteList"></div>
 
-      <div class="qr-block">
-        <img id="qrImage" alt="LINE QR">
-        <div id="qrFallback" class="is-hidden">QR</div>
-        <span class="qr-label">官方 LINE</span>
-      </div>
-
       <footer class="footer">
         <div class="wordmark">宅心<strong>驗屋</strong></div>
-        <div class="contact">
-          <p>電話：<strong id="phoneText">0971-866797</strong></p>
-          <p>LINE ID：<strong id="lineText">@301thssm</strong></p>
-        </div>
       </footer>
 
     </div>
@@ -339,10 +278,7 @@
 
       const q = (id) => document.getElementById(id);
       if (q("projectName")) q("projectName").textContent = data.projectName || "建案專屬";
-      if (q("phoneText")) q("phoneText").textContent = data.phone || "0971-866797";
-      if (q("lineText")) q("lineText").textContent = data.lineId || "@301thssm";
       setImage(q("brandLogo"), q("logoFallback"), data.brandLogo || "./assets/logo.png");
-      setImage(q("qrImage"), q("qrFallback"), data.qrImage || "./assets/qrcode.png");
 
       // Notes
       const noteList = q("noteList");
@@ -355,16 +291,14 @@
         });
       }
 
-      // Price section: one card per threshold column
+      // Price section: one card per threshold
       const section = q("priceSection");
       if (section) {
         thresholds.forEach(function (threshold, colIdx) {
           const isBest = (colIdx === lastCol);
-
           const card = document.createElement("div");
           card.className = "threshold-card" + (isBest ? " is-best" : "");
 
-          // Card header
           const header = document.createElement("div");
           header.className = "card-header";
           const labelEl = document.createElement("div");
@@ -373,13 +307,12 @@
           header.appendChild(labelEl);
           if (isBest) {
             const badge = document.createElement("div");
-            badge.className = "card-header-badge";
+            badge.className = "card-best-badge";
             badge.textContent = "最 優 惠";
             header.appendChild(badge);
           }
           card.appendChild(header);
 
-          // Price rows (one per room)
           const rowsEl = document.createElement("div");
           rowsEl.className = "card-rows";
           prices.forEach(function (row) {

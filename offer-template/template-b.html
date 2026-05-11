@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=1415, initial-scale=1">
-  <title>宅心驗屋 團購方案</title>
+  <title>宅心驗屋 一般促銷</title>
   <style>
     :root {
       --navy: #0D2340;
@@ -28,7 +28,7 @@
       overflow: hidden;
     }
 
-    /* ── Navy header band ── */
+    /* ── Navy header ── */
     .header-band {
       position: absolute;
       top: 0; left: 0;
@@ -40,16 +40,6 @@
       padding: 0 112px;
       gap: 44px;
     }
-    #brandLogo {
-      width: 148px;
-      height: 148px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-    #logoFallback { display: none; }
-    .header-text { display: flex; flex-direction: column; gap: 6px; }
-    .header-brand { font-size: 50px; font-weight: 700; color: #fff; letter-spacing: 4px; }
-    .header-service { font-size: 34px; font-weight: 400; color: rgba(255,255,255,0.75); letter-spacing: 5px; }
     .header-accent {
       position: absolute;
       top: 0; right: 0;
@@ -57,13 +47,17 @@
       height: 270px;
       background: var(--yellow);
     }
+    #brandLogo { width: 148px; height: 148px; object-fit: contain; flex-shrink: 0; }
+    #logoFallback { display: none; }
+    .header-text { display: flex; flex-direction: column; gap: 6px; }
+    .header-brand { font-size: 52px; font-weight: 700; color: #fff; letter-spacing: 4px; }
+    .header-service { font-size: 34px; font-weight: 400; color: rgba(255,255,255,0.72); letter-spacing: 5px; }
 
     /* ── Building name ── */
     .project-section {
       position: absolute;
-      top: 312px;
-      left: 0;
-      width: 1415px;
+      top: 308px;
+      left: 0; width: 1415px;
       text-align: center;
       padding: 0 112px;
     }
@@ -71,19 +65,19 @@
       font-size: 30px;
       font-weight: 400;
       color: var(--blue-grey);
-      letter-spacing: 8px;
-      margin-bottom: 22px;
+      letter-spacing: 10px;
+      margin-bottom: 20px;
     }
     #projectName {
       display: block;
-      font-size: 112px;
+      font-size: 148px;
       font-weight: 900;
       color: var(--navy);
-      letter-spacing: 12px;
-      line-height: 1;
+      letter-spacing: 16px;
+      line-height: 1.0;
     }
 
-    /* ── Yellow separator ── */
+    /* ── Separators ── */
     .sep {
       position: absolute;
       left: 112px;
@@ -92,25 +86,25 @@
       background: var(--yellow);
       border-radius: 4px;
     }
-    .sep-top { top: 640px; }
-    .sep-bottom { top: 1400px; }
+    .sep-1 { top: 660px; }
+    .sep-2 { top: 1480px; }
 
     /* ── Section title ── */
     .section-title {
       position: absolute;
-      top: 690px;
+      top: 710px;
       left: 112px;
       display: flex;
       align-items: center;
-      gap: 22px;
+      gap: 24px;
     }
-    .section-title img { width: 76px; height: 92px; object-fit: contain; }
-    .section-title h2 { font-size: 50px; font-weight: 700; color: var(--navy); }
+    .section-title img { width: 80px; height: 96px; object-fit: contain; }
+    .section-title h2 { font-size: 54px; font-weight: 700; color: var(--navy); }
 
     /* ── Price table ── */
     .price-table-wrap {
       position: absolute;
-      top: 822px;
+      top: 850px;
       left: 112px;
       width: 1191px;
     }
@@ -119,94 +113,77 @@
       border-collapse: separate;
       border-spacing: 0;
     }
-    /* Header row */
     .pt-head th {
-      font-size: 30px;
+      font-size: 32px;
       font-weight: 700;
-      padding: 0 0 20px;
+      padding: 0 0 18px;
       text-align: center;
       color: var(--blue-grey);
       letter-spacing: 2px;
     }
-    .pt-head th:first-child { text-align: left; color: transparent; font-size: 0; width: 200px; }
+    .pt-head th:first-child { text-align: left; color: transparent; font-size: 0; width: 210px; }
     .pt-head th.is-best {
       background: var(--navy);
       color: var(--yellow);
-      border-radius: 14px 14px 0 0;
-      padding: 18px 0;
-      font-size: 32px;
+      border-radius: 16px 16px 0 0;
+      padding: 20px 0;
+      font-size: 36px;
     }
-    /* Body rows */
-    .pt-body tr { border-bottom: 1px solid rgba(82,108,142,0.18); }
-    .pt-body tr:last-child td { border-bottom: none; }
     .pt-body td {
-      padding: 32px 16px;
+      padding: 36px 16px;
       text-align: center;
       vertical-align: middle;
-      border-bottom: 1px solid rgba(82,108,142,0.18);
+      border-bottom: 1px solid rgba(82,108,142,0.16);
     }
+    .pt-body tr:last-child td { border-bottom: none; }
     .pt-body td:first-child {
-      font-size: 56px;
+      font-size: 60px;
       font-weight: 900;
       color: var(--navy);
       text-align: left;
       padding-left: 0;
-      letter-spacing: 4px;
+      letter-spacing: 5px;
     }
     .pt-body td.price-val {
-      font-size: 54px;
+      font-size: 64px;
       font-weight: 900;
       color: var(--navy);
     }
     .pt-body td.price-val.is-best {
       background: var(--navy);
       color: var(--yellow);
-      font-size: 62px;
+      font-size: 78px;
     }
 
     /* ── Notes ── */
     .notes-area {
       position: absolute;
-      top: 1450px;
+      top: 1530px;
       left: 112px;
       width: 1191px;
-      display: flex;
-      align-items: flex-start;
-      gap: 70px;
     }
-    .note-list { flex: 1; }
     .note-item {
       font-size: 30px;
       color: var(--blue-grey);
-      line-height: 1.65;
+      line-height: 1.7;
       margin-bottom: 10px;
     }
     .note-item::before { content: "★ "; }
     .note-item strong { color: var(--navy); font-weight: 700; }
-    .qr-side { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-    #qrImage { width: 220px; height: 220px; object-fit: contain; }
-    #qrFallback {
-      width: 220px; height: 220px;
-      border: 10px solid var(--navy);
-      display: grid; place-items: center;
-      font-size: 44px; font-weight: 900; color: var(--navy);
-    }
-    .qr-label { font-size: 26px; color: var(--blue-grey); letter-spacing: 2px; }
 
-    /* ── Footer ── */
+    /* ── Footer: wordmark only ── */
     .footer {
       position: absolute;
       bottom: 0; left: 0;
       width: 1415px;
-      height: 210px;
+      height: 185px;
       background: var(--navy);
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0 112px;
+      justify-content: center;
     }
     .wordmark {
-      font-size: 54px;
+      font-size: 62px;
       font-weight: 500;
       color: #fff;
       line-height: 1;
@@ -214,9 +191,6 @@
       padding-bottom: 4px;
     }
     .wordmark strong { color: var(--yellow); font-weight: 700; }
-    .contact { color: rgba(255,255,255,0.7); }
-    .contact p { font-size: 30px; line-height: 1.45; }
-    .contact strong { font-size: 40px; color: #fff; font-weight: 900; }
     .is-hidden { display: none !important; }
   </style>
 </head>
@@ -239,11 +213,11 @@
         <strong id="projectName">建案專屬</strong>
       </div>
 
-      <div class="sep sep-top"></div>
+      <div class="sep sep-1"></div>
 
       <div class="section-title">
         <img src="./assets/ip.png" alt="">
-        <h2>驗屋價格</h2>
+        <h2>驗屋報價</h2>
       </div>
 
       <div class="price-table-wrap">
@@ -253,23 +227,12 @@
         </table>
       </div>
 
-      <div class="sep sep-bottom"></div>
+      <div class="sep sep-2"></div>
 
-      <div class="notes-area">
-        <div class="note-list" id="noteList"></div>
-        <div class="qr-side">
-          <img id="qrImage" alt="LINE QR">
-          <div id="qrFallback" class="is-hidden">QR</div>
-          <span class="qr-label">官方 LINE</span>
-        </div>
-      </div>
+      <div class="notes-area" id="noteList"></div>
 
       <footer class="footer">
         <div class="wordmark">宅心<strong>驗屋</strong></div>
-        <div class="contact">
-          <p>電話：<strong id="phoneText">0971-866797</strong></p>
-          <p>LINE ID：<strong id="lineText">@301thssm</strong></p>
-        </div>
       </footer>
 
     </div>
@@ -286,10 +249,7 @@
 
       const q = (id) => document.getElementById(id);
       if (q("projectName")) q("projectName").textContent = data.projectName || "建案專屬";
-      if (q("phoneText")) q("phoneText").textContent = data.phone || "0971-866797";
-      if (q("lineText")) q("lineText").textContent = data.lineId || "@301thssm";
       setImage(q("brandLogo"), q("logoFallback"), data.brandLogo || "./assets/logo.png");
-      setImage(q("qrImage"), q("qrFallback"), data.qrImage || "./assets/qrcode.png");
 
       // Notes
       const noteList = q("noteList");
@@ -306,8 +266,7 @@
       const head = q("ptHead");
       if (head) {
         const tr = document.createElement("tr");
-        const emptyTh = document.createElement("th");
-        tr.appendChild(emptyTh);
+        const emptyTh = document.createElement("th"); tr.appendChild(emptyTh);
         thresholds.forEach(function (t, i) {
           const th = document.createElement("th");
           th.textContent = t;
