@@ -88,7 +88,7 @@
       gap: 24px; padding-bottom: 40px;
     }
     .room-row {
-      flex: 1; display: flex; flex-direction: column;
+      display: flex; flex-direction: column;
       min-height: 0; border-radius: 16px; overflow: hidden;
       box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
@@ -257,6 +257,41 @@
           roomRow.appendChild(tiersEl);
           roomList.appendChild(roomRow);
         });
+
+        // ── 動態填滿：依房型數量計算每列高度與字體大小 ──
+        var numRooms = prices.length;
+        if (numRooms > 0) {
+          // 海報固定 1415×2000，依 CSS 結構推算可用高度
+          var POSTER_H       = 2000;
+          var FOOTER_H       = 160;  // footer height
+          var RIGHT_PAD_TOP  = 48;   // right-panel padding-top
+          var RIGHT_HEADER_H = 114;  // 48px font×1.2lh + 18pb + 6border + 32mb
+          var LIST_PAD_B     = 40;   // room-list padding-bottom
+          var ROW_GAP        = 24;   // gap between rows
+          var ROW_HEADER_H   = 104;  // room-header: 52px×1.2lh + 36px pad + 5px border
+
+          var availH = POSTER_H - FOOTER_H - RIGHT_PAD_TOP - RIGHT_HEADER_H - LIST_PAD_B;
+          var rowH   = Math.floor((availH - ROW_GAP * (numRooms - 1)) / numRooms);
+          var tierH  = rowH - ROW_HEADER_H;
+
+          var priceSize = Math.max(78,  Math.min(Math.floor(tierH * 0.42), 200));
+          var nameSize  = Math.max(30,  Math.min(Math.floor(tierH * 0.11),  50));
+
+          // 套用每列高度
+          var rows = roomList.querySelectorAll('.room-row');
+          rows.forEach(function(r) {
+            r.style.height = rowH + 'px';
+            r.style.flex   = 'none';
+          });
+
+          // 動態字體（!important 確保覆蓋 CSS 固定值）
+          var dynStyle = document.createElement('style');
+          dynStyle.textContent =
+            '.tier-name { font-size: ' + nameSize + 'px !important; margin-bottom: ' + Math.round(nameSize * 0.4) + 'px !important; }' +
+            '.tier-price { font-size: ' + priceSize + 'px !important; }' +
+            '.tier-cell.is-hot .tier-price { font-size: ' + Math.round(priceSize * 1.06) + 'px !important; }';
+          document.head.appendChild(dynStyle);
+        }
       }
     })();
   </script>
