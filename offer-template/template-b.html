@@ -15,107 +15,142 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body, .page-shell { width: 1415px; height: 2000px; overflow: hidden; background: var(--cream); }
-    .poster { position: relative; width: 1415px; height: 2000px; background: var(--cream); overflow: hidden; }
-
-    /* ── Navy header ── */
-    .header-band {
-      position: absolute; top: 0; left: 0; width: 1415px; height: 260px;
-      background: var(--navy);
-      display: flex; align-items: center; padding: 0 112px; gap: 40px;
+    .poster {
+      width: 1415px; height: 2000px; overflow: hidden;
+      background: var(--cream);
+      display: flex; flex-direction: column;
     }
-    .header-accent { position: absolute; top: 0; right: 0; width: 12px; height: 260px; background: var(--yellow); }
-    #brandLogo { width: 136px; height: 136px; object-fit: contain; flex-shrink: 0; }
-    #logoFallback { display: none; }
-    .header-text { display: flex; flex-direction: column; gap: 6px; }
-    .header-brand { font-size: 52px; font-weight: 700; color: #fff; letter-spacing: 4px; }
-    .header-service { font-size: 32px; font-weight: 400; color: rgba(255,255,255,0.68); letter-spacing: 5px; }
 
-    /* ── Building name ── */
-    .project-section {
-      position: absolute; top: 296px; left: 0; width: 1415px;
-      text-align: center; padding: 0 112px;
+    /* ── Navy header band ── */
+    .header-band {
+      background: var(--navy);
+      padding: 44px 112px;
+      display: flex; align-items: center; gap: 36px;
+      flex-shrink: 0;
+    }
+    #brandLogo { width: 110px; height: 110px; object-fit: contain; flex-shrink: 0; }
+    #logoFallback { display: none; }
+    .header-text { display: flex; flex-direction: column; gap: 8px; }
+    .header-brand {
+      font-size: 52px; font-weight: 700; color: #fff; letter-spacing: 4px;
+    }
+    .header-service {
+      font-size: 30px; font-weight: 500;
+      color: rgba(255,255,255,0.6); letter-spacing: 5px;
+    }
+
+    /* ── Building name section ── */
+    .name-section {
+      text-align: center;
+      padding: 52px 112px 44px;
+      flex-shrink: 0;
     }
     .project-eyebrow {
-      font-size: 28px; font-weight: 400; color: var(--blue-grey);
-      letter-spacing: 10px; margin-bottom: 18px;
+      font-size: 26px; font-weight: 600;
+      color: var(--blue-grey); letter-spacing: 10px; margin-bottom: 20px;
     }
     #projectName {
       display: block; font-size: 148px; font-weight: 900;
       color: var(--navy); letter-spacing: 16px; line-height: 1.0;
     }
 
-    /* ── Separator ── */
-    .sep {
-      position: absolute; left: 112px; width: 1191px;
-      height: 7px; background: var(--yellow); border-radius: 4px;
+    /* ── Yellow separator ── */
+    .yellow-sep {
+      height: 8px; background: var(--yellow);
+      margin: 0 112px; border-radius: 4px;
+      flex-shrink: 0;
     }
-    .sep-1 { top: 640px; }
 
-    /* ── Section header (mascot + title) ── */
-    .section-header {
-      position: absolute; top: 672px; left: 112px;
-      display: flex; align-items: center; gap: 28px;
+    /* ── Price section header ── */
+    .price-section-head {
+      text-align: center; padding: 36px 0 28px;
+      font-size: 38px; font-weight: 900;
+      color: var(--navy); letter-spacing: 10px;
+      flex-shrink: 0;
     }
-    .mascot-icon { width: 92px; height: 112px; object-fit: contain; }
-    .section-header h2 { font-size: 52px; font-weight: 700; color: var(--navy); letter-spacing: 3px; }
 
-    /* ── Price table ── */
-    .price-table-wrap {
-      position: absolute; top: 820px; left: 112px; width: 1191px;
+    /* ── Three-column comparison ── */
+    .compare-wrap {
+      display: flex; gap: 28px;
+      padding: 52px 80px 44px;
+      align-items: flex-start;
+      flex-shrink: 0;
     }
-    .price-table { width: 100%; border-collapse: separate; border-spacing: 0; }
 
-    /* Thead */
-    .pt-head th {
-      font-size: 28px; font-weight: 700;
-      padding: 20px 8px 18px; text-align: center;
-      color: var(--blue-grey); letter-spacing: 2px;
+    /* Standard column */
+    .compare-col {
+      flex: 1; background: #fff;
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.07);
     }
-    .pt-head th:first-child { text-align: left; width: 188px; font-size: 0; color: transparent; }
-    .pt-head th.is-hot {
-      background: var(--navy); color: var(--yellow);
-      border-radius: 18px 18px 0 0;
-      padding: 20px 8px 12px; font-size: 30px;
+    .col-head {
+      padding: 28px 24px 24px; text-align: center;
+      font-size: 30px; font-weight: 700;
+      color: var(--blue-grey); letter-spacing: 4px;
+      border-bottom: 2px solid var(--light);
     }
-    .hot-sub {
-      display: block; font-size: 20px; font-weight: 900;
+    .price-row {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 32px 24px; gap: 10px;
+      border-bottom: 1px solid rgba(82,108,142,0.1);
+    }
+    .price-row:last-child { border-bottom: none; }
+    .room-label {
+      font-size: 30px; font-weight: 700;
+      color: var(--navy); letter-spacing: 4px;
+    }
+    .price-value {
+      font-size: 68px; font-weight: 900;
+      color: var(--navy); line-height: 1;
+    }
+
+    /* Featured column (10戶) */
+    .compare-col.is-featured {
+      background: var(--navy);
+      border-radius: 20px;
+      box-shadow: 0 16px 64px rgba(13,35,64,0.32);
+      margin-top: -44px;
+    }
+    .featured-tag {
       background: var(--yellow); color: var(--navy);
-      border-radius: 16px; padding: 4px 14px;
-      margin: 6px auto 0; width: fit-content; letter-spacing: 2px;
+      font-size: 28px; font-weight: 900;
+      text-align: center; padding: 18px 0; letter-spacing: 4px;
     }
-
-    /* Tbody */
-    .pt-body td {
-      padding: 30px 10px; text-align: center; vertical-align: middle;
-      border-bottom: 1px solid rgba(82,108,142,0.14);
+    .compare-col.is-featured .col-head {
+      color: rgba(255,211,90,0.85); font-weight: 700;
+      border-bottom-color: rgba(255,211,90,0.2);
+      background: rgba(255,255,255,0.04);
     }
-    .pt-body tr:last-child td { border-bottom: none; }
-    .pt-body td:first-child {
-      font-size: 58px; font-weight: 900; color: var(--navy);
-      text-align: left; padding-left: 0; letter-spacing: 4px;
+    .compare-col.is-featured .price-row {
+      border-bottom-color: rgba(255,211,90,0.12);
     }
-    .pt-body td.price-val { font-size: 62px; font-weight: 900; color: var(--navy); }
-    .pt-body td.price-val.is-hot {
-      background: var(--navy); color: var(--yellow); font-size: 74px;
-    }
+    .compare-col.is-featured .room-label { color: rgba(255,255,255,0.65); }
+    .compare-col.is-featured .price-value { color: var(--yellow); font-size: 76px; }
 
     /* ── Notes ── */
-    .notes-area { position: absolute; left: 112px; width: 1191px; top: 1560px; }
-    .note-item { font-size: 28px; color: var(--blue-grey); line-height: 1.68; margin-bottom: 8px; }
-    .note-item::before { content: "★ "; }
+    .notes-area {
+      flex: 1; padding: 28px 112px;
+      display: flex; flex-direction: column; gap: 18px;
+      justify-content: center;
+    }
+    .note-item {
+      font-size: 26px; font-weight: 500;
+      color: var(--blue-grey); line-height: 1.75;
+      padding-left: 22px; border-left: 4px solid var(--yellow);
+    }
     .note-item strong { color: var(--navy); font-weight: 700; }
-
-    /* ── Sep-2 (dynamic) ── */
-    .sep-2 { position: absolute; left: 112px; width: 1191px; height: 7px; background: var(--yellow); border-radius: 4px; top: 1520px; }
 
     /* ── Footer ── */
     .footer {
-      position: absolute; bottom: 0; left: 0; width: 1415px; height: 180px;
-      background: var(--navy); display: flex; align-items: center; justify-content: center;
+      background: var(--navy); flex-shrink: 0; height: 160px;
+      display: flex; align-items: center;
+      padding: 0 112px; gap: 32px;
     }
+    .footer-logo { width: 72px; height: 72px; object-fit: contain; flex-shrink: 0; }
     .wordmark {
-      font-size: 62px; font-weight: 500; color: #fff;
-      border-bottom: 10px solid var(--yellow); padding-bottom: 4px; line-height: 1;
+      font-size: 56px; font-weight: 500; color: #fff;
+      border-bottom: 8px solid var(--yellow); padding-bottom: 4px; line-height: 1;
     }
     .wordmark strong { color: var(--yellow); font-weight: 700; }
     .is-hidden { display: none !important; }
@@ -132,32 +167,22 @@
           <div class="header-brand">宅心驗屋</div>
           <div class="header-service">驗屋｜裝修｜裝潢細清</div>
         </div>
-        <div class="header-accent"></div>
       </div>
 
-      <div class="project-section">
-        <div class="project-eyebrow">社 區 專 屬 驗 屋 方 案</div>
+      <div class="name-section">
+        <div class="project-eyebrow">社 區 限 定 優 惠 方 案</div>
         <strong id="projectName">建案專屬</strong>
       </div>
 
-      <div class="sep sep-1"></div>
+      <div class="yellow-sep"></div>
+      <div class="price-section-head">▌ 驗屋報價一覽 ▌</div>
 
-      <div class="section-header">
-        <img class="mascot-icon" src="./assets/ip.png" alt="">
-        <h2>驗屋報價</h2>
-      </div>
+      <div class="compare-wrap" id="compareWrap"></div>
 
-      <div class="price-table-wrap">
-        <table class="price-table">
-          <thead class="pt-head" id="ptHead"></thead>
-          <tbody class="pt-body" id="ptBody"></tbody>
-        </table>
-      </div>
-
-      <div class="sep sep-2" id="sep2"></div>
       <div class="notes-area" id="noteList"></div>
 
       <footer class="footer">
+        <img class="footer-logo" src="./assets/logo.png" alt="">
         <div class="wordmark">宅心<strong>驗屋</strong></div>
       </footer>
 
@@ -171,70 +196,57 @@
       var data = getDataFromUrl();
       var thresholds = data.thresholds || [];
       var prices = data.prices || [];
-      var HOT_IDX = 1; // 預約滿10戶 永遠是 index 1
+      var HOT_IDX = 1;
 
       var q = function (id) { return document.getElementById(id); };
-      if (q("projectName")) q("projectName").textContent = data.projectName || "建案專屬";
-      setImage(q("brandLogo"), q("logoFallback"), data.brandLogo || "./assets/logo.png");
+      if (q('projectName')) q('projectName').textContent = data.projectName || '建案專屬';
+      setImage(q('brandLogo'), q('logoFallback'), data.brandLogo || './assets/logo.png');
 
       // Notes
-      var noteList = q("noteList");
+      var noteList = q('noteList');
       if (noteList) {
         (data.notes || []).forEach(function (note) {
-          var p = document.createElement("p");
-          p.className = "note-item";
+          var p = document.createElement('p');
+          p.className = 'note-item';
           p.innerHTML = note;
           noteList.appendChild(p);
         });
       }
 
-      // Table header
-      var head = q("ptHead");
-      if (head) {
-        var tr = document.createElement("tr");
-        var emptyTh = document.createElement("th");
-        tr.appendChild(emptyTh);
-        thresholds.forEach(function (t, i) {
-          var th = document.createElement("th");
-          if (i === HOT_IDX) {
-            th.className = "is-hot";
-            th.innerHTML = t + '<span class="hot-sub">★ 熱門方案</span>';
-          } else {
-            th.textContent = t;
+      // Three-column comparison
+      var wrap = q('compareWrap');
+      if (wrap) {
+        thresholds.forEach(function (threshold, colIdx) {
+          var isHot = (colIdx === HOT_IDX);
+          var col = document.createElement('div');
+          col.className = 'compare-col' + (isHot ? ' is-featured' : '');
+
+          if (isHot) {
+            var tag = document.createElement('div');
+            tag.className = 'featured-tag';
+            tag.textContent = '★ 熱門方案';
+            col.appendChild(tag);
           }
-          tr.appendChild(th);
-        });
-        head.appendChild(tr);
-      }
 
-      // Table body
-      var body = q("ptBody");
-      if (body) {
-        prices.forEach(function (row) {
-          var tr = document.createElement("tr");
-          var roomTd = document.createElement("td");
-          roomTd.textContent = row.room;
-          tr.appendChild(roomTd);
-          (row.values || []).forEach(function (val, i) {
-            var td = document.createElement("td");
-            td.className = "price-val" + (i === HOT_IDX ? " is-hot" : "");
-            td.textContent = (val !== null && val !== undefined) ? formatPrice(val) : "–";
-            tr.appendChild(td);
+          var head = document.createElement('div');
+          head.className = 'col-head';
+          head.textContent = threshold;
+          col.appendChild(head);
+
+          prices.forEach(function (row) {
+            var val = (row.values || [])[colIdx];
+            if (val === null || val === undefined) return;
+            var rowEl = document.createElement('div');
+            rowEl.className = 'price-row';
+            rowEl.innerHTML =
+              '<span class="room-label">' + row.room + '</span>' +
+              '<span class="price-value">' + formatPrice(val) + '</span>';
+            col.appendChild(rowEl);
           });
-          body.appendChild(tr);
+
+          wrap.appendChild(col);
         });
       }
-
-      // 動態調整分隔線與備註位置
-      requestAnimationFrame(function () {
-        var wrap = document.querySelector(".price-table-wrap");
-        var sep2 = q("sep2");
-        if (wrap && sep2 && noteList) {
-          var tableBottom = wrap.offsetTop + wrap.offsetHeight;
-          sep2.style.top = (tableBottom + 32) + 'px';
-          noteList.style.top = (tableBottom + 68) + 'px';
-        }
-      });
     })();
   </script>
 </body>

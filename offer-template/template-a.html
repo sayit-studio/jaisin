@@ -14,105 +14,139 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body, .page-shell { width: 1415px; height: 2000px; overflow: hidden; background: var(--navy); }
-    .poster { position: relative; width: 1415px; height: 2000px; overflow: hidden; background: var(--navy); color: #fff; }
+    .poster {
+      width: 1415px; height: 2000px; overflow: hidden;
+      background: var(--navy);
+      display: flex; flex-direction: column;
+    }
 
     /* ── Header ── */
-    .top-brand {
-      position: absolute; top: 60px; left: 112px;
+    .top-header {
       display: flex; align-items: center; gap: 36px;
+      padding: 44px 112px 40px;
+      border-bottom: 2px solid rgba(255,211,90,0.18);
+      flex-shrink: 0;
     }
     #brandLogo { width: 110px; height: 110px; object-fit: contain; flex-shrink: 0; }
     #logoFallback { display: none; }
-    .service-line { color: rgba(255,255,255,0.72); font-size: 36px; font-weight: 400; letter-spacing: 5px; }
-
-    .h-divider {
-      position: absolute; top: 228px; left: 112px;
-      width: 1191px; height: 2px; background: rgba(255,211,90,0.22);
+    .service-line {
+      font-size: 36px; font-weight: 500;
+      color: rgba(255,255,255,0.65); letter-spacing: 5px;
     }
 
-    /* ── Building name ── */
-    .project-block {
-      position: absolute; top: 264px; left: 112px; width: 840px;
+    /* ── Building name zone ── */
+    .name-zone {
+      position: relative; min-height: 360px;
+      padding: 44px 112px 40px;
+      border-bottom: 2px solid rgba(255,211,90,0.12);
+      flex-shrink: 0;
     }
     .project-eyebrow {
-      font-size: 26px; font-weight: 400; color: rgba(255,211,90,0.65);
-      letter-spacing: 10px; margin-bottom: 20px;
+      font-size: 26px; font-weight: 600;
+      color: rgba(255,211,90,0.65); letter-spacing: 10px; margin-bottom: 18px;
     }
     #projectName {
-      display: block; font-size: 148px; font-weight: 900;
-      color: #fff; letter-spacing: 14px; line-height: 1.0; margin-bottom: 28px;
+      display: block; font-size: 156px; font-weight: 900;
+      color: #fff; letter-spacing: 14px; line-height: 1.0; margin-bottom: 22px;
     }
-    .project-badge {
-      display: inline-block; background: var(--yellow); color: var(--navy);
-      font-size: 32px; font-weight: 700; padding: 12px 48px;
-      border-radius: 50px; letter-spacing: 6px;
+    .project-sub {
+      font-size: 28px; font-weight: 500;
+      color: rgba(255,255,255,0.45); letter-spacing: 5px;
     }
-
-    /* ── Mascot ── */
     .mascot {
-      position: absolute; top: 240px; right: 44px;
-      width: 360px; max-height: 540px; object-fit: contain; object-position: bottom;
+      position: absolute; right: 52px; top: 20px; bottom: 0;
+      width: 380px;
+      object-fit: contain; object-position: bottom;
     }
 
-    /* ── Price section ── */
-    .price-section {
-      position: absolute; top: 800px; left: 80px; width: 1255px;
+    /* ── Price header bar ── */
+    .price-header-bar {
+      background: rgba(255,211,90,0.08);
+      padding: 18px 112px;
+      font-size: 38px; font-weight: 900;
+      color: var(--yellow); letter-spacing: 10px;
+      flex-shrink: 0;
     }
 
-    /* Thin tier bar */
-    .tier-bar {
-      display: flex; align-items: center; gap: 0;
-      background: rgba(255,255,255,0.06); border-radius: 18px;
-      padding: 22px 44px; margin-bottom: 18px;
+    /* ── Price bands ── */
+    .price-bands {
+      padding: 44px 80px;
+      display: flex; flex-direction: column; gap: 36px;
+      flex-shrink: 0;
     }
-    .tier-bar-name {
-      font-size: 30px; font-weight: 700; color: rgba(255,255,255,0.62);
-      letter-spacing: 3px; flex-shrink: 0; min-width: 248px;
+    .price-band {
+      background: rgba(255,255,255,0.07);
+      border-radius: 20px; padding: 40px 60px;
+      position: relative;
     }
-    .tier-bar-prices { display: flex; flex-wrap: wrap; gap: 8px 40px; }
-    .tier-bar-item { display: flex; align-items: baseline; gap: 10px; }
-    .tier-bar-room { font-size: 26px; color: rgba(255,255,255,0.4); font-weight: 400; }
-    .tier-bar-price { font-size: 46px; font-weight: 900; color: rgba(255,255,255,0.72); }
+    .band-label {
+      font-size: 32px; font-weight: 700;
+      color: rgba(255,255,255,0.7); letter-spacing: 4px; margin-bottom: 22px;
+    }
+    .band-prices { display: flex; }
+    .price-item {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; gap: 8px;
+    }
+    .price-item + .price-item {
+      border-left: 2px solid rgba(255,255,255,0.08);
+    }
+    .room-name {
+      font-size: 28px; font-weight: 600;
+      color: rgba(255,255,255,0.5); letter-spacing: 3px;
+    }
+    .price-val {
+      font-size: 76px; font-weight: 900;
+      color: #fff; line-height: 1;
+    }
 
-    /* Hero card (熱門) */
-    .hero-card { border-radius: 24px; overflow: hidden; margin-bottom: 18px; }
-    .hero-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 28px 52px; background: var(--navy);
-      border-bottom: 4px solid var(--yellow);
+    /* 10戶：黃底突出卡片 */
+    .price-band.is-hot {
+      background: var(--yellow);
+      box-shadow: 0 8px 48px rgba(255,211,90,0.28);
     }
-    .hero-title { font-size: 52px; font-weight: 900; color: var(--yellow); letter-spacing: 6px; }
-    .hero-badge {
-      background: var(--yellow); color: var(--navy);
-      font-size: 26px; font-weight: 900; padding: 8px 28px;
-      border-radius: 50px; letter-spacing: 3px; white-space: nowrap;
+    .price-band.is-hot .band-label { color: var(--navy); margin-top: 44px; }
+    .price-band.is-hot .room-name { color: rgba(13,35,64,0.6); }
+    .price-band.is-hot .price-val { color: var(--navy); }
+    .price-band.is-hot .price-item + .price-item { border-left-color: rgba(13,35,64,0.1); }
+    .hot-badge {
+      position: absolute; top: 0; left: 0;
+      background: var(--navy); color: var(--yellow);
+      font-size: 26px; font-weight: 900; letter-spacing: 4px;
+      padding: 12px 40px; border-radius: 20px 0 20px 0;
     }
-    .hero-prices { padding: 28px 52px; background: var(--yellow); }
-    .hero-row {
-      display: flex; justify-content: space-between; align-items: baseline;
-      padding: 14px 0; border-bottom: 2px solid rgba(13,35,64,0.12);
-    }
-    .hero-row:last-child { border-bottom: none; }
-    .hero-room { font-size: 50px; font-weight: 900; color: var(--navy); letter-spacing: 5px; }
-    .hero-price { font-size: 84px; font-weight: 900; color: var(--navy); }
 
     /* ── Notes ── */
-    .notes-area { position: absolute; left: 112px; width: 1191px; top: 1680px; }
-    .note-item { font-size: 26px; color: rgba(255,255,255,0.38); line-height: 1.68; margin-bottom: 4px; }
-    .note-item::before { content: "★ "; }
-    .note-item strong { color: rgba(255,255,255,0.62); font-weight: 700; }
+    .notes-area {
+      flex: 1; padding: 32px 112px;
+      display: flex; flex-direction: column; gap: 18px;
+      justify-content: center;
+    }
+    .note-item {
+      font-size: 26px; font-weight: 500;
+      color: rgba(255,255,255,0.52); line-height: 1.75;
+      padding-left: 22px; border-left: 4px solid var(--yellow);
+    }
+    .note-item strong { color: rgba(255,255,255,0.8); font-weight: 700; }
 
     /* ── Footer ── */
     .footer {
-      position: absolute; bottom: 0; left: 0; width: 1415px; height: 152px;
-      border-top: 2px solid rgba(255,211,90,0.2);
-      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; height: 160px;
+      border-top: 2px solid rgba(255,211,90,0.18);
+      display: flex; align-items: center;
+      padding: 0 112px; justify-content: space-between;
     }
+    .footer-brand { display: flex; align-items: center; gap: 22px; }
+    .footer-logo { width: 72px; height: 72px; object-fit: contain; }
     .wordmark {
-      font-size: 62px; font-weight: 500; color: #fff;
-      border-bottom: 10px solid var(--yellow); padding-bottom: 4px; line-height: 1;
+      font-size: 56px; font-weight: 500; color: #fff;
+      border-bottom: 8px solid var(--yellow); padding-bottom: 4px; line-height: 1;
     }
     .wordmark strong { color: var(--yellow); font-weight: 700; }
+    .footer-tagline {
+      font-size: 28px; font-weight: 600;
+      color: rgba(255,255,255,0.28); letter-spacing: 6px;
+    }
     .is-hidden { display: none !important; }
   </style>
 </head>
@@ -120,26 +154,31 @@
   <div class="page-shell">
     <div class="poster" id="poster">
 
-      <div class="top-brand">
+      <div class="top-header">
         <img id="brandLogo" alt="宅心驗屋">
         <div id="logoFallback"></div>
         <span class="service-line">驗屋｜裝修｜裝潢細清</span>
       </div>
-      <div class="h-divider"></div>
 
-      <div class="project-block">
+      <div class="name-zone">
         <div class="project-eyebrow">社 區 限 定 優 惠 方 案</div>
         <strong id="projectName">建案專屬</strong>
-        <div class="project-badge">開 團 就 享 優 惠</div>
+        <div class="project-sub">欲報名請私訊官方 LINE</div>
+        <img class="mascot" src="./assets/ip.png" alt="">
       </div>
 
-      <img class="mascot" src="./assets/ip.png" alt="">
+      <div class="price-header-bar">▌ 驗屋報價一覽 ▌</div>
 
-      <div class="price-section" id="priceSection"></div>
+      <div class="price-bands" id="priceBands"></div>
+
       <div class="notes-area" id="noteList"></div>
 
       <footer class="footer">
-        <div class="wordmark">宅心<strong>驗屋</strong></div>
+        <div class="footer-brand">
+          <img class="footer-logo" src="./assets/logo.png" alt="">
+          <div class="wordmark">宅心<strong>驗屋</strong></div>
+        </div>
+        <div class="footer-tagline">— 人 數 越 多 · 價 惠 越 大 —</div>
       </footer>
 
     </div>
@@ -152,87 +191,57 @@
       var data = getDataFromUrl();
       var thresholds = data.thresholds || [];
       var prices = data.prices || [];
-      var HOT_IDX = 1; // 預約滿10戶 永遠是 index 1
+      var HOT_IDX = 1;
 
       var q = function (id) { return document.getElementById(id); };
-      if (q("projectName")) q("projectName").textContent = data.projectName || "建案專屬";
-      setImage(q("brandLogo"), q("logoFallback"), data.brandLogo || "./assets/logo.png");
+      if (q('projectName')) q('projectName').textContent = data.projectName || '建案專屬';
+      setImage(q('brandLogo'), q('logoFallback'), data.brandLogo || './assets/logo.png');
 
       // Notes
-      var noteList = q("noteList");
+      var noteList = q('noteList');
       if (noteList) {
         (data.notes || []).forEach(function (note) {
-          var p = document.createElement("p");
-          p.className = "note-item";
+          var p = document.createElement('p');
+          p.className = 'note-item';
           p.innerHTML = note;
           noteList.appendChild(p);
         });
       }
 
-      // Price section
-      var section = q("priceSection");
-      if (section) {
+      // Price bands
+      var bandsEl = q('priceBands');
+      if (bandsEl) {
         thresholds.forEach(function (threshold, colIdx) {
           var isHot = (colIdx === HOT_IDX);
+          var band = document.createElement('div');
+          band.className = 'price-band' + (isHot ? ' is-hot' : '');
 
           if (isHot) {
-            // ── Hero card ──
-            var hero = document.createElement("div");
-            hero.className = "hero-card";
-
-            var hdr = document.createElement("div");
-            hdr.className = "hero-header";
-            hdr.innerHTML =
-              '<span class="hero-title">' + threshold + '</span>' +
-              '<span class="hero-badge">★ 熱門方案</span>';
-            hero.appendChild(hdr);
-
-            var heroPs = document.createElement("div");
-            heroPs.className = "hero-prices";
-            prices.forEach(function (row) {
-              var val = (row.values || [])[colIdx];
-              if (val === null || val === undefined) return;
-              var r = document.createElement("div");
-              r.className = "hero-row";
-              r.innerHTML =
-                '<span class="hero-room">' + row.room + '</span>' +
-                '<span class="hero-price">' + formatPrice(val) + '</span>';
-              heroPs.appendChild(r);
-            });
-            hero.appendChild(heroPs);
-            section.appendChild(hero);
-
-          } else {
-            // ── Thin tier bar ──
-            var bar = document.createElement("div");
-            bar.className = "tier-bar";
-
-            var nameEl = document.createElement("div");
-            nameEl.className = "tier-bar-name";
-            nameEl.textContent = threshold;
-            bar.appendChild(nameEl);
-
-            var pricesEl = document.createElement("div");
-            pricesEl.className = "tier-bar-prices";
-            prices.forEach(function (row) {
-              var val = (row.values || [])[colIdx];
-              if (val === null || val === undefined) return;
-              var item = document.createElement("div");
-              item.className = "tier-bar-item";
-              item.innerHTML =
-                '<span class="tier-bar-room">' + row.room + '</span>' +
-                '<span class="tier-bar-price">' + formatPrice(val) + '</span>';
-              pricesEl.appendChild(item);
-            });
-            bar.appendChild(pricesEl);
-            section.appendChild(bar);
+            var badge = document.createElement('div');
+            badge.className = 'hot-badge';
+            badge.textContent = '★ 熱門方案';
+            band.appendChild(badge);
           }
-        });
 
-        // 動態調整備註位置
-        requestAnimationFrame(function () {
-          var bottom = section.offsetTop + section.offsetHeight;
-          if (noteList) noteList.style.top = Math.max(bottom + 40, 1620) + 'px';
+          var label = document.createElement('div');
+          label.className = 'band-label';
+          label.textContent = threshold;
+          band.appendChild(label);
+
+          var pricesEl = document.createElement('div');
+          pricesEl.className = 'band-prices';
+          prices.forEach(function (row) {
+            var val = (row.values || [])[colIdx];
+            if (val === null || val === undefined) return;
+            var item = document.createElement('div');
+            item.className = 'price-item';
+            item.innerHTML =
+              '<span class="room-name">' + row.room + '</span>' +
+              '<span class="price-val">' + formatPrice(val) + '</span>';
+            pricesEl.appendChild(item);
+          });
+          band.appendChild(pricesEl);
+          bandsEl.appendChild(band);
         });
       }
     })();
