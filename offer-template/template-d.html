@@ -92,58 +92,41 @@
     }
     .count-3 .card-room { font-size: 78px; padding: 18px 28px; }
 
-    /* Layer 1: 開團優惠 */
-    .card-tier-basic {
-      display: flex; justify-content: space-between; align-items: baseline;
-      background: #F4F6F8; padding: 22px 36px;
+    /* Unified tier rows */
+    .card-tier {
+      display: flex; justify-content: space-between; align-items: center;
+      background: #fff; padding: 28px 36px;
       border-bottom: 1px solid #E9ECEF;
     }
-    .count-3 .card-tier-basic { padding: 18px 28px; }
-    .card-tier-basic .t-name {
-      font-size: 30px; font-weight: 500;
-      color: #9ca3af; letter-spacing: 2px;
-    }
-    .card-tier-basic .t-price { font-size: 60px; font-weight: 900; color: #b0b8c4; }
-    .count-3 .card-tier-basic .t-price { font-size: 50px; }
-
-    /* Layer 2: 預約滿10戶 */
-    .card-tier-mid {
-      position: relative;
-      display: flex; justify-content: space-between; align-items: baseline;
-      background: #fff; padding: 22px 36px;
-      border-bottom: 1px solid #E9ECEF;
-    }
-    .count-3 .card-tier-mid { padding: 18px 28px; }
-    .hot-corner {
-      position: absolute; top: 0; right: 0;
-      background: var(--navy); color: var(--yellow);
-      font-size: 28px; font-weight: 900;
-      padding: 7px 22px; border-radius: 0 0 0 16px; letter-spacing: 2px;
-    }
-    .count-3 .hot-corner { font-size: 22px; padding: 5px 16px; }
-    .card-tier-mid .t-name {
-      font-size: 32px; font-weight: 700;
+    .card-tier:last-child { border-bottom: none; }
+    .card-tier .t-name {
+      font-size: 32px; font-weight: 600;
       color: var(--navy); letter-spacing: 2px;
     }
-    .card-tier-mid .t-price { font-size: 72px; font-weight: 900; color: var(--navy); }
-    .count-3 .card-tier-mid .t-price { font-size: 58px; }
+    .card-tier .t-price { font-size: 68px; font-weight: 900; color: var(--navy); }
 
-    /* Layer 3: 最低價黃底 */
-    .card-lowest {
-      background: var(--yellow); padding: 26px 36px 30px; text-align: center;
+    /* 熱門方案：全寬黃色橫條 + 內容行 */
+    .card-tier.is-hot { flex-direction: column; padding: 0; }
+    .hot-banner {
+      width: 100%; padding: 12px 36px;
+      background: var(--yellow);
+      font-size: 28px; font-weight: 900; color: var(--navy); letter-spacing: 3px;
     }
-    .count-3 .card-lowest { padding: 20px 28px 24px; }
-    .lowest-label {
-      font-size: 30px; font-weight: 700; color: var(--navy);
-      letter-spacing: 3px; margin-bottom: 8px;
+    .tier-content {
+      width: 100%; padding: 24px 36px;
+      display: flex; justify-content: space-between; align-items: center;
     }
-    .count-3 .lowest-label { font-size: 24px; }
-    .lowest-price { font-size: 110px; font-weight: 900; color: var(--navy); line-height: 1; }
-    .count-3 .lowest-price { font-size: 88px; }
+
+    /* count-3 adjustments */
+    .count-3 .card-tier { padding: 22px 28px; }
+    .count-3 .card-tier .t-name { font-size: 28px; }
+    .count-3 .card-tier .t-price { font-size: 56px; }
+    .count-3 .hot-banner { padding: 10px 28px; font-size: 24px; }
+    .count-3 .tier-content { padding: 18px 28px; }
 
     /* ── Notes ── */
     .notes-area {
-      flex: 1; padding: 36px 112px;
+      flex: 1; padding: 36px 60px;
       display: flex; flex-direction: column; gap: 20px;
       justify-content: center;
     }
@@ -217,9 +200,7 @@
       var thresholds = data.thresholds || [];
       var prices = data.prices || [];
 
-      var BASIC_IDX  = 0;
-      var HOT_IDX    = 1;
-      var LOWEST_IDX = thresholds.length - 1;
+      var HOT_IDX = 1;
 
       var q = function (id) { return document.getElementById(id); };
       if (q('projectName')) q('projectName').textContent = data.projectName || '建案專屬';
@@ -253,30 +234,26 @@
           thresholds.forEach(function (threshold, colIdx) {
             var val = (row.values || [])[colIdx];
             if (val === null || val === undefined) return;
-
-            if (colIdx === LOWEST_IDX) {
-              var el = document.createElement('div');
-              el.className = 'card-lowest';
-              el.innerHTML =
-                '<div class="lowest-label">' + threshold + '</div>' +
-                '<div class="lowest-price">' + formatPrice(val) + '</div>';
-              card.appendChild(el);
-            } else if (colIdx === HOT_IDX) {
-              var el = document.createElement('div');
-              el.className = 'card-tier-mid';
-              el.innerHTML =
-                '<div class="hot-corner">★ 熱門方案</div>' +
+            var isHot = (colIdx === HOT_IDX);
+            var tierEl = document.createElement('div');
+            tierEl.className = 'card-tier' + (isHot ? ' is-hot' : '');
+            if (isHot) {
+              var banner = document.createElement('div');
+              banner.className = 'hot-banner';
+              banner.textContent = '★ 熱門方案';
+              tierEl.appendChild(banner);
+              var content = document.createElement('div');
+              content.className = 'tier-content';
+              content.innerHTML =
                 '<span class="t-name">' + threshold + '</span>' +
                 '<span class="t-price">' + formatPrice(val) + '</span>';
-              card.appendChild(el);
+              tierEl.appendChild(content);
             } else {
-              var el = document.createElement('div');
-              el.className = 'card-tier-basic';
-              el.innerHTML =
+              tierEl.innerHTML =
                 '<span class="t-name">' + threshold + '</span>' +
                 '<span class="t-price">' + formatPrice(val) + '</span>';
-              card.appendChild(el);
             }
+            card.appendChild(tierEl);
           });
 
           cardsEl.appendChild(card);
