@@ -117,6 +117,7 @@
     .tier-price {
       font-size: 78px; font-weight: 900;
       color: var(--navy); line-height: 1;
+      white-space: nowrap; overflow: hidden; max-width: 100%;
     }
 
     /* 10戶 熱門：深藍底 */
@@ -274,8 +275,13 @@
           var rowH   = Math.floor((availH - ROW_GAP * (numRooms - 1)) / numRooms);
           var tierH  = rowH - ROW_HEADER_H;
 
-          var priceSize = Math.max(78,  Math.min(Math.floor(tierH * 0.42), 200));
-          var nameSize  = Math.max(30,  Math.min(Math.floor(tierH * 0.11),  50));
+          // 寬度限制：右側面板 951px 內容寬 ÷ numCols − 格子內距 32px
+          var numCols = thresholds.filter(function(t) { return t !== null && t !== undefined; }).length || 3;
+          var cellContentW = Math.floor((1415 - 460 - 104) / numCols) - 32;
+          // "$10,800" ≈ 7 字元 × ~0.6em，係數 4.2 確保不溢出
+          var maxByWidth = Math.floor(cellContentW / 4.2);
+          var priceSize = Math.max(60, Math.min(Math.floor(tierH * 0.42), maxByWidth));
+          var nameSize  = Math.max(26, Math.min(Math.floor(tierH * 0.11), Math.floor(maxByWidth * 0.45)));
 
           // 套用每列高度
           var rows = roomList.querySelectorAll('.room-row');

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=1415, initial-scale=1">
-  <title>宅心驗屋 房型精選</title>
+  <title>宅心驗屋 分房卡片版</title>
   <style>
     :root {
       --navy: #0D2340;
@@ -14,78 +14,67 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body, .page-shell { width: 1415px; height: 2000px; overflow: hidden; background: var(--navy); }
-    .poster { position: relative; width: 1415px; height: 2000px; overflow: hidden; background: var(--navy); }
+    .poster {
+      width: 1415px; height: 2000px; overflow: hidden;
+      background: var(--navy);
+      display: flex; flex-direction: column;
+    }
 
     /* ── Header ── */
-    .top-brand {
-      position: absolute; top: 60px; left: 112px;
+    .top-header {
       display: flex; align-items: center; gap: 36px;
+      padding: 44px 112px 40px;
+      border-bottom: 2px solid rgba(255,211,90,0.18);
+      flex-shrink: 0;
     }
     #brandLogo { width: 110px; height: 110px; object-fit: contain; flex-shrink: 0; }
     #logoFallback { display: none; }
-    .service-line { color: rgba(255,255,255,0.72); font-size: 36px; font-weight: 400; letter-spacing: 5px; }
-
-    .h-divider {
-      position: absolute; top: 228px; left: 112px;
-      width: 1191px; height: 2px; background: rgba(255,211,90,0.22);
+    .service-line {
+      font-size: 44px; font-weight: 500;
+      color: rgba(255,255,255,0.65); letter-spacing: 5px;
     }
 
-    /* ── Building name ── */
-    .project-block {
-      position: absolute; top: 258px; left: 112px; width: 820px;
+    /* ── Building name zone ── */
+    .name-zone {
+      position: relative;
+      padding: 44px 112px 40px;
+      border-bottom: 2px solid rgba(255,211,90,0.12);
+      flex-shrink: 0;
     }
     .project-eyebrow {
-      font-size: 26px; font-weight: 400;
-      color: rgba(255,211,90,0.65); letter-spacing: 10px; margin-bottom: 20px;
+      font-size: 34px; font-weight: 600;
+      color: rgba(255,211,90,0.65); letter-spacing: 10px; margin-bottom: 18px;
     }
     #projectName {
-      display: block; font-size: 148px; font-weight: 900;
-      color: #fff; letter-spacing: 14px; line-height: 1.0; margin-bottom: 28px;
+      display: block; font-size: 168px; font-weight: 900;
+      color: #fff; letter-spacing: 14px; line-height: 1.0;
     }
-    .project-sub {
-      font-size: 30px; font-weight: 400;
-      color: rgba(255,255,255,0.5); letter-spacing: 4px;
-    }
-
-    /* ── Mascot ── */
     .mascot {
-      position: absolute; top: 215px; right: 40px;
-      width: 380px; max-height: 540px;
+      position: absolute; right: 52px; top: 20px; bottom: 0;
+      width: 380px;
       object-fit: contain; object-position: bottom;
     }
 
-    /* ── Tagline ── */
-    .tagline {
-      position: absolute; top: 556px; left: 0; width: 1415px;
-      text-align: center;
-      font-size: 32px; font-weight: 500;
-      color: rgba(255,255,255,0.45); letter-spacing: 8px;
-    }
+    /* ── Yellow sep ── */
+    .yellow-sep { height: 8px; background: var(--yellow); flex-shrink: 0; }
 
-    /* ── Yellow separator ── */
-    .yellow-sep {
-      position: absolute; top: 612px; left: 0;
-      width: 1415px; height: 8px; background: var(--yellow);
-    }
-
-    /* ── Price section header ── */
-    .price-header {
-      position: absolute; top: 628px; left: 0; width: 1415px;
-      text-align: center;
-      font-size: 38px; font-weight: 900;
+    /* ── Price header bar ── */
+    .price-header-bar {
+      text-align: center; padding: 22px 112px;
+      font-size: 48px; font-weight: 900;
       color: var(--yellow); letter-spacing: 10px;
-      padding-top: 16px;
+      flex-shrink: 0;
     }
 
-    /* ── Price cards container ── */
+    /* ── Price cards ── */
     .price-cards {
-      position: absolute; top: 706px; left: 80px; width: 1255px;
+      padding: 36px 80px 0;
       display: flex; flex-wrap: wrap;
       gap: 36px 40px; align-items: flex-start;
+      flex-shrink: 0;
     }
-    .price-cards.count-3 { gap: 28px 28px; }
+    .price-cards.count-3 { gap: 28px; }
 
-    /* ── Card shell ── */
     .price-card {
       flex: 1; min-width: 560px;
       border-radius: 20px; overflow: hidden;
@@ -97,102 +86,92 @@
     .card-room {
       background: var(--navy);
       border-bottom: 6px solid var(--yellow);
-      padding: 22px 36px;
-      text-align: center;
-      font-size: 72px; font-weight: 900;
+      padding: 22px 36px; text-align: center;
+      font-size: 96px; font-weight: 900;
       color: #fff; letter-spacing: 10px; line-height: 1;
     }
-    .count-3 .card-room { font-size: 60px; padding: 18px 28px; }
+    .count-3 .card-room { font-size: 78px; padding: 18px 28px; }
 
-    /* ── Layer 1：團購優惠價（灰底，存在感最低）── */
+    /* Layer 1: 開團優惠 */
     .card-tier-basic {
       display: flex; justify-content: space-between; align-items: baseline;
-      background: #F4F6F8;
-      padding: 22px 36px;
+      background: #F4F6F8; padding: 22px 36px;
       border-bottom: 1px solid #E9ECEF;
     }
     .count-3 .card-tier-basic { padding: 18px 28px; }
     .card-tier-basic .t-name {
-      font-size: 22px; font-weight: 400;
+      font-size: 30px; font-weight: 500;
       color: #9ca3af; letter-spacing: 2px;
     }
-    .card-tier-basic .t-price {
-      font-size: 46px; font-weight: 900; color: #b0b8c4;
-    }
-    .count-3 .card-tier-basic .t-price { font-size: 38px; }
+    .card-tier-basic .t-price { font-size: 60px; font-weight: 900; color: #b0b8c4; }
+    .count-3 .card-tier-basic .t-price { font-size: 50px; }
 
-    /* ── Layer 2：預約滿10戶（白底＋右上角角標）── */
+    /* Layer 2: 預約滿10戶 */
     .card-tier-mid {
       position: relative;
       display: flex; justify-content: space-between; align-items: baseline;
-      background: #fff;
-      padding: 22px 36px;
+      background: #fff; padding: 22px 36px;
       border-bottom: 1px solid #E9ECEF;
     }
     .count-3 .card-tier-mid { padding: 18px 28px; }
     .hot-corner {
       position: absolute; top: 0; right: 0;
       background: var(--navy); color: var(--yellow);
-      font-size: 20px; font-weight: 900;
-      padding: 7px 22px;
-      border-radius: 0 0 0 16px;
-      letter-spacing: 2px;
+      font-size: 28px; font-weight: 900;
+      padding: 7px 22px; border-radius: 0 0 0 16px; letter-spacing: 2px;
     }
-    .count-3 .hot-corner { font-size: 16px; padding: 5px 16px; }
+    .count-3 .hot-corner { font-size: 22px; padding: 5px 16px; }
     .card-tier-mid .t-name {
-      font-size: 24px; font-weight: 700;
+      font-size: 32px; font-weight: 700;
       color: var(--navy); letter-spacing: 2px;
     }
-    .card-tier-mid .t-price {
-      font-size: 54px; font-weight: 900; color: var(--navy);
-    }
-    .count-3 .card-tier-mid .t-price { font-size: 44px; }
+    .card-tier-mid .t-price { font-size: 72px; font-weight: 900; color: var(--navy); }
+    .count-3 .card-tier-mid .t-price { font-size: 58px; }
 
-    /* ── Layer 3：預約滿30戶（黃底爆發，最大）── */
+    /* Layer 3: 最低價黃底 */
     .card-lowest {
-      background: var(--yellow);
-      padding: 26px 36px 30px;
-      text-align: center;
+      background: var(--yellow); padding: 26px 36px 30px; text-align: center;
     }
     .count-3 .card-lowest { padding: 20px 28px 24px; }
     .lowest-label {
-      font-size: 22px; font-weight: 700;
-      color: rgba(13,35,64,0.55);
+      font-size: 30px; font-weight: 700; color: var(--navy);
       letter-spacing: 3px; margin-bottom: 8px;
     }
-    .count-3 .lowest-label { font-size: 18px; }
-    .lowest-price {
-      font-size: 84px; font-weight: 900;
-      color: var(--navy); line-height: 1;
-    }
-    .count-3 .lowest-price { font-size: 68px; }
+    .count-3 .lowest-label { font-size: 24px; }
+    .lowest-price { font-size: 110px; font-weight: 900; color: var(--navy); line-height: 1; }
+    .count-3 .lowest-price { font-size: 88px; }
 
-    /* ── Notes（段落區塊樣式）── */
+    /* ── Notes ── */
     .notes-area {
-      position: absolute; left: 112px; width: 1191px; top: 1720px;
+      flex: 1; padding: 36px 112px;
+      display: flex; flex-direction: column; gap: 20px;
+      justify-content: center;
     }
     .note-item {
-      font-size: 26px;
-      color: rgba(255,255,255,0.52);
-      line-height: 1.75;
-      margin-bottom: 16px;
-      padding-left: 20px;
-      border-left: 4px solid var(--yellow);
+      font-size: 34px; font-weight: 500;
+      color: rgba(255,255,255,0.52); line-height: 1.75;
+      padding-left: 22px; border-left: 4px solid var(--yellow);
     }
-    .note-item:last-child { margin-bottom: 0; }
-    .note-item strong { color: rgba(255,255,255,0.75); font-weight: 700; }
+    .note-item strong { color: rgba(255,255,255,0.8); font-weight: 700; }
 
     /* ── Footer ── */
     .footer {
-      position: absolute; bottom: 0; left: 0; width: 1415px; height: 152px;
-      border-top: 2px solid rgba(255,211,90,0.22);
-      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; height: 160px;
+      border-top: 2px solid rgba(255,211,90,0.18);
+      display: flex; align-items: center;
+      padding: 0 112px; justify-content: space-between;
     }
+    .footer-brand { display: flex; align-items: center; gap: 22px; }
+    .footer-logo { width: 72px; height: 72px; object-fit: contain; }
     .wordmark {
-      font-size: 62px; font-weight: 500; color: #fff;
-      border-bottom: 10px solid var(--yellow); padding-bottom: 4px; line-height: 1;
+      font-size: 56px; font-weight: 500; color: #fff;
+      border-bottom: 8px solid var(--yellow); padding-bottom: 4px; line-height: 1;
     }
     .wordmark strong { color: var(--yellow); font-weight: 700; }
+    .footer-tagline {
+      font-size: 32px; font-weight: 600;
+      color: rgba(255,255,255,0.28); letter-spacing: 6px;
+    }
     .is-hidden { display: none !important; }
   </style>
 </head>
@@ -200,30 +179,31 @@
   <div class="page-shell">
     <div class="poster" id="poster">
 
-      <div class="top-brand">
+      <div class="top-header">
         <img id="brandLogo" alt="宅心驗屋">
         <div id="logoFallback"></div>
         <span class="service-line">驗屋｜裝修｜裝潢細清</span>
       </div>
-      <div class="h-divider"></div>
 
-      <div class="project-block">
+      <div class="name-zone">
         <div class="project-eyebrow">社 區 限 定 優 惠 方 案</div>
         <strong id="projectName">建案專屬</strong>
-        <div class="project-sub">欲報名請私訊官方 LINE</div>
+        <img class="mascot" src="./assets/ip.png" alt="">
       </div>
 
-      <img class="mascot" src="./assets/ip.png" alt="">
-
-      <div class="tagline">— 人 數 越 多 · 價 惠 越 大 —</div>
       <div class="yellow-sep"></div>
-      <div class="price-header">▌ 驗屋報價一覽 ▌</div>
+      <div class="price-header-bar">▌ 驗屋報價一覽 ▌</div>
 
       <div class="price-cards" id="priceCards"></div>
+
       <div class="notes-area" id="noteList"></div>
 
       <footer class="footer">
-        <div class="wordmark">宅心<strong>驗屋</strong></div>
+        <div class="footer-brand">
+          <img class="footer-logo" src="./assets/logo.png" alt="">
+          <div class="wordmark">宅心<strong>驗屋</strong></div>
+        </div>
+        <div class="footer-tagline">— 人 數 越 多 · 價 惠 越 大 —</div>
       </footer>
 
     </div>
@@ -237,38 +217,36 @@
       var thresholds = data.thresholds || [];
       var prices = data.prices || [];
 
-      // 固定層級 index（依照：團購/10戶/30戶）
-      var BASIC_IDX  = 0; // 層①：灰底小字
-      var HOT_IDX    = 1; // 層②：白底角標
-      var LOWEST_IDX = thresholds.length - 1; // 層③：黃底爆發（最低價）
+      var BASIC_IDX  = 0;
+      var HOT_IDX    = 1;
+      var LOWEST_IDX = thresholds.length - 1;
 
       var q = function (id) { return document.getElementById(id); };
-      if (q("projectName")) q("projectName").textContent = data.projectName || "建案專屬";
-      setImage(q("brandLogo"), q("logoFallback"), data.brandLogo || "./assets/logo.png");
+      if (q('projectName')) q('projectName').textContent = data.projectName || '建案專屬';
+      setImage(q('brandLogo'), q('logoFallback'), data.brandLogo || './assets/logo.png');
 
-      // Notes（段落區塊）
-      var noteList = q("noteList");
+      // Notes
+      var noteList = q('noteList');
       if (noteList) {
         (data.notes || []).forEach(function (note) {
-          var p = document.createElement("p");
-          p.className = "note-item";
+          var p = document.createElement('p');
+          p.className = 'note-item';
           p.innerHTML = note;
           noteList.appendChild(p);
         });
       }
 
       // Price cards：一張卡片一個房型
-      var cardsEl = q("priceCards");
+      var cardsEl = q('priceCards');
       if (cardsEl) {
-        if (prices.length === 3) cardsEl.classList.add("count-3");
+        if (prices.length === 3) cardsEl.classList.add('count-3');
 
         prices.forEach(function (row) {
-          var card = document.createElement("div");
-          card.className = "price-card";
+          var card = document.createElement('div');
+          card.className = 'price-card';
 
-          // Room header
-          var roomEl = document.createElement("div");
-          roomEl.className = "card-room";
+          var roomEl = document.createElement('div');
+          roomEl.className = 'card-room';
           roomEl.textContent = row.room;
           card.appendChild(roomEl);
 
@@ -277,28 +255,23 @@
             if (val === null || val === undefined) return;
 
             if (colIdx === LOWEST_IDX) {
-              // ── 層③ 黃底爆發 ──
-              var el = document.createElement("div");
-              el.className = "card-lowest";
+              var el = document.createElement('div');
+              el.className = 'card-lowest';
               el.innerHTML =
                 '<div class="lowest-label">' + threshold + '</div>' +
                 '<div class="lowest-price">' + formatPrice(val) + '</div>';
               card.appendChild(el);
-
             } else if (colIdx === HOT_IDX) {
-              // ── 層② 白底角標 ──
-              var el = document.createElement("div");
-              el.className = "card-tier-mid";
+              var el = document.createElement('div');
+              el.className = 'card-tier-mid';
               el.innerHTML =
                 '<div class="hot-corner">★ 熱門方案</div>' +
                 '<span class="t-name">' + threshold + '</span>' +
                 '<span class="t-price">' + formatPrice(val) + '</span>';
               card.appendChild(el);
-
             } else {
-              // ── 層① 灰底小字 ──
-              var el = document.createElement("div");
-              el.className = "card-tier-basic";
+              var el = document.createElement('div');
+              el.className = 'card-tier-basic';
               el.innerHTML =
                 '<span class="t-name">' + threshold + '</span>' +
                 '<span class="t-price">' + formatPrice(val) + '</span>';
@@ -307,12 +280,6 @@
           });
 
           cardsEl.appendChild(card);
-        });
-
-        // 動態備註位置
-        requestAnimationFrame(function () {
-          var bottom = cardsEl.offsetTop + cardsEl.offsetHeight;
-          if (noteList) noteList.style.top = Math.max(bottom + 44, 1680) + 'px';
         });
       }
     })();
