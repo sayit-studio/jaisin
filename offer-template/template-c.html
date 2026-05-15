@@ -28,35 +28,32 @@
     /* ── Left panel (navy) ── */
     .left-panel {
       background: var(--navy);
-      width: 260px; flex-shrink: 0;
+      width: 300px; flex-shrink: 0;
       display: flex; flex-direction: column;
       align-items: center;
-      padding: 42px 20px 0;
+      padding: 42px 22px 0;
     }
     .left-logo { width: 86px; height: 86px; object-fit: contain; flex-shrink: 0; }
     #logoFallback { display: none; }
     .left-service {
-      writing-mode: vertical-rl; text-orientation: upright;
-      font-size: 28px; font-weight: 800; line-height: 1.2;
-      color: rgba(255,255,255,0.62); letter-spacing: 4px;
-      margin-top: 18px; height: 340px;
+      display: none;
     }
     .left-divider {
       width: 100%; height: 2px; background: rgba(255,211,90,0.2);
-      margin: 24px 0; flex-shrink: 0;
+      margin: 30px 0 28px; flex-shrink: 0;
     }
     .left-eyebrow {
-      writing-mode: vertical-rl; text-orientation: upright;
-      font-size: 34px; font-weight: 800; line-height: 1.08;
-      color: rgba(255,211,90,0.76); letter-spacing: 6px;
-      height: 380px; flex-shrink: 0;
+      writing-mode: horizontal-tb; text-orientation: mixed;
+      font-size: 28px; font-weight: 900; line-height: 1;
+      color: rgba(255,211,90,0.82); letter-spacing: 0;
+      white-space: nowrap; flex-shrink: 0;
     }
     #projectName {
-      display: block; font-size: 88px; font-weight: 900;
-      color: #fff; letter-spacing: 6px; line-height: 1.02;
+      display: block; font-size: 116px; font-weight: 900;
+      color: #fff; letter-spacing: 8px; line-height: 1;
       writing-mode: vertical-rl; text-orientation: upright;
-      max-height: 620px; overflow: hidden;
-      margin-top: 18px;
+      max-height: 760px; overflow: hidden;
+      margin-top: 70px;
     }
     .left-sub {
       display: none;
@@ -67,7 +64,7 @@
     }
     .left-mascot {
       flex: 1; overflow: hidden;
-      margin-top: 18px; margin-left: -20px; margin-right: -20px;
+      margin-top: 24px; margin-left: -22px; margin-right: -22px;
       display: flex; align-items: flex-end; justify-content: center;
     }
     .left-mascot img {
@@ -79,7 +76,7 @@
     .right-panel {
       background: var(--cream);
       flex: 1; display: flex; flex-direction: column;
-      padding: 44px 36px 0;
+      padding: 44px 32px 0;
     }
     .right-header {
       font-size: 58px; font-weight: 900;
@@ -250,13 +247,15 @@
 
       // 建案名稱：依字數自動縮小，禁止斷行
       var nameEl = q('projectName');
+      if (serviceEl) serviceEl.textContent = '';
+      if (eyebrowEl) eyebrowEl.textContent = '\u793e\u5340\u9650\u5b9a\u5c08\u5c6c\u512a\u60e0';
       if (nameEl) {
         var name = data.projectName || '建案專屬';
         nameEl.textContent = name;
         var n = name.length;
-        var maxTitleH = 620;
-        var fs = Math.floor((maxTitleH * 0.92 - (n - 1) * 6) / n);
-        nameEl.style.fontSize = Math.min(88, Math.max(52, fs)) + 'px';
+        var maxTitleH = 760;
+        var fs = Math.floor((maxTitleH * 0.92 - (n - 1) * 8) / n);
+        nameEl.style.fontSize = Math.min(116, Math.max(68, fs)) + 'px';
       }
 
       setImage(q('brandLogo'), q('logoFallback'), data.brandLogo || './assets/logo.png');
@@ -370,7 +369,7 @@
 
           // 寬度限制：右側面板 951px 內容寬 ÷ numCols − 格子內距 32px
           var numCols = prices.length || 3;
-          var cellContentW = Math.floor((1415 - 260 - 72) / numCols) - 32;
+          var cellContentW = Math.floor((1415 - 300 - 64) / numCols) - 32;
           // "$10,800" ≈ 7 字元 × ~0.6em，係數 4.0 確保不溢出
           var maxByWidth = Math.floor(cellContentW / 4.0);
           var priceMin = numCols >= 4 ? 44 : 86;
