@@ -28,30 +28,35 @@
     /* ── Left panel (navy) ── */
     .left-panel {
       background: var(--navy);
-      width: 460px; flex-shrink: 0;
+      width: 260px; flex-shrink: 0;
       display: flex; flex-direction: column;
-      padding: 52px 44px 0;
+      align-items: center;
+      padding: 42px 20px 0;
     }
-    .left-logo { width: 112px; height: 112px; object-fit: contain; flex-shrink: 0; }
+    .left-logo { width: 86px; height: 86px; object-fit: contain; flex-shrink: 0; }
     #logoFallback { display: none; }
     .left-service {
-      font-size: 36px; font-weight: 700;
-      color: rgba(255,255,255,0.5); letter-spacing: 4px; margin-top: 16px;
+      writing-mode: vertical-rl; text-orientation: upright;
+      font-size: 28px; font-weight: 800; line-height: 1.2;
+      color: rgba(255,255,255,0.62); letter-spacing: 4px;
+      margin-top: 18px; height: 340px;
     }
     .left-divider {
-      height: 2px; background: rgba(255,211,90,0.2);
-      margin: 36px 0; flex-shrink: 0;
+      width: 100%; height: 2px; background: rgba(255,211,90,0.2);
+      margin: 24px 0; flex-shrink: 0;
     }
     .left-eyebrow {
-      font-size: 40px; font-weight: 700;
-      color: rgba(255,211,90,0.65); letter-spacing: 8px; margin-bottom: 16px;
+      writing-mode: vertical-rl; text-orientation: upright;
+      font-size: 34px; font-weight: 800; line-height: 1.08;
+      color: rgba(255,211,90,0.76); letter-spacing: 6px;
+      height: 380px; flex-shrink: 0;
     }
     #projectName {
-      display: block; font-size: 124px; font-weight: 900;
-      color: #fff; letter-spacing: 8px; line-height: 1.05;
+      display: block; font-size: 88px; font-weight: 900;
+      color: #fff; letter-spacing: 6px; line-height: 1.02;
       writing-mode: vertical-rl; text-orientation: upright;
-      max-height: 1040px; overflow: hidden;
-      align-self: center; margin-top: 22px;
+      max-height: 620px; overflow: hidden;
+      margin-top: 18px;
     }
     .left-sub {
       display: none;
@@ -62,11 +67,11 @@
     }
     .left-mascot {
       flex: 1; overflow: hidden;
-      margin-top: 20px; margin-left: -44px; margin-right: -44px;
+      margin-top: 18px; margin-left: -20px; margin-right: -20px;
       display: flex; align-items: flex-end; justify-content: center;
     }
     .left-mascot img {
-      width: 100%;
+      width: 108%;
       object-fit: contain; object-position: bottom;
     }
 
@@ -74,7 +79,7 @@
     .right-panel {
       background: var(--cream);
       flex: 1; display: flex; flex-direction: column;
-      padding: 44px 52px 0;
+      padding: 44px 36px 0;
     }
     .right-header {
       font-size: 58px; font-weight: 900;
@@ -238,6 +243,10 @@
       var HOT_IDX = 1;
 
       var q = function (id) { return document.getElementById(id); };
+      var serviceEl = document.querySelector('.left-service');
+      var eyebrowEl = document.querySelector('.left-eyebrow');
+      if (serviceEl) serviceEl.textContent = '宅心驗屋 傾聽你心';
+      if (eyebrowEl) eyebrowEl.textContent = '社區限定專屬優惠';
 
       // 建案名稱：依字數自動縮小，禁止斷行
       var nameEl = q('projectName');
@@ -245,9 +254,9 @@
         var name = data.projectName || '建案專屬';
         nameEl.textContent = name;
         var n = name.length;
-        var maxTitleH = 1040;
-        var fs = Math.floor((maxTitleH * 0.92 - (n - 1) * 8) / n);
-        nameEl.style.fontSize = Math.min(124, Math.max(68, fs)) + 'px';
+        var maxTitleH = 620;
+        var fs = Math.floor((maxTitleH * 0.92 - (n - 1) * 6) / n);
+        nameEl.style.fontSize = Math.min(88, Math.max(52, fs)) + 'px';
       }
 
       setImage(q('brandLogo'), q('logoFallback'), data.brandLogo || './assets/logo.png');
@@ -361,7 +370,7 @@
 
           // 寬度限制：右側面板 951px 內容寬 ÷ numCols − 格子內距 32px
           var numCols = prices.length || 3;
-          var cellContentW = Math.floor((1415 - 460 - 104) / numCols) - 32;
+          var cellContentW = Math.floor((1415 - 260 - 72) / numCols) - 32;
           // "$10,800" ≈ 7 字元 × ~0.6em，係數 4.0 確保不溢出
           var maxByWidth = Math.floor(cellContentW / 4.0);
           var priceMin = numCols >= 4 ? 44 : 86;
