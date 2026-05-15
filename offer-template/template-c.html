@@ -32,10 +32,10 @@
       display: flex; flex-direction: column;
       padding: 52px 44px 0;
     }
-    .left-logo { width: 88px; height: 88px; object-fit: contain; flex-shrink: 0; }
+    .left-logo { width: 112px; height: 112px; object-fit: contain; flex-shrink: 0; }
     #logoFallback { display: none; }
     .left-service {
-      font-size: 30px; font-weight: 500;
+      font-size: 36px; font-weight: 700;
       color: rgba(255,255,255,0.5); letter-spacing: 4px; margin-top: 16px;
     }
     .left-divider {
@@ -43,16 +43,19 @@
       margin: 36px 0; flex-shrink: 0;
     }
     .left-eyebrow {
-      font-size: 30px; font-weight: 600;
+      font-size: 40px; font-weight: 700;
       color: rgba(255,211,90,0.65); letter-spacing: 8px; margin-bottom: 16px;
     }
     #projectName {
-      display: block; font-size: 152px; font-weight: 900;
+      display: block; font-size: 124px; font-weight: 900;
       color: #fff; letter-spacing: 8px; line-height: 1.05;
-      max-width: 100%; overflow-wrap: anywhere; word-break: break-all;
+      writing-mode: vertical-rl; text-orientation: upright;
+      max-height: 1040px; overflow: hidden;
+      align-self: center; margin-top: 22px;
     }
     .left-sub {
-      margin-top: 28px; display: inline-block;
+      display: none;
+      margin-top: 28px;
       border: 3px solid rgba(255,211,90,0.45); color: var(--yellow);
       font-size: 30px; font-weight: 600;
       padding: 12px 28px; border-radius: 40px; letter-spacing: 4px;
@@ -71,10 +74,10 @@
     .right-panel {
       background: var(--cream);
       flex: 1; display: flex; flex-direction: column;
-      padding: 48px 52px 0;
+      padding: 44px 52px 0;
     }
     .right-header {
-      font-size: 48px; font-weight: 900;
+      font-size: 58px; font-weight: 900;
       color: var(--navy); letter-spacing: 8px;
       padding-bottom: 18px;
       border-bottom: 6px solid var(--yellow);
@@ -82,7 +85,7 @@
       display: flex; align-items: flex-end; justify-content: space-between; gap: 24px;
     }
     .tax-note {
-      font-size: 24px; font-weight: 700;
+      font-size: 32px; font-weight: 800;
       color: var(--blue-grey); letter-spacing: 3px;
       white-space: nowrap; padding-bottom: 6px;
     }
@@ -90,16 +93,17 @@
     /* Room list */
     .room-list {
       flex: 1; display: flex; flex-direction: column;
-      gap: 24px; padding-bottom: 40px;
+      gap: 22px; padding-bottom: 24px;
     }
     .room-row {
       display: flex; flex-direction: column;
+      position: relative;
       min-height: 0; border-radius: 16px; overflow: hidden;
       box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
     .room-header {
-      background: var(--navy); padding: 18px 32px;
-      font-size: 52px; font-weight: 900;
+      background: var(--navy); padding: 20px 32px;
+      font-size: 62px; font-weight: 900;
       color: #fff; letter-spacing: 8px;
       border-bottom: 5px solid var(--yellow);
       flex-shrink: 0;
@@ -116,11 +120,11 @@
     }
     .tier-cell:last-child { border-right: none; }
     .tier-name {
-      font-size: 30px; font-weight: 600;
-      color: #aaa; letter-spacing: 2px; margin-bottom: 10px;
+      font-size: 42px; font-weight: 800;
+      color: var(--navy); letter-spacing: 2px; margin-bottom: 10px;
     }
     .tier-price {
-      font-size: 78px; font-weight: 900;
+      font-size: 96px; font-weight: 900;
       color: var(--navy); line-height: 1;
       white-space: nowrap; overflow: hidden; max-width: 100%;
     }
@@ -139,12 +143,14 @@
     .hot-corner {
       position: absolute; top: 0; right: 0;
       background: var(--yellow); color: var(--navy);
-      font-size: 26px; font-weight: 900; letter-spacing: 2px;
-      padding: 6px 18px; border-radius: 0 0 0 12px;
+      font-size: 34px; font-weight: 900; letter-spacing: 2px;
+      padding: 6px 18px; border-radius: 0 16px 0 12px;
+      z-index: 5;
     }
 
     /* ── Footer (navy full-width) ── */
     .footer {
+      display: none;
       background: var(--navy); flex-shrink: 0; height: 178px;
       display: flex; align-items: center;
       padding: 0 60px; justify-content: space-between;
@@ -160,13 +166,22 @@
     .footer-notes {
       display: flex; flex-direction: column; gap: 8px; flex: 1; margin-left: 54px;
     }
+    .right-panel .footer-notes {
+      flex: 0 0 auto; margin-left: 0; padding: 12px 0 28px; gap: 10px;
+    }
     .note-item {
-      font-size: 26px; font-weight: 600;
+      font-size: 32px; font-weight: 700;
       color: rgba(255,255,255,0.66); line-height: 1.35;
       padding-left: 18px; border-left: 4px solid var(--yellow);
     }
+    .right-panel .note-item {
+      color: var(--blue-grey);
+      border-left-width: 5px;
+    }
+    .right-panel .note-item strong { color: var(--navy); }
     .note-item strong { color: rgba(255,255,255,0.75); font-weight: 700; }
     .is-hidden { display: none !important; }
+    footer.footer { display: none !important; }
   </style>
 </head>
 <body>
@@ -179,7 +194,7 @@
         <div class="left-panel">
           <img class="left-logo" id="brandLogo" alt="宅心驗屋">
           <div id="logoFallback"></div>
-          <div class="left-service">驗屋｜裝修｜裝潢細清</div>
+          <div class="left-service">宅心驗屋 傾聽你心</div>
           <div class="left-divider"></div>
           <div class="left-eyebrow">社 區 限 定</div>
           <strong id="projectName">建案專屬</strong>
@@ -196,6 +211,7 @@
             <span class="tax-note">以下皆為未稅價</span>
           </div>
           <div class="room-list" id="roomList"></div>
+          <div class="footer-notes" id="noteList"></div>
         </div>
 
       </div>
@@ -206,7 +222,7 @@
           <img class="footer-logo" src="./assets/logo.png" alt="">
           <div class="wordmark">宅心<strong>驗屋</strong></div>
         </div>
-        <div class="footer-notes" id="noteList"></div>
+        <div class="footer-notes"></div>
       </footer>
 
     </div>
@@ -229,10 +245,9 @@
         var name = data.projectName || '建案專屬';
         nameEl.textContent = name;
         var n = name.length;
-        var LEFT_CONTENT_W = 460 - 44 * 2; // 372px
-        var fs = Math.floor((LEFT_CONTENT_W * 0.92 - (n - 1) * 8) / n);
-        nameEl.style.fontSize = Math.min(152, Math.max(40, fs)) + 'px';
-        nameEl.style.whiteSpace = 'normal';
+        var maxTitleH = 1040;
+        var fs = Math.floor((maxTitleH * 0.92 - (n - 1) * 8) / n);
+        nameEl.style.fontSize = Math.min(124, Math.max(68, fs)) + 'px';
       }
 
       setImage(q('brandLogo'), q('logoFallback'), data.brandLogo || './assets/logo.png');
@@ -286,29 +301,73 @@
           roomList.appendChild(roomRow);
         });
 
+        roomList.innerHTML = '';
+        thresholds.forEach(function (threshold, colIdx) {
+          var isHot = (colIdx === HOT_IDX);
+          var thresholdRow = document.createElement('div');
+          thresholdRow.className = 'room-row';
+
+          var thresholdHeader = document.createElement('div');
+          thresholdHeader.className = 'room-header';
+          thresholdHeader.textContent = threshold;
+          thresholdRow.appendChild(thresholdHeader);
+
+          var thresholdGrid = document.createElement('div');
+          thresholdGrid.className = 'tiers-grid';
+          prices.forEach(function (row) {
+            var val = (row.values || [])[colIdx];
+            if (val === null || val === undefined) return;
+            var cell = document.createElement('div');
+            cell.className = 'tier-cell' + (isHot ? ' is-hot' : '');
+            if (false) {
+              var corner = document.createElement('div');
+              corner.className = 'hot-corner';
+              corner.textContent = '熱門方案';
+              thresholdRow.appendChild(corner);
+            }
+            cell.innerHTML += (
+              '<div class="tier-name">' + row.room + '</div>' +
+              '<div class="tier-price">' + formatPrice(val) + '</div>'
+            );
+            thresholdGrid.appendChild(cell);
+          });
+
+          thresholdRow.appendChild(thresholdGrid);
+          if (isHot) {
+            var corner = document.createElement('div');
+            corner.className = 'hot-corner';
+            corner.textContent = '熱門方案';
+            thresholdRow.appendChild(corner);
+          }
+          roomList.appendChild(thresholdRow);
+        });
+
         // ── 動態填滿：依房型數量計算每列高度與字體大小 ──
-        var numRooms = prices.length;
+        var numRooms = thresholds.length;
         if (numRooms > 0) {
           // 海報固定 1415×2000，依 CSS 結構推算可用高度
           var POSTER_H       = 2000;
-          var FOOTER_H       = 178;  // footer height
-          var RIGHT_PAD_TOP  = 48;   // right-panel padding-top
-          var RIGHT_HEADER_H = 114;  // 48px font×1.2lh + 18pb + 6border + 32mb
-          var LIST_PAD_B     = 40;   // room-list padding-bottom
-          var ROW_GAP        = 24;   // gap between rows
-          var ROW_HEADER_H   = 104;  // room-header: 52px×1.2lh + 36px pad + 5px border
+          var FOOTER_H       = 0;
+          var RIGHT_PAD_TOP  = 44;
+          var RIGHT_HEADER_H = 142;
+          var NOTES_H        = 250;
+          var LIST_PAD_B     = 24;
+          var ROW_GAP        = 22;
+          var ROW_HEADER_H   = 122;
 
-          var availH = POSTER_H - FOOTER_H - RIGHT_PAD_TOP - RIGHT_HEADER_H - LIST_PAD_B;
+          var availH = POSTER_H - FOOTER_H - RIGHT_PAD_TOP - RIGHT_HEADER_H - NOTES_H - LIST_PAD_B;
           var rowH   = Math.floor((availH - ROW_GAP * (numRooms - 1)) / numRooms);
           var tierH  = rowH - ROW_HEADER_H;
 
           // 寬度限制：右側面板 951px 內容寬 ÷ numCols − 格子內距 32px
-          var numCols = thresholds.filter(function(t) { return t !== null && t !== undefined; }).length || 3;
+          var numCols = prices.length || 3;
           var cellContentW = Math.floor((1415 - 460 - 104) / numCols) - 32;
           // "$10,800" ≈ 7 字元 × ~0.6em，係數 4.0 確保不溢出
           var maxByWidth = Math.floor(cellContentW / 4.0);
-          var priceSize = Math.max(60, Math.min(Math.floor(tierH * 0.42), maxByWidth));
-          var nameSize  = Math.max(34, Math.min(Math.floor(tierH * 0.11), Math.floor(maxByWidth * 0.45)));
+          var priceMin = numCols >= 4 ? 44 : 86;
+          var nameMin = numCols >= 4 ? 30 : 42;
+          var priceSize = Math.max(priceMin, Math.min(Math.floor(tierH * 0.48), maxByWidth));
+          var nameSize  = Math.max(nameMin, Math.min(Math.floor(tierH * 0.16), Math.floor(maxByWidth * 0.5)));
 
           // 套用每列高度
           var rows = roomList.querySelectorAll('.room-row');
