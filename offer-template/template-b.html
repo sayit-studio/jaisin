@@ -28,11 +28,13 @@
       display: flex; align-items: center; gap: 36px;
       flex-shrink: 0;
     }
-    #brandLogo { width: 128px; height: 128px; object-fit: contain; flex-shrink: 0; }
+    #brandLogo { width: 220px; height: 220px; object-fit: contain; flex-shrink: 0; }
     #logoFallback { display: none; }
     .header-text { display: flex; flex-direction: column; gap: 8px; }
     .header-brand {
-      font-size: 52px; font-weight: 800; color: #fff; letter-spacing: 4px;
+      font-size: 132px; font-weight: 900; color: #fff; letter-spacing: 2px;
+      text-shadow: 0 6px 24px rgba(0,0,0,0.22);
+      white-space: nowrap;
     }
     .header-service {
       display: none;
@@ -158,7 +160,7 @@
       display: flex; align-items: center;
       padding: 0 112px; gap: 32px;
     }
-    .footer-logo { width: 72px; height: 72px; object-fit: contain; flex-shrink: 0; }
+    .footer-logo { width: 96px; height: 96px; object-fit: contain; flex-shrink: 0; }
     .wordmark {
       font-size: 56px; font-weight: 500; color: #fff;
       border-bottom: 8px solid var(--yellow); padding-bottom: 4px; line-height: 1;
@@ -176,7 +178,7 @@
         <img id="brandLogo" alt="宅心驗屋">
         <div id="logoFallback"></div>
         <div class="header-text">
-          <div class="header-brand">宅心驗屋 傾聽你心</div>
+          <div class="header-brand">宅心驗屋</div>
           <div class="header-service">驗屋｜裝修｜裝潢細清</div>
         </div>
       </div>
@@ -213,7 +215,7 @@
 
       var q = function (id) { return document.getElementById(id); };
       if (q('projectName')) q('projectName').textContent = data.projectName || '建案專屬';
-      setImage(q('brandLogo'), q('logoFallback'), data.brandLogo || './assets/logo.png');
+      setImage(q('brandLogo'), q('logoFallback'), data.brandLogo || './assets/brand-mark.png');
 
       // Notes
       var noteList = q('noteList');

@@ -34,7 +34,7 @@
       align-items: center;
       padding: 42px 22px 0;
     }
-    .left-logo { width: 136px; height: 136px; object-fit: contain; flex-shrink: 0; }
+    .left-logo { width: 230px; height: 230px; object-fit: contain; flex-shrink: 0; }
     #logoFallback { display: none; }
     .left-service {
       display: none;
@@ -83,10 +83,21 @@
       padding: 44px 32px 0;
     }
     .right-eyebrow {
-      font-size: 34px; font-weight: 900;
+      text-align: center;
+      font-size: 46px; font-weight: 900;
       color: rgba(13,35,64,0.72);
       letter-spacing: 6px; line-height: 1;
-      margin: 0 0 16px; flex-shrink: 0;
+      margin: 0 0 18px; flex-shrink: 0;
+    }
+    .brand-slogan {
+      width: 100%;
+      text-align: center;
+      font-size: 116px; font-weight: 900;
+      color: var(--navy);
+      letter-spacing: 3px; line-height: 1.1;
+      margin: 0 0 24px; flex-shrink: 0;
+      text-shadow: 0 4px 18px rgba(13,35,64,0.12);
+      white-space: nowrap;
     }
     .right-header {
       font-size: 62px; font-weight: 900;
@@ -169,7 +180,7 @@
       border-top: 2px solid rgba(255,211,90,0.18);
     }
     .footer-brand { display: flex; align-items: center; gap: 22px; }
-    .footer-logo { width: 72px; height: 72px; object-fit: contain; }
+    .footer-logo { width: 96px; height: 96px; object-fit: contain; }
     .wordmark {
       font-size: 56px; font-weight: 500; color: #fff;
       border-bottom: 8px solid var(--yellow); padding-bottom: 4px; line-height: 1;
@@ -218,6 +229,7 @@
 
         <!-- Right: price panel -->
         <div class="right-panel">
+          <div class="brand-slogan">宅心驗屋</div>
           <div class="right-eyebrow">社區專屬限定優惠</div>
           <div class="right-header">
             <span>▌ 驗屋報價一覽 ▌</span>
@@ -271,7 +283,7 @@
         nameEl.style.fontSize = Math.min(132, Math.max(62, fs)) + 'px';
       }
 
-      setImage(q('brandLogo'), q('logoFallback'), data.brandLogo || './assets/logo.png');
+      setImage(q('brandLogo'), q('logoFallback'), data.brandLogo || './assets/brand-mark.png');
 
       // Notes（in footer）
       var noteList = q('noteList');
@@ -370,7 +382,7 @@
           var POSTER_H       = 2000;
           var FOOTER_H       = 0;
           var RIGHT_PAD_TOP  = 44;
-          var RIGHT_HEADER_H = 142;
+          var RIGHT_HEADER_H = 248;
           var NOTES_H        = 250;
           var LIST_PAD_B     = 24;
           var ROW_GAP        = 22;

@@ -1,7 +1,7 @@
 const SAMPLES = {
   shengmei: {
     projectName: "勝美珺專屬",
-    brandLogo: "./assets/logo.png",
+    brandLogo: "./assets/brand-mark.png",
     qrImage: "./assets/qrcode.png",
     projectImage: "./assets/shengmei-project.jpg",
     thresholds: ["開團優惠價", "預約滿10戶", "預約滿30戶"],
@@ -19,7 +19,7 @@ const SAMPLES = {
   },
   aipue: {
     projectName: "鉑金愛悅專屬",
-    brandLogo: "./assets/logo.png",
+    brandLogo: "./assets/brand-mark.png",
     qrImage: "./assets/qrcode.png",
     projectImage: "./assets/aipue-project.jpg",
     thresholds: ["開團優惠價", "預約滿5戶", "預約滿20戶"],
@@ -123,7 +123,7 @@ function renderPoster(data) {
   if (q("#phoneText")) q("#phoneText").textContent = data.phone || "0971-866797";
   if (q("#lineText")) q("#lineText").textContent = data.lineId || "@301thssm";
 
-  setImage(q("#brandLogo"), q("#logoFallback"), data.brandLogo || "./assets/logo.png");
+  setImage(q("#brandLogo"), q("#logoFallback"), data.brandLogo || "./assets/brand-mark.png");
   setImage(q("#projectImage"), null, data.projectImage);
   setImage(q("#qrImage"), q("#qrFallback"), data.qrImage || "./assets/qrcode.png");
 
