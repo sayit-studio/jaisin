@@ -33,7 +33,7 @@
       align-items: center;
       padding: 42px 22px 0;
     }
-    .left-logo { width: 112px; height: 112px; object-fit: contain; flex-shrink: 0; }
+    .left-logo { width: 136px; height: 136px; object-fit: contain; flex-shrink: 0; }
     #logoFallback { display: none; }
     .left-service {
       display: none;
@@ -50,12 +50,13 @@
       white-space: nowrap; flex-shrink: 0;
     }
     #projectName {
-      display: block; width: 180px; height: 820px;
+      display: flex; width: 244px; height: 840px;
+      align-items: center; justify-content: center;
       font-size: 132px; font-weight: 900;
-      color: #fff; letter-spacing: 8px; line-height: 1;
+      color: #fff; letter-spacing: 8px; line-height: 1.06;
       writing-mode: vertical-rl; text-orientation: upright;
-      overflow: hidden; text-align: center;
-      margin-top: 88px;
+      overflow: visible; text-align: center; white-space: nowrap;
+      margin-top: 74px;
     }
     .left-sub {
       display: none;
@@ -264,8 +265,8 @@
         var name = data.projectName || '建案專屬';
         nameEl.textContent = name;
         var n = name.length;
-        var maxTitleH = 820;
-        var fs = Math.floor((maxTitleH * 0.92 - (n - 1) * 8) / n);
+        var maxTitleH = 840;
+        var fs = Math.floor((maxTitleH * 0.90 - (n - 1) * 8) / n);
         nameEl.style.fontSize = Math.min(132, Math.max(62, fs)) + 'px';
       }
 
