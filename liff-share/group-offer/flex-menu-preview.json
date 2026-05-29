@@ -1,0 +1,135 @@
+{
+  "type": "flex",
+  "altText": "團購方案工具",
+  "contents": {
+    "type": "bubble",
+    "size": "mega",
+    "header": {
+      "type": "box",
+      "layout": "vertical",
+      "backgroundColor": "#123E68",
+      "paddingAll": "18px",
+      "contents": [
+        {
+          "type": "text",
+          "text": "團購方案工具",
+          "color": "#FFFFFF",
+          "weight": "bold",
+          "size": "xl"
+        },
+        {
+          "type": "text",
+          "text": "選擇要執行的流程",
+          "color": "#DDEBFF",
+          "size": "sm",
+          "margin": "xs"
+        }
+      ]
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "md",
+      "contents": [
+        {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "xs",
+          "contents": [
+            {
+              "type": "text",
+              "text": "步驟一",
+              "color": "#1B6F58",
+              "weight": "bold",
+              "size": "sm"
+            },
+            {
+              "type": "text",
+              "text": "輸入資料、選擇模板，產生可下載的團購方案圖片。",
+              "wrap": true,
+              "color": "#334155",
+              "size": "sm"
+            }
+          ]
+        },
+        {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "xs",
+          "contents": [
+            {
+              "type": "text",
+              "text": "步驟二",
+              "color": "#1B6F58",
+              "weight": "bold",
+              "size": "sm"
+            },
+            {
+              "type": "text",
+              "text": "輸入文字並製作 LINE Flex 訊息。",
+              "wrap": true,
+              "color": "#334155",
+              "size": "sm"
+            }
+          ]
+        },
+        {
+          "type": "box",
+          "layout": "vertical",
+          "spacing": "xs",
+          "contents": [
+            {
+              "type": "text",
+              "text": "步驟三",
+              "color": "#1B6F58",
+              "weight": "bold",
+              "size": "sm"
+            },
+            {
+              "type": "text",
+              "text": "重新整理 n8n 快取，讓 LINE 回覆讀到最新資料。",
+              "wrap": true,
+              "color": "#334155",
+              "size": "sm"
+            }
+          ]
+        }
+      ]
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "sm",
+      "contents": [
+        {
+          "type": "button",
+          "style": "primary",
+          "color": "#123E68",
+          "action": {
+            "type": "uri",
+            "label": "製作團購方案",
+            "uri": "https://liff.line.me/2010234607-r7RfEvrr"
+          }
+        },
+        {
+          "type": "button",
+          "style": "secondary",
+          "action": {
+            "type": "postback",
+            "label": "製作 Flex 訊息",
+            "data": "action=build_flex"
+          }
+        },
+        {
+          "type": "button",
+          "style": "secondary",
+          "action": {
+            "type": "postback",
+            "label": "刷新快取",
+            "data": "action=refresh_cache"
+          }
+        }
+      ]
+    }
+  }
+}
