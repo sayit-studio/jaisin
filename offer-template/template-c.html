@@ -190,11 +190,11 @@
       display: flex; flex-direction: column; gap: 8px; flex: 1; margin-left: 54px;
     }
     .right-panel .footer-notes {
-      flex: 0 0 auto; margin-left: 0; padding: 12px 0 28px; gap: 10px;
+      flex: 0 0 auto; margin-left: 0; padding: 10px 0 16px; gap: 8px;
     }
     .note-item {
-      font-size: 32px; font-weight: 700;
-      color: rgba(255,255,255,0.66); line-height: 1.35;
+      font-size: 30px; font-weight: 700;
+      color: rgba(255,255,255,0.66); line-height: 1.28;
       padding-left: 18px; border-left: 4px solid var(--yellow);
     }
     .right-panel .note-item {
@@ -378,17 +378,17 @@
         // ── 動態填滿：依房型數量計算每列高度與字體大小 ──
         var numRooms = thresholds.length;
         if (numRooms > 0) {
-          // 海報固定 1415×2000，依 CSS 結構推算可用高度
-          var POSTER_H       = 2000;
-          var FOOTER_H       = 0;
-          var RIGHT_PAD_TOP  = 44;
-          var RIGHT_HEADER_H = 248;
-          var NOTES_H        = 250;
+          // Use actual rendered heights so larger brand/header blocks do not push notes off canvas.
+          var rightPanel = document.querySelector('.right-panel');
+          var noteListEl = q('noteList');
           var LIST_PAD_B     = 24;
           var ROW_GAP        = 22;
           var ROW_HEADER_H   = 122;
 
-          var availH = POSTER_H - FOOTER_H - RIGHT_PAD_TOP - RIGHT_HEADER_H - NOTES_H - LIST_PAD_B;
+          var panelH = rightPanel ? rightPanel.clientHeight : 2000;
+          var listTop = roomList.offsetTop || 0;
+          var notesH = noteListEl ? noteListEl.offsetHeight : 0;
+          var availH = panelH - listTop - notesH - LIST_PAD_B;
           var rowH   = Math.floor((availH - ROW_GAP * (numRooms - 1)) / numRooms);
           var tierH  = rowH - ROW_HEADER_H;
 
