@@ -19,16 +19,36 @@
       </section>
 
       <form class="offer-form" id="offerForm">
-        <label>
-          選擇方案
-          <select id="messageId" name="messageId" required>
-            <option value="">讀取中...</option>
-          </select>
-        </label>
+        <fieldset class="mode-field">
+          <legend>第一步</legend>
+          <label class="choice-card">
+            <input type="radio" name="mode" value="create" checked>
+            <span>
+              <strong>新增新建案團購方案</strong>
+              <small>建立新方案，輸入建案名稱後選擇海報模板。</small>
+            </span>
+          </label>
+          <label class="choice-card">
+            <input type="radio" name="mode" value="existing">
+            <span>
+              <strong>使用既有建案</strong>
+              <small>從 Notion 既有方案選擇，再調整海報模板。</small>
+            </span>
+          </label>
+        </fieldset>
+
+        <section class="mode-section" id="existingSection">
+          <label>
+            選擇既有方案
+            <select id="messageId" name="messageId">
+              <option value="">讀取中...</option>
+            </select>
+          </label>
+        </section>
 
         <label>
           團購圖片建案名稱
-          <input id="projectName" name="projectName" autocomplete="off" placeholder="可留空使用 Notion 原資料">
+          <input id="projectName" name="projectName" autocomplete="off" placeholder="新增時必填；既有方案可留空使用 Notion 原資料">
         </label>
 
         <label>
@@ -41,6 +61,39 @@
             <option value="對切海報版">對切海報版</option>
           </select>
         </label>
+
+        <section class="defaults-panel" aria-labelledby="defaultsTitle">
+          <div class="section-title">
+            <h2 id="defaultsTitle">預設帶入資料</h2>
+            <p>新增方案時會依 Notion 自動化預設值產圖；取消勾選的房型不會帶入圖片。</p>
+          </div>
+
+          <div class="room-options">
+            <label class="room-card">
+              <input type="checkbox" name="roomTypes" value="二房" checked>
+              <span>
+                <strong>二房</strong>
+                <small>團購價 7800 / 階梯價 7300 / 6800</small>
+              </span>
+            </label>
+
+            <label class="room-card">
+              <input type="checkbox" name="roomTypes" value="三房" checked>
+              <span>
+                <strong>三房</strong>
+                <small>團購價 8800 / 階梯價 8300 / 7800</small>
+              </span>
+            </label>
+
+            <label class="room-card">
+              <input type="checkbox" name="roomTypes" value="四房" checked>
+              <span>
+                <strong>四房</strong>
+                <small>團購價 10800 / 階梯價 10300 / 9800</small>
+              </span>
+            </label>
+          </div>
+        </section>
 
         <details class="advanced">
           <summary>進階資料</summary>
@@ -136,6 +189,8 @@
       const messageId = document.querySelector("#messageId");
       const projectName = document.querySelector("#projectName");
       const templateStyle = document.querySelector("#templateStyle");
+      const existingSection = document.querySelector("#existingSection");
+      const modeInputs = document.querySelectorAll("input[name='mode']");
       const resultPanel = document.querySelector("#resultPanel");
       const resultImage = document.querySelector("#resultImage");
       const sendButton = document.querySelector("#sendButton");
@@ -147,10 +202,35 @@
       }
 
       function fillFormFromSelectedOption() {
+        if (getSelectedMode() !== "existing") {
+          return;
+        }
+
         const selected = state.options.find((item) => item.messageId === messageId.value);
 
         projectName.value = selected?.projectName || "";
         templateStyle.value = selected?.templateStyle || "";
+      }
+
+      function getSelectedMode() {
+        return document.querySelector("input[name='mode']:checked")?.value || "create";
+      }
+
+      function updateModeView() {
+        const mode = getSelectedMode();
+
+        existingSection.classList.toggle("is-hidden", mode !== "existing");
+        messageId.required = mode === "existing";
+        projectName.required = mode === "create";
+
+        if (mode === "create") {
+          messageId.value = "";
+          projectName.value = "";
+          setStatus("請輸入新建案名稱並選擇海報樣式。", "success");
+        } else {
+          fillFormFromSelectedOption();
+          setStatus("請選擇既有方案並確認海報樣式。", "success");
+        }
       }
 
       async function loadOptions() {
@@ -207,10 +287,15 @@
 
       function getFormPayload() {
         const formData = new FormData(offerForm);
+        const roomTypes = Array.from(offerForm.querySelectorAll("input[name='roomTypes']:checked"))
+          .map((input) => input.value);
+
         return {
+          mode: String(formData.get("mode") || "create").trim(),
           messageId: String(formData.get("messageId") || "").trim(),
           projectName: String(formData.get("projectName") || "").trim(),
           templateStyle: String(formData.get("templateStyle") || "").trim(),
+          roomTypes,
           thresholds: [
             String(formData.get("threshold0") || "").trim(),
             String(formData.get("threshold1") || "").trim(),
@@ -230,6 +315,20 @@
 
       async function generateImage(event) {
         event.preventDefault();
+        const mode = getSelectedMode();
+
+        if (mode === "create" && !projectName.value.trim()) {
+          setStatus("新增新建案團購方案時，請先輸入建案名稱。", "error");
+          projectName.focus();
+          return;
+        }
+
+        if (mode === "existing" && !messageId.value.trim()) {
+          setStatus("使用既有建案時，請先選擇方案。", "error");
+          messageId.focus();
+          return;
+        }
+
         submitButton.disabled = true;
         resultPanel.classList.add("is-hidden");
         setStatus("正在產生圖片，請稍候。");
@@ -299,6 +398,9 @@
       }
 
       messageId.addEventListener("change", fillFormFromSelectedOption);
+      for (const input of modeInputs) {
+        input.addEventListener("change", updateModeView);
+      }
       offerForm.addEventListener("submit", generateImage);
       sendButton.addEventListener("click", sendImageToChat);
 
@@ -308,7 +410,7 @@
           await initLiff();
           setStatus("正在讀取方案清單。");
           await loadOptions();
-          setStatus("請選擇方案並確認資料。", "success");
+          updateModeView();
         } catch (error) {
           console.error(error);
           setStatus(error.message || "初始化失敗。", "error");
