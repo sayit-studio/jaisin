@@ -14,133 +14,64 @@
         <h1>製作團購方案</h1>
       </header>
 
-      <section class="status" id="statusBox" role="status" aria-live="polite">
-        正在準備表單。
+      <section class="status" id="statusBox" role="status" aria-live="polite">正在準備表單。</section>
+
+      <nav class="tabs" aria-label="團購工具分頁">
+        <button class="tab-button is-active" type="button" data-tab="image">製作圖片</button>
+        <button class="tab-button" type="button" data-tab="flex">Flex 上下線</button>
+        <button class="tab-button" type="button" data-tab="cache">刷新快取</button>
+      </nav>
+
+      <section class="tab-panel is-active" data-panel="image">
+        <form class="offer-form" id="offerForm">
+          <fieldset class="mode-field">
+            <legend>第一步</legend>
+            <label class="choice-card"><input type="radio" name="mode" value="create" checked><span><strong>新增新建案團購方案</strong><small>建立新方案，輸入建案名稱後選擇海報模板。</small></span></label>
+            <label class="choice-card"><input type="radio" name="mode" value="existing"><span><strong>使用既有建案</strong><small>從 Notion 既有方案選擇，再調整海報模板。</small></span></label>
+          </fieldset>
+
+          <section class="mode-section" id="existingSection">
+            <label>選擇既有方案<select id="messageId" name="messageId"><option value="">讀取中...</option></select></label>
+          </section>
+
+          <label>團購圖片建案名稱<input id="projectName" name="projectName" autocomplete="off" placeholder="新增時必填；既有方案可留空使用 Notion 原資料"></label>
+
+          <label>海報樣式<select id="templateStyle" name="templateStyle"><option value="">使用 Notion 原設定</option><option value="三欄比較版">三欄比較版</option><option value="橫條衝擊版">橫條衝擊版</option><option value="分房卡片版">分房卡片版</option><option value="對切海報版">對切海報版</option></select></label>
+
+          <section class="defaults-panel" aria-labelledby="defaultsTitle">
+            <div class="section-title"><h2 id="defaultsTitle">預設帶入資料</h2><p>新增方案時會依 Notion 自動化預設值產圖；取消勾選的房型不會帶入圖片。</p></div>
+            <div class="room-options">
+              <label class="room-card"><input type="checkbox" name="roomTypes" value="二房" checked><span><strong>二房</strong><small>團購價 7800 / 階梯價 7300 / 6800</small></span></label>
+              <label class="room-card"><input type="checkbox" name="roomTypes" value="三房" checked><span><strong>三房</strong><small>團購價 8800 / 階梯價 8300 / 7800</small></span></label>
+              <label class="room-card"><input type="checkbox" name="roomTypes" value="四房" checked><span><strong>四房</strong><small>團購價 10800 / 階梯價 10300 / 9800</small></span></label>
+            </div>
+          </section>
+
+          <details class="advanced">
+            <summary>進階資料</summary>
+            <label>團購價標題<input id="threshold0" name="threshold0" autocomplete="off" placeholder="開團優惠價"></label>
+            <div class="field-grid"><label>階梯價1標題<input id="threshold1" name="threshold1" autocomplete="off" placeholder="預約滿10戶"></label><label>階梯價2標題<input id="threshold2" name="threshold2" autocomplete="off" placeholder="預約滿30戶"></label></div>
+            <label>備註1<textarea id="note1" name="note1" rows="2" placeholder="可留空使用 Notion 原資料"></textarea></label>
+            <label>備註2<textarea id="note2" name="note2" rows="2" placeholder="可留空使用 Notion 原資料"></textarea></label>
+            <label>備註3<textarea id="note3" name="note3" rows="2" placeholder="可留空使用 Notion 原資料"></textarea></label>
+          </details>
+
+          <button class="primary-button" id="submitButton" type="submit" disabled>產生圖片</button>
+        </form>
+
+        <section class="result-panel is-hidden" id="resultPanel">
+          <img id="resultImage" alt="團購方案圖片">
+          <div class="actions"><button class="secondary-button" id="sendButton" type="button">傳送圖片到聊天室</button><a class="download-link" id="downloadLink" target="_blank" rel="noreferrer">開啟圖片</a></div>
+        </section>
       </section>
 
-      <form class="offer-form" id="offerForm">
-        <fieldset class="mode-field">
-          <legend>第一步</legend>
-          <label class="choice-card">
-            <input type="radio" name="mode" value="create" checked>
-            <span>
-              <strong>新增新建案團購方案</strong>
-              <small>建立新方案，輸入建案名稱後選擇海報模板。</small>
-            </span>
-          </label>
-          <label class="choice-card">
-            <input type="radio" name="mode" value="existing">
-            <span>
-              <strong>使用既有建案</strong>
-              <small>從 Notion 既有方案選擇，再調整海報模板。</small>
-            </span>
-          </label>
-        </fieldset>
+      <section class="tab-panel" data-panel="flex">
+        <div class="section-header"><div><h2>Flex 上下線</h2><p>切換啟用狀態後會自動刷新快取，關鍵字回覆只會讀取已啟用的方案。</p></div><button class="secondary-button compact" id="reloadFlexButton" type="button">重新讀取</button></div>
+        <div class="offer-list" id="flexList" aria-live="polite"></div>
+      </section>
 
-        <section class="mode-section" id="existingSection">
-          <label>
-            選擇既有方案
-            <select id="messageId" name="messageId">
-              <option value="">讀取中...</option>
-            </select>
-          </label>
-        </section>
-
-        <label>
-          團購圖片建案名稱
-          <input id="projectName" name="projectName" autocomplete="off" placeholder="新增時必填；既有方案可留空使用 Notion 原資料">
-        </label>
-
-        <label>
-          海報樣式
-          <select id="templateStyle" name="templateStyle">
-            <option value="">使用 Notion 原設定</option>
-            <option value="三欄比較版">三欄比較版</option>
-            <option value="橫條衝擊版">橫條衝擊版</option>
-            <option value="分房卡片版">分房卡片版</option>
-            <option value="對切海報版">對切海報版</option>
-          </select>
-        </label>
-
-        <section class="defaults-panel" aria-labelledby="defaultsTitle">
-          <div class="section-title">
-            <h2 id="defaultsTitle">預設帶入資料</h2>
-            <p>新增方案時會依 Notion 自動化預設值產圖；取消勾選的房型不會帶入圖片。</p>
-          </div>
-
-          <div class="room-options">
-            <label class="room-card">
-              <input type="checkbox" name="roomTypes" value="二房" checked>
-              <span>
-                <strong>二房</strong>
-                <small>團購價 7800 / 階梯價 7300 / 6800</small>
-              </span>
-            </label>
-
-            <label class="room-card">
-              <input type="checkbox" name="roomTypes" value="三房" checked>
-              <span>
-                <strong>三房</strong>
-                <small>團購價 8800 / 階梯價 8300 / 7800</small>
-              </span>
-            </label>
-
-            <label class="room-card">
-              <input type="checkbox" name="roomTypes" value="四房" checked>
-              <span>
-                <strong>四房</strong>
-                <small>團購價 10800 / 階梯價 10300 / 9800</small>
-              </span>
-            </label>
-          </div>
-        </section>
-
-        <details class="advanced">
-          <summary>進階資料</summary>
-
-          <label>
-            團購價標題
-            <input id="threshold0" name="threshold0" autocomplete="off" placeholder="開團優惠價">
-          </label>
-
-          <div class="field-grid">
-            <label>
-              階梯價1標題
-              <input id="threshold1" name="threshold1" autocomplete="off" placeholder="預約滿10戶">
-            </label>
-            <label>
-              階梯價2標題
-              <input id="threshold2" name="threshold2" autocomplete="off" placeholder="預約滿30戶">
-            </label>
-          </div>
-
-          <label>
-            備註1
-            <textarea id="note1" name="note1" rows="2" placeholder="可留空使用 Notion 原資料"></textarea>
-          </label>
-
-          <label>
-            備註2
-            <textarea id="note2" name="note2" rows="2" placeholder="可留空使用 Notion 原資料"></textarea>
-          </label>
-
-          <label>
-            備註3
-            <textarea id="note3" name="note3" rows="2" placeholder="可留空使用 Notion 原資料"></textarea>
-          </label>
-        </details>
-
-        <button class="primary-button" id="submitButton" type="submit" disabled>
-          產生圖片
-        </button>
-      </form>
-
-      <section class="result-panel is-hidden" id="resultPanel">
-        <img id="resultImage" alt="團購方案圖片">
-        <div class="actions">
-          <button class="secondary-button" id="sendButton" type="button">傳送圖片到聊天室</button>
-          <a class="download-link" id="downloadLink" target="_blank" rel="noreferrer">開啟圖片</a>
-        </div>
+      <section class="tab-panel" data-panel="cache">
+        <div class="cache-panel"><h2>刷新快取</h2><p>當 Notion 的關鍵字、Flex JSON 或啟用狀態有變更時，可以手動刷新快取。</p><button class="primary-button" id="refreshCacheButton" type="button">刷新快取</button><p class="cache-result" id="cacheResult"></p></div>
       </section>
     </main>
 
@@ -148,41 +79,23 @@
       function mergeLiffStateParams() {
         const params = new URLSearchParams(window.location.search);
         const state = params.get("liff.state");
-
-        if (!state) {
-          return params;
-        }
-
-        const normalizedState = state.startsWith("?") ? state.slice(1) : state;
-        const stateParams = new URLSearchParams(normalizedState);
-
-        for (const [key, value] of stateParams.entries()) {
-          if (!params.has(key)) {
-            params.set(key, value);
-          }
-        }
-
+        if (!state) return params;
+        const stateParams = new URLSearchParams(state.startsWith("?") ? state.slice(1) : state);
+        for (const [key, value] of stateParams.entries()) if (!params.has(key)) params.set(key, value);
         return params;
       }
 
       const params = mergeLiffStateParams();
       const CONFIG = {
         liffId: params.get("liffId") || "2010234607-r7RfEvrr",
-        optionsApiUrl:
-          params.get("optionsApi") ||
-          "https://sayitstudio.zeabur.app/webhook/zai-shin-group-offer-options",
-        generateApiUrl:
-          params.get("generateApi") ||
-          "https://sayitstudio.zeabur.app/webhook/zai-shin-group-offer-generate",
+        optionsApiUrl: params.get("optionsApi") || "https://sayitstudio.zeabur.app/webhook/zai-shin-group-offer-options",
+        generateApiUrl: params.get("generateApi") || "https://sayitstudio.zeabur.app/webhook/zai-shin-group-offer-generate",
+        toggleApiUrl: params.get("toggleApi") || "https://sayitstudio.zeabur.app/webhook/zai-shin-group-offer-toggle-status",
+        refreshCacheApiUrl: params.get("refreshApi") || "https://sayitstudio.zeabur.app/webhook/zai-shin-keyword-cache-refresh",
         debug: params.get("debug") === "1"
       };
 
-      const state = {
-        initialized: false,
-        imageUrl: "",
-        options: []
-      };
-
+      const state = { initialized: false, imageUrl: "", options: [] };
       const statusBox = document.querySelector("#statusBox");
       const offerForm = document.querySelector("#offerForm");
       const submitButton = document.querySelector("#submitButton");
@@ -195,236 +108,133 @@
       const resultImage = document.querySelector("#resultImage");
       const sendButton = document.querySelector("#sendButton");
       const downloadLink = document.querySelector("#downloadLink");
+      const tabButtons = document.querySelectorAll("[data-tab]");
+      const tabPanels = document.querySelectorAll("[data-panel]");
+      const flexList = document.querySelector("#flexList");
+      const reloadFlexButton = document.querySelector("#reloadFlexButton");
+      const refreshCacheButton = document.querySelector("#refreshCacheButton");
+      const cacheResult = document.querySelector("#cacheResult");
 
-      function setStatus(message, tone = "default") {
-        statusBox.textContent = message;
-        statusBox.dataset.tone = tone;
+      function setStatus(message, tone = "default") { statusBox.textContent = message; statusBox.dataset.tone = tone; }
+      function getSelectedMode() { return document.querySelector("input[name='mode']:checked")?.value || "create"; }
+      function setActiveTab(tabName) {
+        for (const button of tabButtons) button.classList.toggle("is-active", button.dataset.tab === tabName);
+        for (const panel of tabPanels) panel.classList.toggle("is-active", panel.dataset.panel === tabName);
+        if (tabName === "flex") renderFlexList();
       }
-
       function fillFormFromSelectedOption() {
-        if (getSelectedMode() !== "existing") {
-          return;
-        }
-
+        if (getSelectedMode() !== "existing") return;
         const selected = state.options.find((item) => item.messageId === messageId.value);
-
         projectName.value = selected?.projectName || "";
         templateStyle.value = selected?.templateStyle || "";
       }
-
-      function getSelectedMode() {
-        return document.querySelector("input[name='mode']:checked")?.value || "create";
-      }
-
       function updateModeView() {
         const mode = getSelectedMode();
-
         existingSection.classList.toggle("is-hidden", mode !== "existing");
         messageId.required = mode === "existing";
         projectName.required = mode === "create";
-
-        if (mode === "create") {
-          messageId.value = "";
-          projectName.value = "";
-          setStatus("請輸入新建案名稱並選擇海報樣式。", "success");
-        } else {
-          fillFormFromSelectedOption();
-          setStatus("請選擇既有方案並確認海報樣式。", "success");
-        }
+        if (mode === "create") { messageId.value = ""; projectName.value = ""; setStatus("請輸入新建案名稱並選擇海報樣式。", "success"); }
+        else { fillFormFromSelectedOption(); setStatus("請選擇既有方案並確認海報樣式。", "success"); }
       }
 
       async function loadOptions() {
         const response = await fetch(CONFIG.optionsApiUrl, { cache: "no-store" });
-
-        if (!response.ok) {
-          throw new Error("方案清單讀取失敗。");
-        }
-
+        if (!response.ok) throw new Error("方案清單讀取失敗。");
         const payload = await response.json();
         state.options = Array.isArray(payload.items) ? payload.items : [];
         messageId.innerHTML = "";
-
         if (!state.options.length) {
-          const option = document.createElement("option");
-          option.value = "";
-          option.textContent = "目前沒有可用方案";
-          messageId.append(option);
-          return;
+          const option = document.createElement("option"); option.value = ""; option.textContent = "目前沒有可用方案"; messageId.append(option); renderFlexList(); return;
         }
-
         for (const item of state.options) {
-          const option = document.createElement("option");
-          option.value = item.messageId;
-          option.textContent = `${item.name}｜${item.messageId}`;
-          messageId.append(option);
+          const option = document.createElement("option"); option.value = item.messageId; option.textContent = `${item.name}｜${item.messageId}`; messageId.append(option);
         }
+        fillFormFromSelectedOption(); submitButton.disabled = false; renderFlexList();
+      }
 
-        fillFormFromSelectedOption();
-        submitButton.disabled = false;
+      function appendMeta(list, label, value) { const term = document.createElement("dt"); term.textContent = label; const description = document.createElement("dd"); description.textContent = value; list.append(term, description); }
+      function renderFlexList() {
+        flexList.innerHTML = "";
+        if (!state.options.length) { const empty = document.createElement("p"); empty.className = "empty-state"; empty.textContent = "目前沒有可管理的方案。"; flexList.append(empty); return; }
+        for (const item of state.options) {
+          const card = document.createElement("article"); card.className = "offer-status-card"; card.dataset.messageId = item.messageId;
+          const title = document.createElement("div"); title.className = "offer-status-title";
+          const heading = document.createElement("h3"); heading.textContent = item.name || item.projectName || item.messageId;
+          const toggleLabel = document.createElement("label"); toggleLabel.className = "switch";
+          const toggle = document.createElement("input"); toggle.type = "checkbox"; toggle.checked = Boolean(item.enabled); toggle.dataset.messageId = item.messageId;
+          const slider = document.createElement("span"); slider.setAttribute("aria-hidden", "true"); toggleLabel.append(toggle, slider); title.append(heading, toggleLabel);
+          const meta = document.createElement("dl"); meta.className = "offer-meta";
+          appendMeta(meta, "Message ID", item.messageId || "-"); appendMeta(meta, "關鍵字", item.keyword || "-"); appendMeta(meta, "Flex", item.flexStatus || "未產生"); appendMeta(meta, "圖片", item.imageStatus || (item.imageUrl ? "已產生" : "未產生")); appendMeta(meta, "狀態", item.enabled ? "已上線" : "已下線");
+          const message = document.createElement("p"); message.className = "card-message"; message.textContent = "切換後會自動刷新快取。";
+          toggle.addEventListener("change", () => toggleOfferStatus(item, toggle, message));
+          card.append(title, meta, message); flexList.append(card);
+        }
+      }
+
+      async function toggleOfferStatus(item, toggle, messageElement) {
+        const enabled = toggle.checked; toggle.disabled = true; messageElement.textContent = enabled ? "正在上線並刷新快取..." : "正在下線並刷新快取..."; messageElement.dataset.tone = "default";
+        try {
+          const encodedPayload = new URLSearchParams(); encodedPayload.set("messageId", item.messageId); encodedPayload.set("enabled", enabled ? "true" : "false");
+          const response = await fetch(CONFIG.toggleApiUrl, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" }, body: encodedPayload.toString() });
+          const payload = await response.json(); if (!response.ok || !payload.ok) throw new Error(payload.message || "狀態更新失敗。");
+          item.enabled = enabled; messageElement.textContent = enabled ? "已上線並刷新快取。" : "已下線並刷新快取。"; messageElement.dataset.tone = "success"; setStatus(messageElement.textContent, "success"); await loadOptions();
+        } catch (error) { console.error(error); toggle.checked = !enabled; messageElement.textContent = error.message || "狀態更新失敗。"; messageElement.dataset.tone = "error"; setStatus(messageElement.textContent, "error"); }
+        finally { toggle.disabled = false; }
+      }
+
+      async function refreshKeywordCache() {
+        refreshCacheButton.disabled = true; cacheResult.textContent = "正在刷新快取..."; cacheResult.dataset.tone = "default";
+        try {
+          const response = await fetch(CONFIG.refreshCacheApiUrl, { method: "POST", cache: "no-store" });
+          const payload = await response.json(); if (!response.ok || payload.ok === false) throw new Error(payload.message || "刷新快取失敗。");
+          const time = new Date().toLocaleString("zh-TW", { timeZone: "Asia/Taipei" }); cacheResult.textContent = `快取已刷新：${time}`; cacheResult.dataset.tone = "success"; setStatus(cacheResult.textContent, "success");
+        } catch (error) { console.error(error); cacheResult.textContent = error.message || "刷新快取失敗。"; cacheResult.dataset.tone = "error"; setStatus(cacheResult.textContent, "error"); }
+        finally { refreshCacheButton.disabled = false; }
       }
 
       async function initLiff() {
-        if (!window.liff) {
-          throw new Error("LIFF SDK 尚未載入。");
-        }
-
-        if (!CONFIG.liffId || CONFIG.liffId === "YOUR_GROUP_OFFER_LIFF_ID") {
-          if (CONFIG.debug) {
-            return;
-          }
-
-          throw new Error("尚未設定 LIFF ID。");
-        }
-
-        await liff.init({ liffId: CONFIG.liffId });
-        state.initialized = true;
-
-        if (!liff.isLoggedIn()) {
-          liff.login({ redirectUri: window.location.href });
-          return;
-        }
+        if (!window.liff) throw new Error("LIFF SDK 尚未載入。");
+        if (!CONFIG.liffId || CONFIG.liffId === "YOUR_GROUP_OFFER_LIFF_ID") { if (CONFIG.debug) return; throw new Error("尚未設定 LIFF ID。"); }
+        await liff.init({ liffId: CONFIG.liffId }); state.initialized = true;
+        if (!liff.isLoggedIn()) { liff.login({ redirectUri: window.location.href }); return; }
       }
 
       function getFormPayload() {
         const formData = new FormData(offerForm);
-        const roomTypes = Array.from(offerForm.querySelectorAll("input[name='roomTypes']:checked"))
-          .map((input) => input.value);
-
-        return {
-          mode: String(formData.get("mode") || "create").trim(),
-          messageId: String(formData.get("messageId") || "").trim(),
-          projectName: String(formData.get("projectName") || "").trim(),
-          templateStyle: String(formData.get("templateStyle") || "").trim(),
-          roomTypes,
-          thresholds: [
-            String(formData.get("threshold0") || "").trim(),
-            String(formData.get("threshold1") || "").trim(),
-            String(formData.get("threshold2") || "").trim()
-          ],
-          notes: [
-            String(formData.get("note1") || "").trim(),
-            String(formData.get("note2") || "").trim(),
-            String(formData.get("note3") || "").trim()
-          ],
-          lineUserId:
-            state.initialized && liff.isLoggedIn() && liff.getContext()
-              ? liff.getContext().userId || ""
-              : ""
-        };
+        const roomTypes = Array.from(offerForm.querySelectorAll("input[name='roomTypes']:checked")).map((input) => input.value);
+        return { mode: String(formData.get("mode") || "create").trim(), messageId: String(formData.get("messageId") || "").trim(), projectName: String(formData.get("projectName") || "").trim(), templateStyle: String(formData.get("templateStyle") || "").trim(), roomTypes, thresholds: [String(formData.get("threshold0") || "").trim(), String(formData.get("threshold1") || "").trim(), String(formData.get("threshold2") || "").trim()], notes: [String(formData.get("note1") || "").trim(), String(formData.get("note2") || "").trim(), String(formData.get("note3") || "").trim()], lineUserId: state.initialized && liff.isLoggedIn() && liff.getContext() ? liff.getContext().userId || "" : "" };
       }
 
       async function generateImage(event) {
-        event.preventDefault();
-        const mode = getSelectedMode();
-
-        if (mode === "create" && !projectName.value.trim()) {
-          setStatus("新增新建案團購方案時，請先輸入建案名稱。", "error");
-          projectName.focus();
-          return;
-        }
-
-        if (mode === "existing" && !messageId.value.trim()) {
-          setStatus("使用既有建案時，請先選擇方案。", "error");
-          messageId.focus();
-          return;
-        }
-
-        submitButton.disabled = true;
-        resultPanel.classList.add("is-hidden");
-        setStatus("正在產生圖片，請稍候。");
-
+        event.preventDefault(); const mode = getSelectedMode();
+        if (mode === "create" && !projectName.value.trim()) { setStatus("新增新建案團購方案時，請先輸入建案名稱。", "error"); projectName.focus(); return; }
+        if (mode === "existing" && !messageId.value.trim()) { setStatus("使用既有建案時，請先選擇方案。", "error"); messageId.focus(); return; }
+        submitButton.disabled = true; resultPanel.classList.add("is-hidden"); setStatus("正在產生圖片，請稍候。");
         try {
-          const payload = getFormPayload();
-          const encodedPayload = new URLSearchParams();
-
-          for (const [key, value] of Object.entries(payload)) {
-            encodedPayload.set(key, Array.isArray(value) ? JSON.stringify(value) : value);
-          }
-
-          const response = await fetch(CONFIG.generateApiUrl, {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-            body: encodedPayload.toString()
-          });
-
-          const result = await response.json();
-
-          if (!response.ok || !result.ok || !result.imageUrl) {
-            throw new Error(result.message || "圖片產生失敗。");
-          }
-
-          state.imageUrl = result.imageUrl;
-          resultImage.src = result.imageUrl;
-          downloadLink.href = result.imageUrl;
-          resultPanel.classList.remove("is-hidden");
-          setStatus("圖片已產生。", "success");
-
-          await sendImageToChat();
-        } catch (error) {
-          console.error(error);
-          setStatus(error.message || "圖片產生失敗。", "error");
-        } finally {
-          submitButton.disabled = false;
-        }
+          const payload = getFormPayload(); const encodedPayload = new URLSearchParams(); for (const [key, value] of Object.entries(payload)) encodedPayload.set(key, Array.isArray(value) ? JSON.stringify(value) : value);
+          const response = await fetch(CONFIG.generateApiUrl, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" }, body: encodedPayload.toString() });
+          const result = await response.json(); if (!response.ok || !result.ok || !result.imageUrl) throw new Error(result.message || "圖片產生失敗。");
+          state.imageUrl = result.imageUrl; resultImage.src = result.imageUrl; downloadLink.href = result.imageUrl; resultPanel.classList.remove("is-hidden"); setStatus("圖片已產生。", "success"); await sendImageToChat();
+        } catch (error) { console.error(error); setStatus(error.message || "圖片產生失敗。", "error"); }
+        finally { submitButton.disabled = false; }
       }
 
       async function sendImageToChat() {
-        if (!state.imageUrl) {
-          return;
-        }
-
-        if (!state.initialized || !liff.isInClient()) {
-          setStatus("圖片已產生，可開啟圖片下載；目前環境不是 LINE 內建瀏覽器，無法自動傳送。", "warning");
-          return;
-        }
-
-        try {
-          await liff.sendMessages([
-            {
-              type: "image",
-              originalContentUrl: state.imageUrl,
-              previewImageUrl: state.imageUrl
-            },
-            {
-              type: "text",
-              text: "團購方案圖片已產生，可長按圖片儲存或轉傳。"
-            }
-          ]);
-          setStatus("圖片已送回聊天室。", "success");
-        } catch (error) {
-          console.error(error);
-          setStatus("圖片已產生，但傳送到聊天室失敗，請改用開啟圖片。", "warning");
-        }
+        if (!state.imageUrl) return;
+        if (!state.initialized || !liff.isInClient()) { setStatus("圖片已產生，可開啟圖片下載；目前環境不是 LINE 內建瀏覽器，無法自動傳送。", "warning"); return; }
+        try { await liff.sendMessages([{ type: "image", originalContentUrl: state.imageUrl, previewImageUrl: state.imageUrl }, { type: "text", text: "團購方案圖片已產生，可長按圖片儲存或轉傳。" }]); setStatus("圖片已送回聊天室。", "success"); }
+        catch (error) { console.error(error); setStatus("圖片已產生，但傳送到聊天室失敗，請改用開啟圖片。", "warning"); }
       }
 
       messageId.addEventListener("change", fillFormFromSelectedOption);
-      for (const input of modeInputs) {
-        input.addEventListener("change", updateModeView);
-      }
+      for (const input of modeInputs) input.addEventListener("change", updateModeView);
+      for (const button of tabButtons) button.addEventListener("click", () => setActiveTab(button.dataset.tab));
       offerForm.addEventListener("submit", generateImage);
       sendButton.addEventListener("click", sendImageToChat);
+      reloadFlexButton.addEventListener("click", async () => { setStatus("正在重新讀取方案清單。"); await loadOptions(); setStatus("方案清單已更新。", "success"); });
+      refreshCacheButton.addEventListener("click", refreshKeywordCache);
 
-      (async () => {
-        try {
-          setStatus("正在初始化 LIFF。");
-          await initLiff();
-          setStatus("正在讀取方案清單。");
-          await loadOptions();
-          updateModeView();
-        } catch (error) {
-          console.error(error);
-          setStatus(error.message || "初始化失敗。", "error");
-
-          if (CONFIG.debug) {
-            try {
-              await loadOptions();
-              submitButton.disabled = false;
-            } catch (loadError) {
-              console.error(loadError);
-            }
-          }
-        }
-      })();
+      (async () => { try { setStatus("正在初始化 LIFF。"); await initLiff(); setStatus("正在讀取方案清單。"); await loadOptions(); updateModeView(); } catch (error) { console.error(error); setStatus(error.message || "初始化失敗。", "error"); if (CONFIG.debug) { try { await loadOptions(); submitButton.disabled = false; } catch (loadError) { console.error(loadError); } } } })();
     </script>
   </body>
 </html>
