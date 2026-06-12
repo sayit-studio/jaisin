@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="全屋整裝成果照佔位圖">
+  <rect width="800" height="600" fill="#F1E7D6"/>
+  <rect x="24" y="24" width="752" height="552" rx="20" fill="none" stroke="#0D2340" stroke-opacity="0.18" stroke-width="3" stroke-dasharray="12 12"/>
+  <circle cx="400" cy="248" r="60" fill="#FFD35A"/>
+  <path d="M366 232h14l8-12h24l8 12h14a10 10 0 0 1 10 10v40a10 10 0 0 1-10 10h-68a10 10 0 0 1-10-10v-40a10 10 0 0 1 10-10z" fill="#0D2340"/>
+  <circle cx="400" cy="262" r="15" fill="#F1E7D6"/>
+  <text x="400" y="378" text-anchor="middle" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="40" font-weight="700" fill="#0D2340">全屋整裝・成果照</text>
+  <text x="400" y="424" text-anchor="middle" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="22" fill="#4A6080">佔位圖 — 待置換實際照片</text>
+</svg>

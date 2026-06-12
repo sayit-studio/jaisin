@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title>宅心驗屋</title>
+    <!--
+      GitHub Pages SPA 路由修補：
+      直接造訪 /jaisin/about 這類深層路徑時，GitHub Pages 找不到實體檔案會回傳此頁。
+      我們把路徑編碼成 /jaisin/?/about 後導回首頁，再由 index.html 的解碼腳本還原。
+      pathSegmentsToKeep = 1 對應專案頁的 /jaisin/ 這一層。
+    -->
+    <script type="text/javascript">
+      var pathSegmentsToKeep = 1
+      var l = window.location
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      )
+    </script>
+  </head>
+  <body></body>
+</html>

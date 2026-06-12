@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0D2340" />
+    <link rel="icon" type="image/png" href="/jaisin/assets/logo/brand-mark.png" />
+
+    <!-- GitHub Pages SPA：解碼由 404.html 編碼的深層路由，還原真實路徑 -->
+    <script type="text/javascript">
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function (s) {
+            return s.replace(/~and~/g, '&')
+          }).join('?')
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash)
+        }
+      }(window.location))
+    </script>
+
+    <!-- Google Fonts: Plus Jakarta Sans (EN) + Noto Sans TC (ZH) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- GA4_PLACEHOLDER: 上線時於此插入 GA4 追蹤碼 -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=VITE_GA4_ID"></script> -->
+
+    <title>宅心驗屋｜比你更在乎家的細節 — 全台專業驗屋服務</title>
+    <meta name="description" content="宅心驗屋提供新成屋、中古屋與社區團購驗屋服務。從現場檢測、缺失紀錄到報告說明，以清楚、細膩、專業的方式陪屋主確認家的狀態。LINE 立即諮詢。" />
+    <script type="module" crossorigin src="/jaisin/assets/index-Du3uDtmR.js"></script>
+    <link rel="stylesheet" crossorigin href="/jaisin/assets/index-CxfbTwSO.css">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
