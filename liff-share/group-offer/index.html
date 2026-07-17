@@ -20,13 +20,17 @@
 
       <nav class="tabs" aria-label="團購工具分頁">
         <button class="tab-button is-active" type="button" data-tab="image">製作圖片</button>
-
+        <button class="tab-button" type="button" data-tab="library">圖片資料庫</button>
       </nav>
 
       <section class="tab-panel is-active" id="imagePanel" data-panel="image">
       <form class="offer-form" id="offerForm">
+        <div class="step-heading">
+          <span>STEP 01</span>
+          <div><h2>選擇建立方式</h2><p>建立新建案，或從 Notion 載入既有方案。</p></div>
+        </div>
         <fieldset class="mode-field">
-          <legend>第一步</legend>
+          <legend class="sr-only">選擇建立方式</legend>
           <label class="choice-card">
             <input type="radio" name="mode" value="create" checked>
             <span>
@@ -52,22 +56,46 @@
           </label>
         </section>
 
+        <div class="step-heading">
+          <span>STEP 02</span>
+          <div><h2>確認建案名稱</h2><p>名稱會直接顯示在團購海報上。</p></div>
+        </div>
         <label>
           團購圖片建案名稱
-          <input id="projectName" name="projectName" autocomplete="off" placeholder="新增時必填；既有方案可留空使用 Notion 原資料">
+          <input id="projectName" name="projectName" autocomplete="off" placeholder="新增時必填；既有方案可使用 Notion 原資料">
         </label>
 
-        <label>
-          海報樣式
-          <select id="templateStyle" name="templateStyle">
-            <option value="">使用 Notion 原設定</option>
-            <option value="三欄比較版">三欄比較版</option>
-            <option value="橫條衝擊版">橫條衝擊版</option>
-            <option value="分房卡片版">分房卡片版</option>
-            <option value="對切海報版">對切海報版</option>
-          </select>
-        </label>
+        <div class="step-heading">
+          <span>STEP 03</span>
+          <div><h2>選擇海報樣式</h2><p>點擊預覽卡片即可單選套用。</p></div>
+        </div>
+        <div class="template-grid" role="radiogroup" aria-label="海報樣式">
+          <label class="template-card">
+            <input type="radio" name="templateStyle" value="橫條衝擊版">
+            <span class="template-preview"><iframe src="../../offer-template/template-a.html" title="橫條衝擊版預覽" loading="lazy" tabindex="-1"></iframe></span>
+            <strong>橫條衝擊版</strong>
+          </label>
+          <label class="template-card">
+            <input type="radio" name="templateStyle" value="三欄比較版">
+            <span class="template-preview"><iframe src="../../offer-template/template-b.html" title="三欄比較版預覽" loading="lazy" tabindex="-1"></iframe></span>
+            <strong>三欄比較版</strong>
+          </label>
+          <label class="template-card">
+            <input type="radio" name="templateStyle" value="對切海報版" checked>
+            <span class="template-preview"><iframe src="../../offer-template/template-c.html" title="對切海報版預覽" loading="lazy" tabindex="-1"></iframe></span>
+            <strong>對切海報版</strong>
+          </label>
+          <label class="template-card">
+            <input type="radio" name="templateStyle" value="分房卡片版">
+            <span class="template-preview"><iframe src="../../offer-template/template-d.html" title="分房卡片版預覽" loading="lazy" tabindex="-1"></iframe></span>
+            <strong>分房卡片版</strong>
+          </label>
+        </div>
 
+        <div class="step-heading">
+          <span>STEP 04</span>
+          <div><h2>確認價格與備註</h2><p>預設值可直接使用，也可展開進階資料調整。</p></div>
+        </div>
         <section class="defaults-panel" aria-labelledby="defaultsTitle">
           <div class="section-title">
             <h2 id="defaultsTitle">預設帶入資料</h2>
@@ -151,7 +179,21 @@
         </div>
       </section>
       </section>
+
+      <section class="tab-panel" id="libraryPanel" data-panel="library">
+        <div class="library-header">
+          <div>
+            <p class="section-kicker">NOTION PROJECTS</p>
+            <h2>圖片資料庫</h2>
+            <p>查看所有建案的產圖狀態、產生日期，並可直接下載或分享。</p>
+          </div>
+          <button class="secondary-button" id="reloadLibraryButton" type="button">重新整理</button>
+        </div>
+        <div class="library-summary" id="librarySummary"></div>
+        <div class="project-grid" id="projectGrid" aria-live="polite"></div>
+      </section>
     </main>
+    <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
 
     <script>
       function mergeLiffStateParams() {
@@ -198,7 +240,7 @@
       const submitButton = document.querySelector("#submitButton");
       const messageId = document.querySelector("#messageId");
       const projectName = document.querySelector("#projectName");
-      const templateStyle = document.querySelector("#templateStyle");
+      const templateInputs = document.querySelectorAll("input[name='templateStyle']");
       const existingSection = document.querySelector("#existingSection");
       const modeInputs = document.querySelectorAll("input[name='mode']");
       const resultPanel = document.querySelector("#resultPanel");
@@ -209,10 +251,28 @@
       const downloadLink = document.querySelector("#downloadLink");
       const tabButtons = document.querySelectorAll("[data-tab]");
       const tabPanels = document.querySelectorAll("[data-panel]");
+      const reloadLibraryButton = document.querySelector("#reloadLibraryButton");
+      const librarySummary = document.querySelector("#librarySummary");
+      const projectGrid = document.querySelector("#projectGrid");
+      const toastRegion = document.querySelector("#toastRegion");
 
-      function setStatus(message, tone = "default") {
+      function showToast(message, tone = "default") {
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.dataset.tone = tone;
+        toast.textContent = message;
+        toastRegion.append(toast);
+        requestAnimationFrame(() => toast.classList.add("is-visible"));
+        window.setTimeout(() => {
+          toast.classList.remove("is-visible");
+          window.setTimeout(() => toast.remove(), 250);
+        }, 3200);
+      }
+
+      function setStatus(message, tone = "default", notify = false) {
         statusBox.textContent = message;
         statusBox.dataset.tone = tone;
+        if (notify || tone === "success" || tone === "warning" || tone === "error") showToast(message, tone);
       }
 
       function setActiveTab(tabName) {
@@ -233,7 +293,14 @@
         const selected = state.options.find((item) => item.messageId === messageId.value);
 
         projectName.value = selected?.projectName || "";
-        templateStyle.value = selected?.templateStyle || "";
+        setTemplateStyle(selected?.templateStyle || "對切海報版");
+      }
+
+      function setTemplateStyle(value) {
+        const fallback = "對切海報版";
+        const matched = Array.from(templateInputs).find((input) => input.value === value);
+        const target = matched || Array.from(templateInputs).find((input) => input.value === fallback);
+        if (target) target.checked = true;
       }
 
       function getSelectedMode() {
@@ -285,8 +352,151 @@
 
         fillFormFromSelectedOption();
         submitButton.disabled = false;
+        renderProjectLibrary();
       }
 
+      function getGeneratedDate(item) {
+        const explicit = item.generatedAt || item.imageGeneratedAt || item.updatedAt || "";
+        if (explicit) {
+          const date = new Date(explicit);
+          if (!Number.isNaN(date.getTime())) return date;
+        }
+        const match = String(item.imageUrl || "").match(/-(\d{13})\.png(?:\?|$)/i);
+        if (match) {
+          const date = new Date(Number(match[1]));
+          if (!Number.isNaN(date.getTime())) return date;
+        }
+
+        const idDate = String(item.messageId || "").match(/^(\d{4})(\d{2})(\d{2})/);
+        if (idDate) {
+          const date = new Date(idDate[1] + "-" + idDate[2] + "-" + idDate[3] + "T12:00:00+08:00");
+          if (!Number.isNaN(date.getTime())) return date;
+        }
+        return null;
+      }
+
+      function formatDate(date) {
+        if (!date) return "尚無日期紀錄";
+        return new Intl.DateTimeFormat("zh-TW", {
+          timeZone: "Asia/Taipei",
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit"
+        }).format(date);
+      }
+
+      function imageFileName(item) {
+        const fromUrl = String(item.imageUrl || "").split("/").pop()?.split("?")[0];
+        return fromUrl || (item.messageId || "宅心驗屋") + "-團購方案.png";
+      }
+
+      function renderProjectLibrary() {
+        if (!projectGrid) return;
+        projectGrid.innerHTML = "";
+        const generatedCount = state.options.filter((item) => Boolean(item.imageUrl)).length;
+        librarySummary.innerHTML = "";
+        for (const [label, value] of [
+          ["全部建案", state.options.length],
+          ["已產生圖片", generatedCount],
+          ["尚未產生", state.options.length - generatedCount]
+        ]) {
+          const block = document.createElement("div");
+          const strong = document.createElement("strong");
+          const span = document.createElement("span");
+          strong.textContent = value;
+          span.textContent = label;
+          block.append(strong, span);
+          librarySummary.append(block);
+        }
+
+        if (!state.options.length) {
+          const empty = document.createElement("p");
+          empty.className = "empty-state";
+          empty.textContent = "目前尚未讀取到 Notion 建案資料。";
+          projectGrid.append(empty);
+          return;
+        }
+
+        for (const item of state.options) {
+          const generated = Boolean(item.imageUrl);
+          const card = document.createElement("article");
+          card.className = "project-card";
+          const media = document.createElement("div");
+          media.className = "project-media";
+
+          if (generated) {
+            const image = document.createElement("img");
+            image.src = item.imageUrl;
+            image.alt = (item.projectName || item.name || "建案") + "團購方案";
+            image.loading = "lazy";
+            media.append(image);
+          } else {
+            const placeholder = document.createElement("span");
+            placeholder.textContent = "尚未產生圖片";
+            media.append(placeholder);
+          }
+
+          const body = document.createElement("div");
+          body.className = "project-body";
+          const titleRow = document.createElement("div");
+          titleRow.className = "project-title-row";
+          const title = document.createElement("h3");
+          title.textContent = item.projectName || item.name || item.messageId;
+          const badge = document.createElement("span");
+          badge.className = "status-badge " + (generated ? "is-generated" : "is-pending");
+          badge.textContent = generated ? "已產生" : "未產生";
+          titleRow.append(title, badge);
+
+          const meta = document.createElement("dl");
+          for (const [label, value] of [
+            ["Message ID", item.messageId || "-"],
+            ["產生日期", generated ? formatDate(getGeneratedDate(item)) : "-"]
+          ]) {
+            const dt = document.createElement("dt");
+            const dd = document.createElement("dd");
+            dt.textContent = label;
+            dd.textContent = value;
+            meta.append(dt, dd);
+          }
+
+          const actions = document.createElement("div");
+          actions.className = "project-actions";
+          if (generated) {
+            const download = document.createElement("button");
+            download.type = "button";
+            download.className = "secondary-button";
+            download.textContent = "下載";
+            download.addEventListener("click", () => downloadImage(item.imageUrl, imageFileName(item)));
+            const share = document.createElement("button");
+            share.type = "button";
+            share.className = "primary-button";
+            share.textContent = "轉發好友";
+            share.addEventListener("click", () => shareImageToFriends(item.imageUrl));
+            actions.append(download, share);
+          } else {
+            const create = document.createElement("button");
+            create.type = "button";
+            create.className = "secondary-button";
+            create.textContent = "前往製作";
+            create.addEventListener("click", () => {
+              setActiveTab("image");
+              const existingMode = document.querySelector("input[name='mode'][value='existing']");
+              existingMode.checked = true;
+              updateModeView();
+              messageId.value = item.messageId;
+              fillFormFromSelectedOption();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              showToast("已載入「" + (item.projectName || item.name) + "」。", "success");
+            });
+            actions.append(create);
+          }
+          body.append(titleRow, meta, actions);
+          card.append(media, body);
+          projectGrid.append(card);
+        }
+      }
       async function initLiff() {
         if (!window.liff) {
           throw new Error("LIFF SDK 尚未載入。");
@@ -318,7 +528,7 @@
           mode: String(formData.get("mode") || "create").trim(),
           messageId: String(formData.get("messageId") || "").trim(),
           projectName: String(formData.get("projectName") || "").trim(),
-          templateStyle: String(formData.get("templateStyle") || "").trim(),
+          templateStyle: String(formData.get("templateStyle") || "對切海報版").trim(),
           roomTypes,
           thresholds: [
             String(formData.get("threshold0") || "").trim(),
@@ -384,7 +594,8 @@
           resultImage.src = result.imageUrl;
           downloadLink.href = result.imageUrl;
           resultPanel.classList.remove("is-hidden");
-          setStatus("圖片已產生。", "success");
+          setStatus("圖片已產生並完成紀錄。", "success", true);
+          await loadOptions();
 
           await sendImageToChat();
         } catch (error) {
@@ -392,40 +603,41 @@
           setStatus(error.message || "圖片產生失敗。", "error");
         } finally {
           submitButton.disabled = false;
+        renderProjectLibrary();
         }
       }
 
-      async function downloadImage() {
-        if (!state.imageUrl) {
+      async function downloadImage(imageUrl = state.imageUrl, fileName = state.imageFileName) {
+        if (!imageUrl) {
           setStatus("請先產生圖片。", "warning");
           return;
         }
         downloadButton.disabled = true;
         setStatus("正在準備下載圖片。");
         try {
-          const response = await fetch(state.imageUrl, { cache: "no-store" });
+          const response = await fetch(imageUrl, { cache: "no-store" });
           if (!response.ok) throw new Error("圖片下載失敗。");
           const blob = await response.blob();
           const objectUrl = URL.createObjectURL(blob);
           const anchor = document.createElement("a");
           anchor.href = objectUrl;
-          anchor.download = state.imageFileName;
+          anchor.download = fileName;
           document.body.append(anchor);
           anchor.click();
           anchor.remove();
           window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
-          setStatus("圖片已開始下載。", "success");
+          setStatus("圖片已開始下載。", "success", true);
         } catch (error) {
           console.error(error);
-          window.open(state.imageUrl, "_blank", "noopener,noreferrer");
+          window.open(imageUrl, "_blank", "noopener,noreferrer");
           setStatus("無法自動下載，已為你開啟原圖，可長按圖片儲存。", "warning");
         } finally {
           downloadButton.disabled = false;
         }
       }
 
-      async function shareImageToFriends() {
-        if (!state.imageUrl) {
+      async function shareImageToFriends(imageUrl = state.imageUrl) {
+        if (!imageUrl) {
           setStatus("請先產生圖片。", "warning");
           return;
         }
@@ -443,12 +655,12 @@
           const result = await liff.shareTargetPicker([
             {
               type: "image",
-              originalContentUrl: state.imageUrl,
-              previewImageUrl: state.imageUrl
+              originalContentUrl: imageUrl,
+              previewImageUrl: imageUrl
             },
             { type: "text", text: "宅心驗屋團購方案" }
           ]);
-          setStatus(result ? "圖片已分享。" : "已取消分享。", result ? "success" : "warning");
+          setStatus(result ? "圖片已分享。" : "已取消分享。", result ? "success" : "warning", true);
         } catch (error) {
           console.error(error);
           setStatus("分享失敗，請稍後再試。", "error");
@@ -478,7 +690,7 @@
               text: "團購方案圖片已產生，可長按圖片儲存或轉傳。"
             }
           ]);
-          setStatus("圖片已送回聊天室。", "success");
+          setStatus("圖片已送回聊天室。", "success", true);
         } catch (error) {
           console.error(error);
           setStatus("圖片已產生，但傳送到聊天室失敗，請改用開啟圖片。", "warning");
@@ -494,8 +706,21 @@
       }
       offerForm.addEventListener("submit", generateImage);
       sendButton.addEventListener("click", sendImageToChat);
-      shareButton.addEventListener("click", shareImageToFriends);
-      downloadButton.addEventListener("click", downloadImage);
+      shareButton.addEventListener("click", () => shareImageToFriends());
+      downloadButton.addEventListener("click", () => downloadImage());
+      reloadLibraryButton.addEventListener("click", async () => {
+        reloadLibraryButton.disabled = true;
+        setStatus("正在重新讀取 Notion 建案資料。");
+        try {
+          await loadOptions();
+          setStatus("圖片資料庫已更新。", "success", true);
+        } catch (error) {
+          console.error(error);
+          setStatus(error.message || "資料庫更新失敗。", "error", true);
+        } finally {
+          reloadLibraryButton.disabled = false;
+        }
+      });
 
       (async () => {
         try {
